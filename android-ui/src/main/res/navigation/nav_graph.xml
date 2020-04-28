@@ -3,11 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainActivity">
+    app:startDestination="@id/imageListFragment">
 
     <activity
         android:id="@+id/mainActivity"
-        android:name="com.example.discovermars.MainActivity"
+        android:name="com.example.discovermars.features.main.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/imageDetail"
+        android:name="com.example.discovermars.image.imagedetail.ImageDetailFragment"
+        android:label="fragment_image_detail"
+        tools:layout="@layout/fragment_image_detail" />
+    <fragment
+        android:id="@+id/imageListFragment"
+        android:name="com.example.discovermars.image.imagelist.ImageListFragment"
+        android:label="fragment_image_list"
+        tools:layout="@layout/fragment_image_list" >
+        <action
+            android:id="@+id/action_imageListFragment_to_imageDetail"
+            app:destination="@id/imageDetail" />
+    </fragment>
 </navigation>
