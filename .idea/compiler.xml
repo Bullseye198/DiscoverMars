@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="DiscoverMars.android-ui" target="1.8" />
+      <module name="DiscoverMars.cache" target="1.8" />
+      <module name="DiscoverMars.data" target="1.7" />
+      <module name="DiscoverMars.domain" target="1.7" />
+      <module name="DiscoverMars.remote" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
