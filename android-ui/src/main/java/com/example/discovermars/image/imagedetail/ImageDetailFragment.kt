@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.discovermars.ImageDetailViewModel
+import com.example.discovermars.image.ImageDetailViewModel
 import com.example.discovermars.R
 
 class ImageDetailFragment : Fragment() {
