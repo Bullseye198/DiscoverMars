@@ -1,6 +1,8 @@
 package com.example.discovermars.core.injection.module
 
 import android.content.Context
+import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.example.domain.AppCoroutineDispatchers
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers
