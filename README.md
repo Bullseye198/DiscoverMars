@@ -3,13 +3,13 @@
 App that connects to the NASA API and shows photos from Mars that was taken by Mars Rover. :)
 
 What we will use:
-JetPack Navigation
-REST API
-Retrofit
-Dagger2
-Clean Architecture
-MVVM
-ListAdapter
+JetPack Navigation,
+REST API,
+Retrofit,
+Dagger2,
+Clean Architecture,
+MVVM,
+ListAdapter,
 
 
 To do:
