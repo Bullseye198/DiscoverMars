@@ -21,7 +21,7 @@ To do:
 
 
 In Progress:
-- Click on item inside of a list goes to description
+- Click on item inside of a list goes to image detail
 
 
 Done:
