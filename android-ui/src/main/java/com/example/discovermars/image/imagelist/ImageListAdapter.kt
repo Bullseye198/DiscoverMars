@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.discovermars.R
@@ -11,7 +12,8 @@ import com.example.domain.image.model.Image
 import kotlinx.android.synthetic.main.item_image.view.*
 
 
-class ImageListAdapter(): ListAdapter<Image, ImageListAdapter.ImageViewHolder>(ImageDiffUtilCallback()) {
+class ImageListAdapter(val event: MutableLiveData<ImageListEvent> = MutableLiveData()): ListAdapter<Image, ImageListAdapter.ImageViewHolder>
+    (ImageDiffUtilCallback()) {
 
     class ImageViewHolder(root: View) : RecyclerView.ViewHolder(root) {
         var content: TextView = root.lbl_message
@@ -30,6 +32,10 @@ class ImageListAdapter(): ListAdapter<Image, ImageListAdapter.ImageViewHolder>(I
       getItem(position).let { image ->
           holder.content.text = image.contents
           holder.date.text = image.creationDate
+
+          holder.itemView.setOnClickListener{
+              event.value = ImageListEvent.OnImageItemClick(position)
+          }
       }
     }
 
