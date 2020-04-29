@@ -9,7 +9,7 @@ class ImageListViewModel @Inject constructor(
 {
     // Implement viewModel
 
-    private fun getImages() {
+     fun getImages() {
         val imagesResult = listOf( "Marco", "Christoph", "Martin")
     }
 }

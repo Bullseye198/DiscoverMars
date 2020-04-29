@@ -40,23 +40,24 @@ class ImageListFragment : DaggerFragment() {
 
     override fun onStart() {
         super.onStart()
+        setUpAdapter()
 
 
 
     }
-/*
+
     private fun setUpAdapter() {
         adapter = ImageListAdapter()
-        adapter.event.observe(
+       /* adapter.event.observe(
             viewLifecycleOwner,
             Observer{
                 viewModel.handleEvent(it)
             }
-        )
+        )*/
         rec_list_fragment.adapter = adapter
     }
 
- */
+
 
 
 }
