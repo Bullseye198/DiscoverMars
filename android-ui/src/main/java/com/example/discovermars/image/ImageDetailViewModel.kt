@@ -1,7 +1,10 @@
 package com.example.discovermars.image
 
 import androidx.lifecycle.ViewModel
+import javax.inject.Inject
 
-class ImageDetailViewModel : ViewModel() {
+class ImageDetailViewModel @Inject constructor(
+
+) : ViewModel(){
     // Implement ViewModel
 }

@@ -1,5 +1,6 @@
 package com.example.discovermars
 
+import com.example.discovermars.core.injection.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import dagger.android.HasAndroidInjector
