@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey
     tableName = "mars",
     indices = [Index("creation_date")]
 )
-data class RoomMars (
+data class RoomImage (
     @PrimaryKey
     @ColumnInfo(name = "creation_date")
     val creationDate: String

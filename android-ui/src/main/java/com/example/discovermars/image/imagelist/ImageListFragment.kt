@@ -8,13 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.discovermars.image.ImageListViewModel
 import com.example.discovermars.R
+import com.example.discovermars.dependencyInjection.ViewModelFactory
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class ImageListFragment : Fragment() {
+class ImageListFragment : DaggerFragment() {
 
     companion object {
         fun newInstance() =
             ImageListFragment()
     }
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
     private lateinit var viewModel: ImageListViewModel
 
@@ -27,8 +33,9 @@ class ImageListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ImageListViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ImageListViewModel::class.java)
         // Use viewModel
+
     }
 
 }

@@ -2,6 +2,10 @@ package com.example.discovermars.dependencyInjection
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.discovermars.features.main.MainActivity
+import com.example.discovermars.image.ImageDetailViewModel
+import com.example.discovermars.image.ImageListViewModel
+import com.example.discovermars.userInterface.MainActivityViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -34,4 +38,17 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey (MainActivityViewModel::class)
     internal abstract fun mainActivityViewModel(viewModel: MainActivityViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey (ImageDetailViewModel::class)
+    internal abstract fun imageDetailViewModel(viewModel: ImageDetailViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey (ImageListViewModel::class)
+    internal abstract fun imageListViewModel(viewModel: ImageListViewModel): ViewModel
+
 }
+
+

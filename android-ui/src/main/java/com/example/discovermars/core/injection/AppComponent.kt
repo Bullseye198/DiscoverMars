@@ -21,10 +21,8 @@ import javax.inject.Singleton
     AndroidInjectionModule::class,
     ApplicationModule::class,
     ImageUIModule::class,
-    DaoModule::class
-
-
-    ]
+    DaoModule::class,
+    ApplicationModule::class]
 )
 
 
