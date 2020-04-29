@@ -19,7 +19,7 @@
         android:id="@+id/imageListFragment"
         android:name="com.example.discovermars.image.imagelist.ImageListFragment"
         android:label="fragment_image_list"
-        tools:layout="@layout/fragment_image_list" >
+        tools:layout="@layout/fragment_image_list">
         <action
             android:id="@+id/action_imageListFragment_to_imageDetail"
             app:destination="@id/imageDetail" />
