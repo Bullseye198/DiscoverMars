@@ -10,9 +10,7 @@ import com.example.discovermars.R
 import com.example.domain.image.model.Image
 import kotlinx.android.synthetic.main.item_image.view.*
 
-//Note list evet - Sealed class which represent different events which
-//can occur in the front end of the app.
-//Mutable live data - something that can be observed.
+
 class ImageListAdapter(): ListAdapter<Image, ImageListAdapter.ImageViewHolder>(ImageDiffUtilCallback()) {
 
     class ImageViewHolder(root: View) : RecyclerView.ViewHolder(root) {

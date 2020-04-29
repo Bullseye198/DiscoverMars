@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import com.example.discovermars.image.ImageListViewModel
 import com.example.discovermars.R
 import com.example.discovermars.dependencyInjection.ViewModelFactory
+import com.example.domain.image.model.Image
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_image_list.*
 import javax.inject.Inject
@@ -48,13 +49,9 @@ class ImageListFragment : DaggerFragment() {
 
     private fun setUpAdapter() {
         adapter = ImageListAdapter()
-       /* adapter.event.observe(
-            viewLifecycleOwner,
-            Observer{
-                viewModel.handleEvent(it)
-            }
-        )*/
         rec_list_fragment.adapter = adapter
+        adapter.submitList(listOf(Image("ljlklkj", "lkjl", "ljlkjlk"), Image("lkjlkjl", "lkljl","ljlkj")))
+
     }
 
 
