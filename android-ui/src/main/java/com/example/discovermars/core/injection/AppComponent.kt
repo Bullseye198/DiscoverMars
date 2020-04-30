@@ -5,6 +5,7 @@ import com.example.discovermars.MyApplication
 import com.example.discovermars.core.injection.module.ApplicationModule
 import com.example.discovermars.core.injection.module.ApplicationModuleBinds
 import com.example.discovermars.core.injection.module.DaoModule
+import com.example.discovermars.dependencyInjection.AppDataModule
 import com.example.discovermars.dependencyInjection.ImageUIModule
 import com.example.discovermars.dependencyInjection.ViewModelModule
 import dagger.BindsInstance
@@ -22,7 +23,8 @@ import javax.inject.Singleton
     ApplicationModule::class,
     ImageUIModule::class,
     DaoModule::class,
-    ApplicationModule::class]
+    ApplicationModule::class,
+    AppDataModule::class]
 )
 
 

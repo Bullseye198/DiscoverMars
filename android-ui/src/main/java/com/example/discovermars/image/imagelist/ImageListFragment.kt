@@ -55,9 +55,9 @@ class ImageListFragment : DaggerFragment() {
             viewLifecycleOwner,
             Observer {
                 if(it is ImageListEvent.OnImageItemClick){
-                    val direction = ImageListFragmentDirections.actionImageListFragmentToImageDetail()
-                    findNavController().navigate(direction)
-                }
+                val direction = ImageListFragmentDirections.actionImageListFragmentToImageDetail()
+                findNavController().navigate(direction)
+            }
             }
         )
         rec_list_fragment.adapter = adapter
