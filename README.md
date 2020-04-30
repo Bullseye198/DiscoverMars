@@ -15,13 +15,13 @@ ListAdapter,
 To do:
 - Display an list of images (Adapter, List Fragment and ListViewModel)
 - Refractor
-- Connect it to the remote to see if api works
 - Store the data to our local database
 - Abstract more by putting fragment switching logic into viewmodel
 
 
 In Progress:
-- ListViewModel call usecase
+- Connect it to the remote to see if api works
+
 
 Done:
 
@@ -29,3 +29,4 @@ Done:
 - Dagger2 implementation
 - Set up 2 fragments (with listAdapter and description)
 - Click on item inside of a list goes to image detail
+- ListViewModel call usecase
