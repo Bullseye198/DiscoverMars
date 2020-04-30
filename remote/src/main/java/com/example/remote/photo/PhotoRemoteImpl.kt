@@ -1,9 +1,12 @@
 package com.example.remote.photo
 
 import retrofit2.Retrofit
+import javax.inject.Inject
 
 
-class PhotoRemoteImpl {
+class PhotoRemoteImpl @Inject constructor(
+
+){
 
     val photoService: PhotoService
 

@@ -1,5 +1,6 @@
 package com.example.remote.photo
 
+import com.example.remote.photo.model.Camera
 import com.example.remote.photo.model.Images
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -16,4 +17,8 @@ interface PhotoService {
         @Query("api_key") key: String
     ): Images
 
+    @GET("rovers/curiosity/photos")
+    fun getCurrentCamera(
+        @Query("api_key") key: String
+    ): Camera
 }
