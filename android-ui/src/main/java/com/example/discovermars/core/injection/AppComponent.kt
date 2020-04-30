@@ -8,6 +8,7 @@ import com.example.discovermars.core.injection.module.DaoModule
 import com.example.discovermars.dependencyInjection.AppDataModule
 import com.example.discovermars.dependencyInjection.ImageUIModule
 import com.example.discovermars.dependencyInjection.ViewModelModule
+import com.example.remote.injection.RemoteModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -24,7 +25,8 @@ import javax.inject.Singleton
     ImageUIModule::class,
     DaoModule::class,
     ApplicationModule::class,
-    AppDataModule::class]
+    AppDataModule::class,
+    RemoteModule::class]
 )
 
 
