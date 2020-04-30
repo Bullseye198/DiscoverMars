@@ -50,6 +50,7 @@ class ImageListFragment : DaggerFragment() {
 
     private fun setUpAdapter() {
         adapter = ImageListAdapter()
+        rec_list_fragment.adapter = adapter
 
         adapter.event.observe(
             viewLifecycleOwner,
@@ -60,20 +61,11 @@ class ImageListFragment : DaggerFragment() {
             }
             }
         )
-        rec_list_fragment.adapter = adapter
-        adapter.submitList(
-            listOf(
-                Image("ljlklkj", "lkjl", "ljlkjlk")
-                , Image("lkjlkjl", "lkljl", "ljlkj")
-                , Image("lkjlkjl", "lkljl", "ljlkj")
-                , Image("lkjlkjl", "lkljl", "ljlkj")
-                , Image("lkjlkjl", "lkljl", "ljlkj")
-                , Image("lkjlkjl", "lkljl", "ljlkj")
-                , Image("lkjlkjl", "lkljl", "ljlkj")
-                , Image("lkjlkjl", "lkljl", "ljlkj")
-            )
-        )
 
+        viewModel.imageList.observe(   viewLifecycleOwner,
+            Observer {
+                adapter.submitList(it)
+            })
     }
 
 

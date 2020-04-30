@@ -1,10 +1,7 @@
-package com.example.data
+package com.example.cache
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Index
-import androidx.room.PrimaryKey
 
+/*
 
 @Entity(
     tableName = "mars",
@@ -15,3 +12,4 @@ data class RoomImage (
     @ColumnInfo(name = "creation_date")
     val creationDate: String
 )
+*/

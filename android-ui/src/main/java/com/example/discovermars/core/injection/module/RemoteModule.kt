@@ -1,7 +1,8 @@
-package com.example.remote.injection
+package com.example.discovermars.core.injection.module
 
+import android.content.Context
+import com.example.remote.injection.RemoteModuleBinds
 import com.example.remote.photo.PhotoService
-import com.example.remote.photo.PhotoServiceFactory
 import dagger.Module
 import dagger.Provides
 
@@ -13,7 +14,9 @@ object RemoteModule {
 
     @Provides
     fun providePhotoService(
+        context: Context
     ): PhotoService {
+        return PhotoServiceFactory.makePhotoService(context)
         //we need to return PhotoServiceFactory
     }
 }

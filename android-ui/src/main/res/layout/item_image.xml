@@ -11,13 +11,11 @@
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_marginStart="16dp"
-        android:alpha=".86"
         android:contentDescription="TODO"
-        android:tint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_face_24px" />
+        tools:srcCompat="@drawable/ic_baseline_face_24px" />
 
     <TextView
         android:id="@+id/lbl_message"

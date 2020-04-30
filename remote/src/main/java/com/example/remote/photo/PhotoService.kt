@@ -7,18 +7,20 @@ import retrofit2.http.Query
 
 /**
  * Defines the abstract methods used for interacting with the Photo Service.
-*/
+ */
 
 //https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2015-6-3&api_key=DEMO_KEY
 interface PhotoService {
 
     @GET("rovers/curiosity/photos")
-    fun getCurrentPhoto(
+    suspend fun getCurrentPhoto(
+        @Query("earth_date") earthDate: String,
         @Query("api_key") key: String
     ): Images
 
+
     @GET("rovers/curiosity/photos")
-    fun getCurrentCamera(
+    suspend fun getCurrentCamera(
         @Query("api_key") key: String
     ): Camera
 }

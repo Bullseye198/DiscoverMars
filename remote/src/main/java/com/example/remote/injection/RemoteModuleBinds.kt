@@ -1,5 +1,7 @@
 package com.example.remote.injection
 
+import com.example.data.image.PhotoRemote
+import com.example.remote.photo.PhotoRemoteImpl
 import dagger.Binds
 import dagger.Module
 
@@ -9,5 +11,6 @@ import dagger.Module
 @Module
 interface RemoteModuleBinds {
 
-
+    @Binds
+    fun bindPhotoRemote(photoRemoteImpl: PhotoRemoteImpl): PhotoRemote
 }
