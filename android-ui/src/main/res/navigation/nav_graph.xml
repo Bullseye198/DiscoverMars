@@ -14,7 +14,12 @@
         android:id="@+id/imageDetail"
         android:name="com.example.discovermars.image.imagedetail.ImageDetailFragment"
         android:label="fragment_image_detail"
-        tools:layout="@layout/fragment_image_detail" />
+        tools:layout="@layout/fragment_image_detail" >
+        <argument
+            android:name="message"
+            app:argType="string"
+            android:defaultValue="Default" />
+    </fragment>
     <fragment
         android:id="@+id/imageListFragment"
         android:name="com.example.discovermars.image.imagelist.ImageListFragment"
