@@ -1,6 +1,6 @@
 # DiscoverMars
 
-App that connects to the NASA API and shows photos from Mars that was taken by Mars Rover. :)
+App that will connect to the NASA API and show photos from Mars that was taken by Mars Rover. :)
 
 What we will use:
 JetPack Navigation,
