@@ -1,8 +1,7 @@
-package com.example.domain.image.model
+package com.example.remote.photo.model
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import androidx.annotation.Keep
-import com.example.domain.image.model.Camera
 
 @Keep
 @JsonClass(generateAdapter = true)
