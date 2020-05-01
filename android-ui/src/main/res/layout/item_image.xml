@@ -4,20 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root_list_item"
     android:layout_width="match_parent"
-    android:layout_height="88dp">
+    android:layout_height="160dp">
 
     <ImageView
         android:id="@+id/imv_list_item_icon"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:layout_marginStart="16dp"
-        android:alpha=".86"
         android:contentDescription="TODO"
-        android:tint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/btn_styling" />
+        tools:srcCompat="@drawable/ic_baseline_face_24px" />
 
     <TextView
         android:id="@+id/lbl_message"
@@ -37,8 +35,8 @@
 
     <ImageView
         android:id="@+id/imv_date_and_time"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="36dp"
+        android:layout_height="34dp"
         android:layout_marginStart="8dp"
         android:alpha=".86"
         app:layout_constraintStart_toEndOf="@+id/imv_list_item_icon"

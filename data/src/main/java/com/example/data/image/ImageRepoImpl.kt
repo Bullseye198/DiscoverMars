@@ -7,12 +7,12 @@ import javax.inject.Singleton
 
 @Singleton
 class ImageRepoImpl @Inject constructor(
-
+    private val photoRemote: PhotoRemote
 ) : IImageRepository{
 
 
     override suspend fun getImages(): List<Image> {
-        return getImages()
+        return photoRemote.getImages()
     }
 
 

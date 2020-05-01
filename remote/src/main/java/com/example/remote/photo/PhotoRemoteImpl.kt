@@ -1,18 +1,20 @@
 package com.example.remote.photo
 
+import com.example.data.image.PhotoRemote
+import com.example.domain.image.model.Image
 import retrofit2.Retrofit
+import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
+class PhotoRemoteImpl @Inject constructor(
+    private val photoService: PhotoService
+) : PhotoRemote {
 
-class PhotoRemoteImpl {
-
-    val photoService: PhotoService
-
-    init {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("/https://api.nasa.gov/mars-photos/api/v1/")
-            .build()
-
-        photoService = retrofit.create(PhotoService::class.java)
-       val images = photoService.getCurrentPhoto("DEMO_KEY")
+    override suspend fun getImages(): List<Image> {
+        return photoService.getCurrentPhoto("2019-6-3", "DEMO_KEY").photos
+            .map {
+                Image(it.earthDate, it.rover.name, it.imgSrc)
+            }
     }
 }

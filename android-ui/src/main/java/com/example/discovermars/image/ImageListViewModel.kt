@@ -24,6 +24,9 @@ class ImageListViewModel @Inject constructor(
     private val changeImageState = MutableLiveData<String>()
     val editImage: LiveData<String> get() = changeImageState
 
+    init {
+        getImages()
+    }
 
     //TODO: Check out this handle event and use it.
     fun handleEvent(event: ImageListEvent) {
