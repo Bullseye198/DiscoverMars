@@ -1,26 +1,31 @@
 # DiscoverMars
 
 App that will connect to the NASA API and show photos from Mars that was taken by Mars Rover. :)
+So we got our first pictures of Mars :)
+Now we must do our cleanup and 
 
 What we will use:
 JetPack Navigation,
 REST API,
 Retrofit,
 Dagger2,
+Coil,
+OkHttp3,
+Room,
 Clean Architecture,
 MVVM,
 ListAdapter,
 
 
 To do:
-- Display an list of images (Adapter, List Fragment and ListViewModel)
-- Refractor
+
+- Work on the image detail
 - Store the data to our local database
 - Abstract more by putting fragment switching logic into viewmodel
 
 
 In Progress:
-- Connect it to the remote to see if api works
+- Refractor (move PhotoServiceFactory and Remote Module from UI module)
 
 
 Done:
@@ -30,3 +35,5 @@ Done:
 - Set up 2 fragments (with listAdapter and description)
 - Click on item inside of a list goes to image detail
 - ListViewModel call usecase
+- Connected to the remote, api works
+- Display an list of images (Adapter, List Fragment and ListViewModel)
