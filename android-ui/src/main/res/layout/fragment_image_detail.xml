@@ -46,19 +46,23 @@
                 android:layout_marginTop="32dp"
                 android:text="TextView"
                 android:textColor="@android:color/holo_blue_bright"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageDetailView"
-                tools:layout_editor_absoluteX="141dp"
                 tools:text="Mars text will be here" />
 
             <TextView
                 android:id="@+id/lbl_message_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="TextView"
                 android:textColor="@android:color/holo_blue_bright"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lbl_message_detail"
-                tools:layout_editor_absoluteX="141dp"
+                app:layout_constraintVertical_bias="0.0"
                 tools:text="6:30AM 06/01/2017" />
 
 
