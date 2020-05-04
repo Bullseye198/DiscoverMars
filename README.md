@@ -24,7 +24,7 @@ To do:
 
 
 In Progress:
-- Store the data to our local database
+- Store the data to our local database with Room
 
 Done:
 
