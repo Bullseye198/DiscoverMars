@@ -1,10 +1,10 @@
-package com.example.discovermars.core.injection.module
+package com.example.remote.photo
 
-import android.content.Context
 import com.example.remote.injection.RemoteModuleBinds
-import com.example.remote.photo.PhotoService
 import dagger.Module
 import dagger.Provides
+import okhttp3.Interceptor
+import javax.inject.Singleton
 
 /**
  * Module that provides all dependencies from the repository package/layer.
@@ -13,10 +13,13 @@ import dagger.Provides
 object RemoteModule {
 
     @Provides
+    @Singleton
     fun providePhotoService(
-        context: Context
+        chuckerInterceptor: Interceptor
     ): PhotoService {
-        return PhotoServiceFactory.makePhotoService(context)
+        return PhotoServiceFactory.makePhotoService(
+            chuckerInterceptor
+        )
         //we need to return PhotoServiceFactory
     }
 }
