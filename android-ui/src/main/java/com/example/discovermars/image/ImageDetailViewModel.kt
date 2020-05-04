@@ -26,7 +26,7 @@ class ImageDetailViewModel @Inject constructor(
 
     private fun getImage(ImageId: Int) {
         viewModelScope.launch {
-           val imageResult =  onGetImageByIdUseCase.getImage(0)
+           val imageResult =  onGetImageByIdUseCase.getImage(ImageId)
 
            imageState.value = imageResult
         }

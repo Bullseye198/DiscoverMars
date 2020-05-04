@@ -8,6 +8,6 @@ class OnGetImageByIdUseCase @Inject constructor(
     private val iImageRepository: IImageRepository
 ) {
     suspend fun getImage(ImageId : Int): Image {
-        return iImageRepository.getImageById(0)
+        return iImageRepository.getImageById(ImageId)
     }
 }
