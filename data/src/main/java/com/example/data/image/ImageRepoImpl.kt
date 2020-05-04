@@ -8,6 +8,7 @@ import javax.inject.Singleton
 @Singleton
 class ImageRepoImpl @Inject constructor(
     private val photoRemote: PhotoRemote
+    //val local: ImageDao
 ) : IImageRepository{
 
     override suspend fun getImageById(ImageId: Int): Image {
