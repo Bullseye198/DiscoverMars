@@ -6,4 +6,5 @@ interface PhotoRemote {
 
     suspend fun getImages(): List<Image>
 
+
 }

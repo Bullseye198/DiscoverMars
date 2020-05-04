@@ -39,7 +39,7 @@ class ImageListAdapter(val event: MutableLiveData<ImageListEvent> = MutableLiveD
             holder.image.load(image.imageUrl.replace("http:", "https:"))
           //  holder.image.load("https://mars.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/01004/opgs/edr/fcam/FLB_486615455EDR_F0481570FHAZ00323M_.jpg")
             holder.itemView.setOnClickListener {
-                event.value = ImageListEvent.OnImageItemClick(position)
+                event.value = ImageListEvent.OnImageItemClick(position, image.id)
             }
         }
     }
