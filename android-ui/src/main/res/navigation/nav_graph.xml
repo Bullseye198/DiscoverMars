@@ -16,9 +16,8 @@
         android:label="fragment_image_detail"
         tools:layout="@layout/fragment_image_detail" >
         <argument
-            android:name="message"
-            app:argType="string"
-            android:defaultValue="Default" />
+            android:name="imageId"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/imageListFragment"

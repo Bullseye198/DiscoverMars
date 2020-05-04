@@ -2,6 +2,7 @@ package com.example.remote.photo
 
 import com.example.remote.photo.model.Camera
 import com.example.remote.photo.model.Images
+import com.example.remote.photo.model.Photo
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -17,7 +18,12 @@ interface PhotoService {
         @Query("earth_date") earthDate: String,
         @Query("api_key") key: String
     ): Images
-
+/*
+    @GET("rovers/curiosity/photos")
+    suspend fun getCurrentPhotoId(
+        @Query("id") id: String
+    ) : Photo
+*/
 
     @GET("rovers/curiosity/photos")
     suspend fun getCurrentCamera(
