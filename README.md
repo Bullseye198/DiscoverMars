@@ -19,13 +19,12 @@ ListAdapter,
 
 To do:
 
-- Connect Image Detail to the database
-- Store the data to our local database
+- Work on the UI
 - Abstract more by putting fragment switching logic into viewmodel
 
 
 In Progress:
-- Work on the image detail
+- Store the data to our local database
 
 Done:
 
@@ -37,4 +36,5 @@ Done:
 - Connected to the remote, api works
 - Display an list of images (Adapter, List Fragment and ListViewModel)
 - Refractor (move PhotoServiceFactory and Remote Module from UI module)
- 
+- Connect Image Detail to the database
+- Work on the image detail
