@@ -25,7 +25,6 @@ To do:
 
 
 In Progress:
-- Refractor (move PhotoServiceFactory and Remote Module from UI module)
 
 
 Done:
@@ -37,3 +36,4 @@ Done:
 - ListViewModel call usecase
 - Connected to the remote, api works
 - Display an list of images (Adapter, List Fragment and ListViewModel)
+- Refractor (move PhotoServiceFactory and Remote Module from UI module)
