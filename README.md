@@ -19,13 +19,13 @@ ListAdapter,
 
 To do:
 
-- Work on the image detail
+
 - Store the data to our local database
 - Abstract more by putting fragment switching logic into viewmodel
 
 
 In Progress:
-
+- Work on the image detail
 
 Done:
 
