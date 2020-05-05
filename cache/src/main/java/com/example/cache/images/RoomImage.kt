@@ -1,4 +1,4 @@
-package com.example.cache
+package com.example.cache.images
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
