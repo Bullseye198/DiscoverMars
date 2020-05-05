@@ -9,11 +9,19 @@ import javax.inject.Singleton
 @Singleton
 class PhotoCacheImpl @Inject constructor(
     private val imageDao: ImageDao
-): PhotoCache {
+) : PhotoCache {
 
     override suspend fun getImagesSuspend(): List<Image> {
-    return imageDao.getImages()
-        .map {  }
+        return imageDao.getImages()
+            .map { databaseImage ->
+                databaseImage.mapToDomainModel()
+            }
 
+    }
+
+    override suspend fun storeImages(images: List<Image>) {
+        imageDao.insertAllSuspend(images.map { domainImage ->
+            domainImage.mapToRoomModel()
+        })
     }
 }

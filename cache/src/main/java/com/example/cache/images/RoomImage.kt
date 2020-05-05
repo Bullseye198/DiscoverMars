@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.example.domain.image.model.Image
 
 
 @Entity(
@@ -16,3 +17,17 @@ data class RoomImage (
     val creationDate: String
 )
 
+fun RoomImage.mapToDomainModel(): Image {
+    return   Image(
+        creationDate = creationDate,
+        contents = "Test",
+        imageUrl = "Test",
+        id = creationDate.hashCode()
+    )
+}
+
+fun Image.mapToRoomModel(): RoomImage {
+    return RoomImage(
+        creationDate = creationDate
+    )
+}
