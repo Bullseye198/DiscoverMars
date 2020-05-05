@@ -25,7 +25,7 @@ To do:
 
 
 In Progress:
-- Store the data to our local database with Room
+RxJava implementation
 
 Done:
 
@@ -39,3 +39,4 @@ Done:
 - Refractor (move PhotoServiceFactory and Remote Module from UI module)
 - Connect Image Detail to the database
 - Work on the image detail
+- Store the data to our local database with Room
