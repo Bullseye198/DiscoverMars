@@ -8,26 +8,31 @@ import com.example.domain.image.model.Image
 
 
 @Entity(
-    tableName = "mars",
-    indices = [Index("creation_date")]
+    tableName = "mars"
 )
-data class RoomImage (
+data class RoomImage(
     @PrimaryKey
-    @ColumnInfo(name = "creation_date")
-    val creationDate: String
+    @ColumnInfo(name = "id")
+    val id: Int,
+    val creationDate: String,
+    val contents: String,
+    val imageUrl: String
 )
 
 fun RoomImage.mapToDomainModel(): Image {
-    return   Image(
+    return Image(
         creationDate = creationDate,
-        contents = "Test",
-        imageUrl = "Test",
-        id = creationDate.hashCode()
+        contents = contents,
+        imageUrl = imageUrl,
+        id = id
     )
 }
 
 fun Image.mapToRoomModel(): RoomImage {
     return RoomImage(
-        creationDate = creationDate
+        creationDate = creationDate,
+        contents = contents,
+        imageUrl = imageUrl,
+        id = id
     )
 }

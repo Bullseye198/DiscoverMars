@@ -7,7 +7,7 @@ import io.reactivex.Flowable
 interface IImageRepository {
     suspend fun getImageById(ImageId: Int): Image
 
-    fun observeImages(): Flowable<List<Image>>
+    //fun observeImages(): Flowable<List<Image>>
 
     //One Time Request from local Database
     suspend fun requestImages(): List<Image>

@@ -9,8 +9,6 @@ import kotlin.coroutines.CoroutineContext
 @Module
 interface AppDataModule {
 
-    @Binds
-    fun bindIImageRepository(imageRepoImpl: ImageRepoImpl): IImageRepository
 
     @Binds
     fun bindCoroutineCOntext(coroutineContext: CoroutineContext): CoroutineContext

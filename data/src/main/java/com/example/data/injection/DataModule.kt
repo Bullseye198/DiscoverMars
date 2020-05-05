@@ -1,5 +1,6 @@
 package com.example.data.injection
 
+import com.example.data.image.ImageRepoImpl
 import com.example.domain.image.IImageRepository
 import dagger.Binds
 import dagger.Module
@@ -8,5 +9,5 @@ import dagger.Module
 interface DataModule {
 
     @Binds
-    fun bindIImageRepository(iImageRepository: IImageRepository): IImageRepository
+    fun bindIImageRepository(imageRepoImpl: ImageRepoImpl): IImageRepository
 }

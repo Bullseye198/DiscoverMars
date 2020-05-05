@@ -5,6 +5,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.chuckerteam.chucker.api.Chucker
 import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.example.cache.images.RoomImageDatabase
 import com.example.domain.AppCoroutineDispatchers
 import dagger.Module
 import dagger.Provides
@@ -18,8 +19,9 @@ object ApplicationModule {
     @Provides
         fun provideRoomDatabase(
         applicationContext: Context
-    ) : RoomDatabase {
-        return Room.databaseBuilder(applicationContext, RoomDatabase::class.java, "marsdagger")
+    ) : RoomImageDatabase {
+        return Room.databaseBuilder(applicationContext, RoomImageDatabase::class.java, "marsdagger")
+            .fallbackToDestructiveMigration()
             .build()
     }
 
