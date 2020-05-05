@@ -7,14 +7,15 @@ import androidx.lifecycle.viewModelScope
 import com.example.discovermars.image.imagelist.ImageListEvent
 import com.example.domain.AppCoroutineDispatchers
 import com.example.domain.image.model.Image
-import com.example.domain.usecases.OnGetImagesUseCase
+import com.example.domain.usecases.RefreshImagesUseCase
+import com.example.domain.usecases.RequestImagesUseCase
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.text.FieldPosition
 import javax.inject.Inject
 
 class ImageListViewModel @Inject constructor(
-    private val onGetImagesUseCase: OnGetImagesUseCase,
+    private val requestImagesUseCase: RequestImagesUseCase,
+    private val refreshImagesUseCase: RefreshImagesUseCase,
     private val appCoroutineDispatchers: AppCoroutineDispatchers
 ) : ViewModel() {
 
@@ -39,7 +40,18 @@ class ImageListViewModel @Inject constructor(
     private fun getImages() {
         viewModelScope.launch {
             val images = withContext(appCoroutineDispatchers.io) {
-                onGetImagesUseCase.getImages()
+                requestImagesUseCase.requestImages()
+            }
+            imageListState.value = images
+        }
+        refreshAndUpdate()
+    }
+
+    private fun refreshAndUpdate(){
+        viewModelScope.launch {
+            val images = withContext(appCoroutineDispatchers.io) {
+                refreshImagesUseCase.refresh()
+                requestImagesUseCase.requestImages()
             }
             imageListState.value = images
         }

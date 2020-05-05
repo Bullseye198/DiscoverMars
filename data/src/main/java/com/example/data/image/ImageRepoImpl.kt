@@ -7,17 +7,26 @@ import javax.inject.Singleton
 
 @Singleton
 class ImageRepoImpl @Inject constructor(
-    private val photoRemote: PhotoRemote
-    //val local: ImageDao
+    private val photoRemote: PhotoRemote,
+    private val photoCache: PhotoCache
 ) : IImageRepository{
 
     override suspend fun getImageById(ImageId: Int): Image {
-        return photoRemote.getImages()
+        return requestImages()
             .first { it.id == ImageId }
     }
 
-
-    override suspend fun getImages(): List<Image> {
-        return photoRemote.getImages()
+    override suspend fun requestImages(): List<Image> {
+        return photoCache.requestImages()
     }
+
+    override suspend fun fetchImages(): List<Image> {
+        return photoRemote.fetchImages()
+    }
+
+    override suspend fun storeImages(images: List<Image>) {
+        photoCache.storeImages(images)
+    }
+
+
 }

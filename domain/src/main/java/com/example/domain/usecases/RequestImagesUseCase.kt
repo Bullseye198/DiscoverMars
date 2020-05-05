@@ -4,11 +4,12 @@ import com.example.domain.image.IImageRepository
 import com.example.domain.image.model.Image
 import javax.inject.Inject
 
-class OnGetImagesUseCase @Inject constructor(
+class RequestImagesUseCase @Inject constructor(
     private val iImageRepository: IImageRepository
 ){
 
-    suspend fun getImages(): List<Image> {
-       return iImageRepository.getImages()
+    suspend fun requestImages(): List<Image>{
+        return iImageRepository.requestImages()
     }
+
 }

@@ -10,7 +10,7 @@ class PhotoRemoteImpl @Inject constructor(
     private val photoService: PhotoService
 ) : PhotoRemote {
 
-    override suspend fun getImages(): List<Image> {
+    override suspend fun fetchImages(): List<Image> {
         return photoService.getCurrentPhoto("2019-8-3", "DEMO_KEY").photos
             .map {
                 Image(it.earthDate, it.rover.name, it.imgSrc, it.id)
