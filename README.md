@@ -12,6 +12,7 @@ Dagger2,
 Coil,
 OkHttp3,
 Room,
+RxJava
 Clean Architecture,
 MVVM,
 ListAdapter,
