@@ -25,7 +25,7 @@ To do:
 
 
 In Progress:
-RxJava implementation
+- RxJava implementation
 
 Done:
 
