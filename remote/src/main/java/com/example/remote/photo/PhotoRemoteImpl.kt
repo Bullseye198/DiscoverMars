@@ -11,11 +11,9 @@ class PhotoRemoteImpl @Inject constructor(
 ) : PhotoRemote {
 
     override suspend fun fetchImages(): List<Image> {
-        return photoService.getCurrentPhoto("2019-8-3", "DEMO_KEY").photos
+        return photoService.getCurrentPhoto("2019-8-3", "DEMO_KEY", "").photos
             .map {
-                Image(it.earthDate, it.rover.name, it.imgSrc, it.id)
+                Image(it.earthDate, it.rover.name, it.imgSrc, it.id, it.camera.name)
             }
     }
-
-
 }
