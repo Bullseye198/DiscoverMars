@@ -15,7 +15,8 @@ data class RoomImage(
     val id: Int,
     val creationDate: String,
     val contents: String,
-    val imageUrl: String
+    val imageUrl: String,
+    val camera: String
 )
 
 fun RoomImage.mapToDomainModel(): Image {
@@ -24,7 +25,7 @@ fun RoomImage.mapToDomainModel(): Image {
         contents = contents,
         imageUrl = imageUrl,
         id = id,
-        camera = it.camera
+        camera = camera
     )
 }
 
@@ -33,6 +34,7 @@ fun Image.mapToRoomModel(): RoomImage {
         creationDate = creationDate,
         contents = contents,
         imageUrl = imageUrl,
-        id = id
+        id = id,
+        camera = camera
     )
 }
