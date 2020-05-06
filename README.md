@@ -26,7 +26,7 @@ To do:
 
 
 In Progress:
-- Add function to change date when the picture was taken
+- Add function to change date when the picture was taken, and camera
 
 Done:
 
