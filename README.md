@@ -5,17 +5,18 @@ So we got our first pictures of Mars :)
 Now we must do our cleanup and 
 
 What we will use:
+Clean Architecture,
+Modularization,
+ListAdapter,
+MVVM,
 JetPack Navigation,
+Dagger2,
 REST API,
 Retrofit,
-Dagger2,
 Coil,
 OkHttp3,
 Room,
 RxJava,
-Clean Architecture,
-MVVM,
-ListAdapter,
 
 
 To do:
