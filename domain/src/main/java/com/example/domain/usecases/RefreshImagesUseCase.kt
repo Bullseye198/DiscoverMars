@@ -6,10 +6,12 @@ import javax.inject.Inject
 class RefreshImagesUseCase @Inject constructor(
     private val iImageRepository: IImageRepository
 ) {
+    suspend fun refresh() {
+        try {
+            val serverImages = iImageRepository.fetchImages()
+            iImageRepository.storeImages(serverImages)
+        } catch (e: Exception) {
+        }
 
-    suspend fun refresh(){
-        val serverImages = iImageRepository.fetchImages()
-        iImageRepository.storeImages(serverImages)
     }
-
 }
