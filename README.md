@@ -19,13 +19,13 @@ ListAdapter,
 
 
 To do:
-
+- RxJava implementation
 - Work on the UI
 - Abstract more by putting fragment switching logic into viewmodel
 
 
 In Progress:
-- RxJava implementation
+- Add function to change date when the picture was taken
 
 Done:
 
@@ -40,3 +40,4 @@ Done:
 - Connect Image Detail to the database
 - Work on the image detail
 - Store the data to our local database with Room
+- Fixed crash when phone is offline
