@@ -8,8 +8,8 @@ class RequestImagesUseCase @Inject constructor(
     private val iImageRepository: IImageRepository
 ){
 
-    suspend fun requestImages(): List<Image>{
-        return iImageRepository.requestImages()
+    suspend fun requestImages(camera: String? = null): List<Image>{
+        return iImageRepository.requestImages(camera)
     }
 
 }

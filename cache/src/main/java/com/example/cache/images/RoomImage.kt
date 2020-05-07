@@ -2,7 +2,6 @@ package com.example.cache.images
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.example.domain.image.model.Image
 
@@ -16,7 +15,8 @@ data class RoomImage(
     val id: Int,
     val creationDate: String,
     val contents: String,
-    val imageUrl: String
+    val imageUrl: String,
+    val camera: String
 )
 
 fun RoomImage.mapToDomainModel(): Image {
@@ -24,7 +24,8 @@ fun RoomImage.mapToDomainModel(): Image {
         creationDate = creationDate,
         contents = contents,
         imageUrl = imageUrl,
-        id = id
+        id = id,
+        camera = camera
     )
 }
 
@@ -33,6 +34,7 @@ fun Image.mapToRoomModel(): RoomImage {
         creationDate = creationDate,
         contents = contents,
         imageUrl = imageUrl,
-        id = id
+        id = id,
+        camera = camera
     )
 }

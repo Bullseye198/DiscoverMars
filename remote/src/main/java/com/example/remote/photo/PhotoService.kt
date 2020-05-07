@@ -16,7 +16,8 @@ interface PhotoService {
     @GET("rovers/curiosity/photos")
     suspend fun getCurrentPhoto(
         @Query("earth_date") earthDate: String,
-        @Query("api_key") key: String
+        @Query("api_key") key: String,
+        @Query("camera") camera: String?
     ): Images
 
     @GET("rovers/curiosity/photos")

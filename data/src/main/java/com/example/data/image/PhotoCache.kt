@@ -5,7 +5,7 @@ import io.reactivex.Flowable
 
 
 interface PhotoCache {
-    suspend fun requestImages(): List<Image>
+    suspend fun requestImages(camera: String?): List<Image>
 
     suspend fun observeImages(): Flowable<List<Image>>
 
