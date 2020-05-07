@@ -5,10 +5,10 @@ import com.example.domain.image.model.Image
 
 class ImageDiffUtilCallback: DiffUtil.ItemCallback<Image>() {
     override fun areItemsTheSame(oldItem: Image, newItem: Image): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.creationDate == newItem.creationDate
     }
 
     override fun areContentsTheSame(oldItem: Image, newItem: Image): Boolean {
-        return oldItem == newItem
+        return oldItem.creationDate == newItem.creationDate
     }
 }

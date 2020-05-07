@@ -25,8 +25,6 @@ class ImageListViewModel @Inject constructor(
     private val changeImageState = MutableLiveData<String>()
     val editImage: LiveData<String> get() = changeImageState
 
-    var currentCamera: String? = null
-
     init {
         getImages()
     }
@@ -39,15 +37,10 @@ class ImageListViewModel @Inject constructor(
         }
     }
 
-    fun onNewCameraSelected(newCamera: String){
-        currentCamera = newCamera
-        getImages()
-    }
-
     private fun getImages() {
         viewModelScope.launch {
             val images = withContext(appCoroutineDispatchers.io) {
-                requestImagesUseCase.requestImages(currentCamera)
+                requestImagesUseCase.requestImages()
             }
             imageListState.value = images
         }
@@ -58,7 +51,7 @@ class ImageListViewModel @Inject constructor(
         viewModelScope.launch {
             val images = withContext(appCoroutineDispatchers.io) {
                 refreshImagesUseCase.refresh()
-                requestImagesUseCase.requestImages(currentCamera)
+                requestImagesUseCase.requestImages()
             }
             imageListState.value = images
         }
