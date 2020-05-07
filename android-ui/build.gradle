@@ -12,8 +12,8 @@ android {
 
     defaultConfig {
         applicationId "com.example.discovermars"
-        minSdkVersion "R"
-        targetSdkVersion "R"
+        minSdkVersion 29
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
