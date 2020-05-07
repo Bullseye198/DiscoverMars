@@ -13,7 +13,7 @@ class PhotoRemoteImpl @Inject constructor(
 
     override suspend fun fetchImages(camera: String): List<Image> {
         return photoService.getCurrentPhoto(
-            "2019-8-3", "DEMO_KEY", if (camera.isNotEmpty()) {
+            "2015-5-5", "DEMO_KEY", if (camera.isNotEmpty()) {
                 camera
             } else null
         ).photos
