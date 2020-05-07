@@ -20,8 +20,8 @@ class ImageRepoImpl @Inject constructor(
         return photoCache.requestImages()
     }
 
-    override suspend fun fetchImages(camera: String): List<Image> {
-        return photoRemote.fetchImages(camera)
+    override suspend fun fetchImages(): List<Image> {
+        return photoRemote.fetchImages()
     }
 
     override suspend fun storeImages(images: List<Image>) {
