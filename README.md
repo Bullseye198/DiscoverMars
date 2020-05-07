@@ -26,7 +26,7 @@ To do:
 
 
 In Progress:
-- Add function to change date when the picture was taken, and camera
+- Add function to change date when the picture was taken
 
 Done:
 
@@ -42,3 +42,4 @@ Done:
 - Work on the image detail
 - Store the data to our local database with Room
 - Fixed crash when phone is offline
+- Added function to change the camera
