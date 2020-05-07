@@ -5,6 +5,7 @@ So we got our first pictures of Mars :)
 
 How to open project:
 * This project needs Android Studio 4.1 or newer
+* Newest Gradle version and newest SDK version are needed
 
 
 What we will use:
