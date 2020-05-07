@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name">DiscoverMars</string>
-    <string name="selected_item">Selected item:</string>
 
     <string-array name="cameras">
-        <item>FirstCam</item>
-        <item>SecondCam</item>
-        <item>ThirdCam</item>
-        <item>FourthCam</item>
+        <item>FHAZ</item>
+        <item>RHAZ</item>
+        <item>MAST</item>
+        <item>CHEMCAM</item>
+        <item>MAHLI</item>
+        <item>MARDI</item>
+        <item>NAVCAM</item>
     </string-array>
 </resources>

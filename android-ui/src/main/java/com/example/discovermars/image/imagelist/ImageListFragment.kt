@@ -22,7 +22,6 @@ class ImageListFragment : DaggerFragment() {
 
     private lateinit var viewModel: ImageListViewModel
     private lateinit var adapter: ImageListAdapter
-    private lateinit var spinnerAdapter : SpinnerAdapter
 
 
     @Inject
