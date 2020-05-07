@@ -12,12 +12,18 @@ class PhotoCacheImpl @Inject constructor(
     private val imageDao: ImageDao
 ) : PhotoCache {
 
-    override suspend fun requestImages(): List<Image> {
-        return imageDao.getImages()
-            .map { databaseImage ->
-                databaseImage.mapToDomainModel()
-            }
-
+    override suspend fun requestImages(camera: String?): List<Image> {
+        return if (camera == null) {
+            imageDao.getImages()
+                .map { databaseImage ->
+                    databaseImage.mapToDomainModel()
+                }
+        } else {
+            imageDao.getImagesForCamera(camera)
+                .map { databaseImage ->
+                    databaseImage.mapToDomainModel()
+                }
+        }
     }
 
     override suspend fun observeImages(): Flowable<List<Image>> {

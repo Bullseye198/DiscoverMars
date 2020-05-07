@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.discovermars.image.ImageListViewModel
@@ -21,6 +22,7 @@ class ImageListFragment : DaggerFragment() {
 
     private lateinit var viewModel: ImageListViewModel
     private lateinit var adapter: ImageListAdapter
+    private lateinit var spinnerAdapter : SpinnerAdapter
 
 
     @Inject
@@ -36,37 +38,76 @@ class ImageListFragment : DaggerFragment() {
     }
 
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        observeViewModel()
+        setUpImageListAdapter()
+        setupSpinnerAdapter()
+    }
+
+
+
+
+    private fun setupSpinnerAdapter() {
+        val cameras = resources.getStringArray(R.array.cameras)
+
+        val spinner = requireView().findViewById<Spinner>(R.id.spinner1)
+        if (spinner != null) {
+            val adapter = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_item, cameras
+            )
+            spinner.adapter = adapter
+
+            spinner.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    viewModel.onNewCameraSelected(adapter.getItem(position)!!)
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                    TODO("Not yet implemented")
+                }
+            }
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         rec_list_fragment.adapter = null
+        spinner1.adapter = null
     }
 
-    override fun onStart() {
-        super.onStart()
-        setUpAdapter()
-
-    }
-
-
-    private fun setUpAdapter() {
+    private fun setUpImageListAdapter() {
         adapter = ImageListAdapter()
         rec_list_fragment.adapter = adapter
 
         adapter.event.observe(
             viewLifecycleOwner,
             Observer {
-                if(it is ImageListEvent.OnImageItemClick){
-                val direction = ImageListFragmentDirections.actionImageListFragmentToImageDetail(it.imageId)
-                findNavController().navigate(direction)
-            }
+                if (it is ImageListEvent.OnImageItemClick) {
+                    val direction =
+                        ImageListFragmentDirections.actionImageListFragmentToImageDetail(it.imageId)
+                    findNavController().navigate(direction)
+                }
             }
         )
 
-        viewModel.imageList.observe(   viewLifecycleOwner,
+
+    }
+
+    private fun observeViewModel() {
+        viewModel.imageList.observe(viewLifecycleOwner,
             Observer {
                 adapter.submitList(it)
             })
     }
-
 
 }
