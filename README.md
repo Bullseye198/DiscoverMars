@@ -2,7 +2,10 @@
 
 App that will connect to the NASA API and show photos from Mars that was taken by Mars Rover. :)
 So we got our first pictures of Mars :)
-Now we must do our cleanup and 
+
+How to open project:
+* This project needs Android Studio 4.1 or newer
+
 
 What we will use:
 Clean Architecture,
