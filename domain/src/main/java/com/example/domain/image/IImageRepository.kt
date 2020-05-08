@@ -13,7 +13,7 @@ interface IImageRepository {
     suspend fun requestImages(camera: String?): List<Image>
 
     //from Server - Remote
-    suspend fun fetchImages(camera: String = ""): List<Image>
+    suspend fun fetchImages(earthDate: String= "", camera: String = ""): List<Image>
 
     suspend fun storeImages(images: List<Image>)
 }

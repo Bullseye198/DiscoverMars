@@ -8,7 +8,7 @@ class RefreshImagesUseCase @Inject constructor(
 ) {
     suspend fun refresh() {
         try {
-            val serverImages = iImageRepository.fetchImages(camera = "")
+            val serverImages = iImageRepository.fetchImages(earthDate = "2015-5-6", camera = "")
             iImageRepository.storeImages(serverImages)
         } catch (e: Exception) {
         }

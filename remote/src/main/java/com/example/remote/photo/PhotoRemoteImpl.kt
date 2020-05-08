@@ -11,9 +11,8 @@ class PhotoRemoteImpl @Inject constructor(
     private val photoService: PhotoService
 ) : PhotoRemote {
 
-    override suspend fun fetchImages(camera: String): List<Image> {
-        return photoService.getCurrentPhoto(
-            "2015-5-5", "aiYJqOieQM1jp0oSvmuj1cEF6N8a4rY8tqtwy0HC", if (camera.isNotEmpty()) {
+    override suspend fun fetchImages(earthDate: String, camera: String): List<Image> {
+        return photoService.getCurrentPhoto( if(earthDate.isNotEmpty()) {earthDate} else null, "aiYJqOieQM1jp0oSvmuj1cEF6N8a4rY8tqtwy0HC", if (camera.isNotEmpty()) {
                 camera
             } else null
         ).photos
