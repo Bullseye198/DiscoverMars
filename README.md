@@ -14,6 +14,10 @@ and click apply.
 - If needed, download the gradle from https://gradle.org/releases/ 
 and make sure to set the distribution URL in gradle-wrapper.properties to the one where you put your zip file and then sync.
 
+- Enter the date and select a camera (Date format is: yyyy-mm-dd, for example: 2015-05-05, and press Done) 
+- First available images are from the date Mars Rover Curiosity landed, which is: 2012-08-06
+- On some days, Rover doesn't take pictures with certain cameras, so try with selecting some other cameras.
+- The app will be developed further, so have fun :)
 
 What we will use:
 Clean Architecture,
