@@ -37,7 +37,7 @@ To do:
 
 
 In Progress:
-- [ ] Add function to change date when the picture was taken
+
 
 Done:
 
@@ -54,3 +54,4 @@ Done:
 - [x] Store the data to our local database with Room
 - [x] Fixed crash when phone is offline
 - [x] Added function to change the camera
+- [x] Add function to change date when the picture was taken
