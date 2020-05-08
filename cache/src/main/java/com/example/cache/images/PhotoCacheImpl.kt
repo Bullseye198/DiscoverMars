@@ -12,19 +12,20 @@ class PhotoCacheImpl @Inject constructor(
     private val imageDao: ImageDao
 ) : PhotoCache {
 
-    override suspend fun requestImages(camera: String?): List<Image> {
-        return if(camera == null) {
+    override suspend fun requestImages(earthDate: String?, camera: String?): List<Image> {
+        val roomImages = if (earthDate == null && camera == null) {
             imageDao.getImages()
-                .map { databaseImage ->
-                    databaseImage.mapToDomainModel()
-                }
+        } else if (camera == null && earthDate != null) {
+            imageDao.getImagesForDate(earthDate)
+        } else if (earthDate != null && camera != null) {
+            imageDao.getImagesForCameraAndDate(earthDate, camera)
         } else {
-            imageDao.getImagesForCamera(camera)
-                .map { databaseImage ->
-                    databaseImage.mapToDomainModel()
-                }
+            imageDao.getImagesForCamera(camera!!)
         }
 
+        return roomImages.map { databaseImage ->
+            databaseImage.mapToDomainModel()
+        }
     }
 
     override suspend fun observeImages(): Flowable<List<Image>> {

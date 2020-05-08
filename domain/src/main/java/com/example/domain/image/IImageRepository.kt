@@ -10,7 +10,7 @@ interface IImageRepository {
     //fun observeImages(): Flowable<List<Image>>
 
     //One Time Request from local Database
-    suspend fun requestImages(camera: String?): List<Image>
+    suspend fun requestImages(earthDate: String?, camera: String?): List<Image>
 
     //from Server - Remote
     suspend fun fetchImages(earthDate: String= "", camera: String = ""): List<Image>

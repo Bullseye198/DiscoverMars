@@ -12,12 +12,12 @@ class ImageRepoImpl @Inject constructor(
 ) : IImageRepository{
 
     override suspend fun getImageById(ImageId: Int): Image {
-        return requestImages(null)
+        return requestImages(null, null)
             .first { it.id == ImageId }
     }
 
-    override suspend fun requestImages(camera: String?): List<Image> {
-        return photoCache.requestImages(camera)
+    override suspend fun requestImages(earthDate: String?, camera: String?): List<Image> {
+        return photoCache.requestImages(earthDate, camera)
     }
 
     override suspend fun fetchImages(earthDate: String, camera: String): List<Image> {

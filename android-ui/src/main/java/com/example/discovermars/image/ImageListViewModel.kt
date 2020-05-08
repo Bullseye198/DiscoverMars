@@ -26,6 +26,7 @@ class ImageListViewModel @Inject constructor(
     val editImage: LiveData<String> get() = changeImageState
 
     var currentCamera: String? = null
+    var earthDate: String = ""
 
     init {
         getImages()
@@ -39,26 +40,31 @@ class ImageListViewModel @Inject constructor(
         }
     }
 
-    fun onNewCameraSelected(newCamera: String){
+    fun onNewCameraSelected(newCamera: String) {
         currentCamera = newCamera
+        getImages()
+    }
+
+    fun onDateSelected(earthDate: String) {
+        this.earthDate = earthDate
         getImages()
     }
 
     private fun getImages() {
         viewModelScope.launch {
             val images = withContext(appCoroutineDispatchers.io) {
-                requestImagesUseCase.requestImages(currentCamera)
+                requestImagesUseCase.requestImages(earthDate, currentCamera)
             }
             imageListState.value = images
         }
         refreshAndUpdate()
     }
 
-    private fun refreshAndUpdate(){
+    private fun refreshAndUpdate() {
         viewModelScope.launch {
             val images = withContext(appCoroutineDispatchers.io) {
-                refreshImagesUseCase.refresh()
-                requestImagesUseCase.requestImages(currentCamera)
+                refreshImagesUseCase.refresh(earthDate)
+                requestImagesUseCase.requestImages(earthDate, currentCamera)
             }
             imageListState.value = images
         }

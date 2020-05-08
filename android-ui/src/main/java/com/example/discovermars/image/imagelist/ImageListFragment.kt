@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -42,6 +43,7 @@ class ImageListFragment : DaggerFragment() {
         observeViewModel()
         setUpImageListAdapter()
         setupSpinnerAdapter()
+        onDateSelected()
     }
 
     private fun setupSpinnerAdapter() {
@@ -73,6 +75,17 @@ class ImageListFragment : DaggerFragment() {
         }
     }
 
+    private fun onDateSelected() {
+        txtDate.setOnEditorActionListener { view, i, keyEvent ->
+            if (i == EditorInfo.IME_ACTION_DONE) {
+                viewModel.onDateSelected(earthDate = txtDate.text.toString())
+                return@setOnEditorActionListener true
+            }
+            return@setOnEditorActionListener false
+        }
+
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         rec_list_fragment.adapter = null
@@ -95,7 +108,7 @@ class ImageListFragment : DaggerFragment() {
 
     }
 
-    private fun observeViewModel(){
+    private fun observeViewModel() {
         viewModel.imageList.observe(viewLifecycleOwner,
             Observer {
                 adapter.submitList(it)
