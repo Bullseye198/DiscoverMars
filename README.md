@@ -9,10 +9,10 @@ In Android Studio, go to Help->Check For Updates->Configure updates... and there
 the box for Automatically check updates for, and switch to Canary Channel, or
 Beta Channel, depending on which one you prefer, and update to the newest version.
 - Newest Gradle version and newest SDK version are needed
-- Download the gradle from https://gradle.org/releases/ 
-and make sure to set the distribution URL in gradle-wrapper.properties to the one where you put your zip file and then sync.
 - For SDK go to File->Settings->Appearance&Behavior->System Settings->Android SDK and set the the newest Android API Level, 
 and click apply.
+- If needed, download the gradle from https://gradle.org/releases/ 
+and make sure to set the distribution URL in gradle-wrapper.properties to the one where you put your zip file and then sync.
 
 
 What we will use:
