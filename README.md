@@ -35,12 +35,12 @@ RxJava,
 
 
 To do:
-- [ ] RxJava implementation
 - [ ] Work on the UI
 - [ ] Abstract more by putting fragment switching logic into viewmodel
 
 
 In Progress:
+- [ ] RxJava implementation
 
 
 Done:
