@@ -1,3 +1,5 @@
+include ':common:base-android'
+include ':common:base'
 include ':domain'
 include ':data'
 include ':remote'

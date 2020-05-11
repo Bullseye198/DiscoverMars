@@ -78,6 +78,7 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:2.27"
     kapt "com.google.dagger:dagger-android-processor:2.27"
 
+    //coil
     implementation("io.coil-kt:coil:0.10.1")
 
     //Room
