@@ -1,6 +1,7 @@
 package com.example.discovermars.core.injection
 
 import android.content.Context
+import com.cm.baseAndroid.injection.ThreadingModule
 import com.example.cache.injection.CacheBindsModule
 import com.example.cache.injection.CacheModule
 import com.example.data.injection.DataModule
@@ -32,7 +33,8 @@ import javax.inject.Singleton
     RemoteModule::class,
     DataModule::class,
     CacheModule::class,
-    CacheBindsModule::class]
+    CacheBindsModule::class,
+    ThreadingModule::class]
 )
 
 

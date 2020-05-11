@@ -50,9 +50,7 @@ class ImageListViewModel @Inject constructor(
 
     private fun getImages() {
         viewModelScope.launch {
-            val images = withContext(appCoroutineDispatchers.io) {
-                requestImagesUseCase.requestImages(earthDate, currentCamera)
-            }
+            val images = requestImagesUseCase.requestImages(earthDate, currentCamera)
             imageListState.value = images
         }
         refreshAndUpdate()
@@ -60,10 +58,8 @@ class ImageListViewModel @Inject constructor(
 
     private fun refreshAndUpdate() {
         viewModelScope.launch {
-            val images = withContext(appCoroutineDispatchers.io) {
-                refreshImagesUseCase.refresh(earthDate)
-                requestImagesUseCase.requestImages(earthDate, currentCamera)
-            }
+            refreshImagesUseCase.refresh(earthDate)
+            val images = requestImagesUseCase.requestImages(earthDate, currentCamera)
             imageListState.value = images
         }
     }

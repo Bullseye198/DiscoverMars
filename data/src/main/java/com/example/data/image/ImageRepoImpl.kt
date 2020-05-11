@@ -2,6 +2,7 @@ package com.example.data.image
 
 import com.example.domain.image.IImageRepository
 import com.example.domain.image.model.Image
+import io.reactivex.Flowable
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -29,4 +30,7 @@ class ImageRepoImpl @Inject constructor(
     }
 
 
+    override fun observeImages(): Flowable<List<Image>> {
+        return photoCache.observeImages()
+    }
 }

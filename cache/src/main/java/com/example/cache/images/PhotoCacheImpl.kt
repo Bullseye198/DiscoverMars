@@ -28,8 +28,11 @@ class PhotoCacheImpl @Inject constructor(
         }
     }
 
-    override suspend fun observeImages(): Flowable<List<Image>> {
-        return Flowable.empty()
+    override fun observeImages(): Flowable<List<Image>> {
+        return imageDao.observeImages()
+            .map { roomImages ->
+                roomImages.map { it.mapToDomainModel() }
+            }
     }
 
     override suspend fun storeImages(images: List<Image>) {

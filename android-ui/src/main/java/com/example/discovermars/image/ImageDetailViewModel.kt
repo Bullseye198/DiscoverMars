@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.discovermars.image.imagedetail.ImageDetailEvent
 import com.example.domain.image.model.Image
 import com.example.domain.usecases.OnGetImageByIdUseCase
+import io.reactivex.subscribers.DisposableSubscriber
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,10 +26,20 @@ class ImageDetailViewModel @Inject constructor(
     }
 
     private fun getImage(ImageId: Int) {
-        viewModelScope.launch {
-           val imageResult =  onGetImageByIdUseCase.getImage(ImageId)
 
-           imageState.value = imageResult
-        }
+        onGetImageByIdUseCase.getImage(object: DisposableSubscriber<Image>(){
+            override fun onComplete() {
+
+            }
+
+            override fun onNext(t: Image?) {
+                imageState.value = t
+            }
+
+            override fun onError(t: Throwable?) {
+                throw Exception("Subscription failed because ${t?.localizedMessage}.")
+
+            }
+        }, ImageId)
     }
 }
