@@ -6,6 +6,7 @@
       <module name="DiscoverMars.cache" target="1.8" />
       <module name="DiscoverMars.common.base" target="1.7" />
       <module name="DiscoverMars.common.base-android" target="1.8" />
+      <module name="DiscoverMars.common.base-mvviewmodel" target="1.8" />
       <module name="DiscoverMars.data" target="1.8" />
       <module name="DiscoverMars.domain" target="1.8" />
       <module name="DiscoverMars.remote" target="1.8" />

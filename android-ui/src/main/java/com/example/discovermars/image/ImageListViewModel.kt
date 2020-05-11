@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.discovermars.image.imagelist.ImageListEvent
-import com.example.domain.AppCoroutineDispatchers
 import com.example.domain.image.model.Image
 import com.example.domain.usecases.RefreshImagesUseCase
 import com.example.domain.usecases.RequestImagesUseCase
@@ -15,8 +14,7 @@ import javax.inject.Inject
 
 class ImageListViewModel @Inject constructor(
     private val requestImagesUseCase: RequestImagesUseCase,
-    private val refreshImagesUseCase: RefreshImagesUseCase,
-    private val appCoroutineDispatchers: AppCoroutineDispatchers
+    private val refreshImagesUseCase: RefreshImagesUseCase
 ) : ViewModel() {
 
     private val imageListState = MutableLiveData<List<Image>>()

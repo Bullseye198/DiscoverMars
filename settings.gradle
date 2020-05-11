@@ -1,3 +1,4 @@
+include ':common:base-mvviewmodel'
 include ':common:base-android'
 include ':common:base'
 include ':domain'
