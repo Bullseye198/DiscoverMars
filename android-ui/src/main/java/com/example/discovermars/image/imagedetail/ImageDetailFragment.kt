@@ -23,11 +23,11 @@ class ImageDetailFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-     private var imageId: Int = 0
+    private var imageId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        imageId = ImageDetailFragmentArgs.fromBundle(arguments!!).imageId
+        imageId = ImageDetailFragmentArgs.fromBundle(requireArguments()).imageId
     }
 
     override fun onCreateView(

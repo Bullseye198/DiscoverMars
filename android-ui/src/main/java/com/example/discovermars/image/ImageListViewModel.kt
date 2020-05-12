@@ -72,4 +72,9 @@ class ImageListViewModel @Inject constructor(
     private fun getImageDetail(position: Int) {
         changeImageState.value = imageList.value!![position].creationDate
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        requestImagesUseCase.dispose()
+    }
 }
