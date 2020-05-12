@@ -8,6 +8,7 @@ import com.example.discovermars.image.imagelist.ImageListEvent
 import com.example.domain.image.model.Image
 import com.example.domain.usecases.RefreshImagesUseCase
 import com.example.domain.usecases.RequestImagesUseCase
+import io.reactivex.subscribers.DisposableSubscriber
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -46,21 +47,28 @@ class ImageListViewModel @Inject constructor(
     fun onDateSelected(earthDate: String) {
         this.earthDate = earthDate
         getImages()
+        refreshAndUpdate()
     }
 
     private fun getImages() {
-        viewModelScope.launch {
-            val images = requestImagesUseCase.requestImages(earthDate, currentCamera)
-            imageListState.value = images
+        requestImagesUseCase.requestImages(object : DisposableSubscriber<List<Image>>() {
+            override fun onComplete() {
+            }
+
+            override fun onNext(t: List<Image>?) {
+                imageListState.value = t
+            }
+
+            override fun onError(t: Throwable?) {
+                throw Exception("Subscription failed because ${t?.localizedMessage}.")
+            }
+        }, earthDate, currentCamera
+        )
         }
-        refreshAndUpdate()
-    }
 
     private fun refreshAndUpdate() {
         viewModelScope.launch {
             refreshImagesUseCase.refresh(earthDate)
-            val images = requestImagesUseCase.requestImages(earthDate, currentCamera)
-            imageListState.value = images
         }
     }
 
