@@ -8,8 +8,8 @@ import javax.inject.Inject
 
 class RefreshImagesUseCase @Inject constructor(
     private val iImageRepository: IImageRepository,
-    val  appDispatchers: AppCoroutineDispatchers
-){
+    val appDispatchers: AppCoroutineDispatchers
+) {
     suspend fun refresh(earthDate: String) {
         withContext(appDispatchers.io) {
             try {

@@ -8,7 +8,7 @@ import io.reactivex.subscribers.DisposableSubscriber
 
 abstract class FlowableUseCase<T, in Params> constructor(
     private val rxSchedulers: AppRxSchedulers? = null
-){
+) {
 
     private val disposables = CompositeDisposable()
 
@@ -16,7 +16,7 @@ abstract class FlowableUseCase<T, in Params> constructor(
 
     open fun execute(observer: DisposableSubscriber<T>, params: Params?) {
         if (rxSchedulers != null) {
-            buildRxSchedulerBasedDisposable(observer,params)
+            buildRxSchedulerBasedDisposable(observer, params)
         } else {
             throw Exception("No Thread to execute defined.")
         }

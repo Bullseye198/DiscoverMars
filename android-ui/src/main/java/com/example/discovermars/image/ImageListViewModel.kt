@@ -10,7 +10,6 @@ import com.example.domain.usecases.RefreshImagesUseCase
 import com.example.domain.usecases.RequestImagesUseCase
 import io.reactivex.subscribers.DisposableSubscriber
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class ImageListViewModel @Inject constructor(
@@ -31,7 +30,6 @@ class ImageListViewModel @Inject constructor(
         getImages()
     }
 
-    //TODO: Check out this handle event and use it.
     fun handleEvent(event: ImageListEvent) {
         when (event) {
             is ImageListEvent.OnImageItemClick -> getImageDetail(event.position)
@@ -62,9 +60,8 @@ class ImageListViewModel @Inject constructor(
             override fun onError(t: Throwable?) {
                 throw Exception("Subscription failed because ${t?.localizedMessage}.")
             }
-        }, earthDate, currentCamera
-        )
-        }
+        }, earthDate, currentCamera)
+    }
 
     private fun refreshAndUpdate() {
         viewModelScope.launch {

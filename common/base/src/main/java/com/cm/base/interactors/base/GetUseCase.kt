@@ -7,7 +7,7 @@ import io.reactivex.Flowable
  */
 abstract class GetUseCase<T, in Params> constructor(
     rxSchedulers: AppRxSchedulers? = null
-) : FlowableUseCase<T, Params>(rxSchedulers){
+) : FlowableUseCase<T, Params>(rxSchedulers) {
 
     abstract fun buildStream(params: Params?): Flowable<T>
 
