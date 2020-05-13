@@ -1,6 +1,5 @@
 package com.example.domain.usecases
 
-import com.cm.base.executor.AppCoroutineDispatchers
 import com.cm.base.executor.AppRxSchedulers
 import com.example.domain.image.IImageRepository
 import com.example.domain.image.model.Image
@@ -9,8 +8,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.combineLatest
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subscribers.DisposableSubscriber
-import java.awt.Composite
-import java.time.LocalDate
+import java.util.*
 import javax.inject.Inject
 
 class RequestImagesUseCase @Inject constructor(
@@ -19,13 +17,12 @@ class RequestImagesUseCase @Inject constructor(
 ) {
 
     private val disposable = CompositeDisposable()
-    val selectedDateStream: BehaviorSubject<String> = BehaviorSubject.create()
-    val selectedCameraStream: BehaviorSubject<String> = BehaviorSubject.create()
-    val today = LocalDate.now()
+    private val selectedDateStream: BehaviorSubject<String> = BehaviorSubject.create()
+    private val selectedCameraStream: BehaviorSubject<String> = BehaviorSubject.create()
 
     init {
-        selectedDateStream.onNext("${today.year}-${today.month}-${today.dayOfMonth}")
         selectedDateStream.onNext("")
+        selectedCameraStream.onNext("")
     }
 
     fun requestImages(
