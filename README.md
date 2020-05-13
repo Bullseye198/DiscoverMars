@@ -4,10 +4,12 @@ App that will connect to the NASA API and show photos from Mars that was taken b
 So we got our first pictures of Mars :)
 
 How to open project:
-- This project needs Android Studio 4.1 or newer.
+- This project needs Android Studio  4.0 RC 1 or newer.
+- If you have problems building the project:
+- We use Gradle-6.1.1
 In Android Studio, go to Help->Check For Updates->Configure updates... and there check
-the box for Automatically check updates for, and switch to Canary Channel, or
-Beta Channel, depending on which one you prefer, and update to the newest version.
+the box for Automatically check updates for, and switch to Beta Channel, or
+Canary Channel, depending on which one you prefer, and update to the newest version.
 - Newest Gradle version and newest SDK version are needed
 - For SDK go to File->Settings->Appearance&Behavior->System Settings->Android SDK and set the the newest Android API Level, 
 and click apply.
