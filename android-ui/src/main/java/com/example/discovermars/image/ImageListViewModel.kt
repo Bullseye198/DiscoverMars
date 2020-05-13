@@ -39,12 +39,12 @@ class ImageListViewModel @Inject constructor(
 
     fun onNewCameraSelected(newCamera: String) {
         currentCamera = newCamera
-        getImages()
+        requestImagesUseCase.onSelectedCameraChanged(newCamera)
     }
 
     fun onDateSelected(earthDate: String) {
         this.earthDate = earthDate
-        getImages()
+        requestImagesUseCase.onDateChanged(earthDate)
         refreshAndUpdate()
     }
 
@@ -60,7 +60,7 @@ class ImageListViewModel @Inject constructor(
             override fun onError(t: Throwable?) {
                 throw Exception("Subscription failed because ${t?.localizedMessage}.")
             }
-        }, earthDate, currentCamera)
+        })
     }
 
     private fun refreshAndUpdate() {
