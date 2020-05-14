@@ -10,7 +10,7 @@ import com.example.domain.usecases.RefreshImagesUseCase
 import com.example.domain.usecases.RequestImagesUseCase
 import io.reactivex.subscribers.DisposableSubscriber
 import kotlinx.coroutines.launch
-import java.util.*
+import java.time.LocalDate
 import javax.inject.Inject
 
 class ImageListViewModel @Inject constructor(
@@ -51,11 +51,9 @@ class ImageListViewModel @Inject constructor(
     }
 
     fun onLatestImages() {
-        val lastDate = Calendar.getInstance()
-        lastDate.add(Calendar.DATE, -2)
+        val lastDate = LocalDate.now().minusDays(2)
         earthDate = lastDate.toString()
         requestImagesUseCase.onDateChanged(earthDate)
-        //selectedDateStream.onNext("${today.year}-${today.month}-${today.dayOfMonth}")
         refreshAndUpdate()
     }
 
