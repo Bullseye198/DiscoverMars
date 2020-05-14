@@ -10,6 +10,7 @@ import com.example.domain.usecases.RefreshImagesUseCase
 import com.example.domain.usecases.RequestImagesUseCase
 import io.reactivex.subscribers.DisposableSubscriber
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 import javax.inject.Inject
 
 class ImageListViewModel @Inject constructor(
@@ -28,6 +29,7 @@ class ImageListViewModel @Inject constructor(
 
     init {
         getImages()
+        onLatestImages()
     }
 
     fun handleEvent(event: ImageListEvent) {
@@ -44,6 +46,13 @@ class ImageListViewModel @Inject constructor(
 
     fun onDateSelected(earthDate: String) {
         this.earthDate = earthDate
+        requestImagesUseCase.onDateChanged(earthDate)
+        refreshAndUpdate()
+    }
+
+    fun onLatestImages() {
+        val lastDate = LocalDate.now().minusDays(2)
+        earthDate = lastDate.toString()
         requestImagesUseCase.onDateChanged(earthDate)
         refreshAndUpdate()
     }
