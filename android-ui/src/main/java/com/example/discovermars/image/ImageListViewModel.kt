@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.discovermars.image.imagelist.ImageListEvent
 import com.example.domain.image.model.Image
+import com.example.domain.usecases.ObserveCurrentCamerasUseCase
 import com.example.domain.usecases.RefreshImagesUseCase
 import com.example.domain.usecases.RequestImagesUseCase
 import io.reactivex.subscribers.DisposableSubscriber
@@ -15,11 +16,15 @@ import javax.inject.Inject
 
 class ImageListViewModel @Inject constructor(
     private val requestImagesUseCase: RequestImagesUseCase,
+    private val observeCurrentCamerasUseCase: ObserveCurrentCamerasUseCase,
     private val refreshImagesUseCase: RefreshImagesUseCase
 ) : ViewModel() {
 
     private val imageListState = MutableLiveData<List<Image>>()
     val imageList: LiveData<List<Image>> get() = imageListState
+
+    private val cameraLiveData = MutableLiveData<List<String>>()
+    val cameras: LiveData<List<String>> get() = cameraLiveData
 
     private val changeImageState = MutableLiveData<String>()
     val editImage: LiveData<String> get() = changeImageState
@@ -28,6 +33,7 @@ class ImageListViewModel @Inject constructor(
     var earthDate: String = ""
 
     init {
+        getCurrentCameras()
         getImages()
         onLatestImages()
     }
@@ -47,14 +53,29 @@ class ImageListViewModel @Inject constructor(
     fun onDateSelected(earthDate: String) {
         this.earthDate = earthDate
         requestImagesUseCase.onDateChanged(earthDate)
+        observeCurrentCamerasUseCase.onDateChanged(earthDate)
         refreshAndUpdate()
     }
 
     fun onLatestImages() {
         val lastDate = LocalDate.now().minusDays(2)
-        earthDate = lastDate.toString()
-        requestImagesUseCase.onDateChanged(earthDate)
-        refreshAndUpdate()
+        onDateSelected(lastDate.toString())
+    }
+
+    private fun getCurrentCameras() {
+        observeCurrentCamerasUseCase.requestImages(object : DisposableSubscriber<List<String>>() {
+            override fun onComplete() {
+            }
+
+            override fun onNext(t: List<String>?) {
+                cameraLiveData.value = t
+            }
+
+            override fun onError(t: Throwable?) {
+                throw Exception("Subscription failed because ${t?.localizedMessage}.")
+            }
+
+        })
     }
 
     private fun getImages() {

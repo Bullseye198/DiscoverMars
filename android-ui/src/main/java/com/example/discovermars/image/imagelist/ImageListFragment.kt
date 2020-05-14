@@ -23,7 +23,7 @@ class ImageListFragment : DaggerFragment() {
 
     private lateinit var viewModel: ImageListViewModel
     private lateinit var adapter: ImageListAdapter
-    private lateinit var spinnerAdapter: SpinnerAdapter
+    private lateinit var spinnerAdapter: ArrayAdapter<String>
 
 
     @Inject
@@ -40,22 +40,22 @@ class ImageListFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeViewModel()
         setUpImageListAdapter()
         setupSpinnerAdapter()
+        observeViewModel()
         onDateSelected()
     }
 
     private fun setupSpinnerAdapter() {
-        val cameras = resources.getStringArray(R.array.cameras)
+        val cameras = resources.getStringArray(R.array.cameras).toList()
 
         val spinner = requireView().findViewById<Spinner>(R.id.spinner1)
         if (spinner != null) {
-            val adapter = ArrayAdapter(
+            spinnerAdapter = ArrayAdapter(
                 requireContext(),
                 android.R.layout.simple_spinner_item, cameras
             )
-            spinner.adapter = adapter
+            spinner.adapter = spinnerAdapter
 
 
             spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -66,13 +66,18 @@ class ImageListFragment : DaggerFragment() {
                     position: Int,
                     id: Long
                 ) {
-                    viewModel.onNewCameraSelected(adapter.getItem(position)!!)
+                    viewModel.onNewCameraSelected(spinnerAdapter.getItem(position)!!)
                 }
 
                 override fun onNothingSelected(adapterView: AdapterView<*>?) {
                 }
             }
         }
+    }
+
+    private fun setNewCameras(cameras: List<String>) {
+        spinnerAdapter.clear()
+        spinnerAdapter.addAll(cameras)
     }
 
     private fun onDateSelected() {
@@ -112,6 +117,11 @@ class ImageListFragment : DaggerFragment() {
         viewModel.imageList.observe(viewLifecycleOwner,
             Observer {
                 adapter.submitList(it)
+            })
+        
+        viewModel.cameras.observe(viewLifecycleOwner,
+            Observer {
+                setNewCameras(it)
             })
     }
 
