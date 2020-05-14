@@ -39,11 +39,13 @@ RxJava,
 
 To do:
 - [ ] Work on the UI
+- [ ] Add Image Swiping in Image Detail Fragment
 - [ ] Abstract more by putting fragment switching logic into viewmodel
 
 
 In Progress:
 - [ ] RxJava implementation
+- [ ] Filter out cameras which are not used on a selected date
 
 
 Done:
@@ -62,3 +64,4 @@ Done:
 - [x] Fixed crash when phone is offline
 - [x] Added function to change the camera
 - [x] Add function to change date when the picture was taken
+- [x] Always show latest images from Mars Rover on app start
