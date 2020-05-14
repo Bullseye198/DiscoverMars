@@ -1,22 +1,23 @@
 package com.example.discovermars.image.imagelist
 
+import android.app.DatePickerDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.discovermars.image.ImageListViewModel
 import com.example.discovermars.R
 import com.example.discovermars.dependencyInjection.ViewModelFactory
-import com.example.domain.image.model.Image
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_image_list.*
-import kotlinx.android.synthetic.main.item_image.*
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.util.*
 import javax.inject.Inject
 
 class ImageListFragment : DaggerFragment() {
@@ -81,14 +82,32 @@ class ImageListFragment : DaggerFragment() {
     }
 
     private fun onDateSelected() {
-        txtDate.setOnEditorActionListener { view, i, keyEvent ->
+        BtnPickerDate.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val cyear = calendar.get(Calendar.YEAR)
+            val cmonth = calendar.get(Calendar.MONTH)
+            val cday = calendar.get(Calendar.DAY_OF_MONTH)
+
+            val datePickerDialog = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+              viewModel.onDateSelected("$year-$monthOfYear-$dayOfMonth")
+            }, cyear, cmonth, cday)
+            datePickerDialog.show()
+        }
+
+        fun provideDayMonthFormatter(): DateTimeFormatter{
+            return DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                .withLocale(Locale.getDefault())
+                .withZone(ZoneId.systemDefault())
+        }
+
+      /*  txtDate.setOnEditorActionListener { view, i, keyEvent ->
             if (i == EditorInfo.IME_ACTION_DONE) {
                 viewModel.onDateSelected(earthDate = txtDate.text.toString())
                 return@setOnEditorActionListener true
             }
             return@setOnEditorActionListener false
         }
-
+*/
     }
 
     override fun onDestroyView() {
