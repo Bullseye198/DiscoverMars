@@ -2,6 +2,7 @@
 
 App that will connect to the NASA API and show photos from Mars that was taken by Mars Rover. :)
 So we got our first pictures of Mars :)
+Our App starts by showing the most recent Images taken by Mars Rover Curiosity.
 
 How to open project:
 - This project needs Android Studio  4.0 RC 1 or newer.
