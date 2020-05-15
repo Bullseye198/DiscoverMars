@@ -95,7 +95,9 @@ class ImageListViewModel @Inject constructor(
 
     private fun refreshAndUpdate() {
         viewModelScope.launch {
+            //val loading = true
             refreshImagesUseCase.refresh(earthDate)
+            //loading = false
         }
     }
 

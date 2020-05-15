@@ -1,25 +1,23 @@
 package com.example.discovermars.image.imagelist
 
 import android.app.DatePickerDialog
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.discovermars.image.ImageListViewModel
 import com.example.discovermars.R
 import com.example.discovermars.dependencyInjection.ViewModelFactory
+import com.example.discovermars.image.DateFormatterModule
+import com.example.discovermars.image.ImageListViewModel
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_image_list.*
-import java.text.DateFormat
 import java.time.LocalDate
-import java.time.Month
-import java.time.Year
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
 import java.util.*
 import javax.inject.Inject
 
@@ -29,7 +27,6 @@ class ImageListFragment : DaggerFragment() {
     private lateinit var adapter: ImageListAdapter
     private lateinit var spinnerAdapter: ArrayAdapter<String>
 
-
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
@@ -38,7 +35,6 @@ class ImageListFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewModel = ViewModelProvider(this, viewModelFactory).get(ImageListViewModel::class.java)
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_image_list, container, false)
     }
 
@@ -85,6 +81,7 @@ class ImageListFragment : DaggerFragment() {
     }
 
     private fun onDateSelected() {
+        BtnPickerDate.text = LocalDate.now().toString()
         BtnPickerDate.setOnClickListener {
             val calendar = Calendar.getInstance()
             val cyear = calendar.get(Calendar.YEAR)
@@ -94,7 +91,12 @@ class ImageListFragment : DaggerFragment() {
             val datePickerDialog = DatePickerDialog(
                 requireContext(),
                 DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                    onDateFormatted(year, monthOfYear, dayOfMonth)
+                    DateFormatterModule.onDateFormatted(year, monthOfYear, dayOfMonth)
+                    val formattedDate =
+                        DateFormatterModule.onDateFormatted(year, monthOfYear, dayOfMonth)
+                    viewModel.onDateSelected(formattedDate)
+
+                    BtnPickerDate.text = formattedDate
                 },
                 cyear,
                 cmonth,
@@ -102,21 +104,6 @@ class ImageListFragment : DaggerFragment() {
             )
             datePickerDialog.show()
         }
-    }
-
-    private fun onDateFormatted(year: Int, monthOfYear: Int, dayOfMonth: Int) {
-        val month: Int = monthOfYear + 1
-        var formattedMonth: String = "" + month
-        var formattedDayOfMonth = "" + dayOfMonth
-
-        if (month < 10) {
-            formattedMonth = "0" + month
-        }
-        if (dayOfMonth < 10) {
-            formattedDayOfMonth = "0" + dayOfMonth
-        }
-
-        viewModel.onDateSelected("$year-$formattedMonth-$formattedDayOfMonth")
     }
 
     override fun onDestroyView() {
@@ -152,6 +139,4 @@ class ImageListFragment : DaggerFragment() {
                 setNewCameras(it)
             })
     }
-
-
 }
