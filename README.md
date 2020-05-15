@@ -46,7 +46,6 @@ To do:
 
 
 In Progress:
-- [ ] Add progress bar
 - [ ] Work on the UI
 - [ ] RxJava implementation
 
@@ -70,3 +69,4 @@ Done:
 - [x] Always show latest images from Mars Rover on app start
 - [x] Filter out cameras which are not used on a selected date
 - [x] Added Date Picker
+- [x] Add progress bar
