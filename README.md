@@ -44,6 +44,7 @@ To do:
 
 
 In Progress:
+- [ ] Add progress bar
 - [ ] Work on the UI
 - [ ] RxJava implementation
 
