@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ProgressBar
 import android.widget.Spinner
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -129,6 +131,15 @@ class ImageListFragment : DaggerFragment() {
     }
 
     private fun observeViewModel() {
+        var progressBar = requireView().findViewById<ProgressBar>(R.id.imgProgressBar)
+
+        viewModel.loading.observe(viewLifecycleOwner,
+            Observer { t ->
+                if (t != null) {
+                    progressBar.isVisible = t
+                }
+            })
+
         viewModel.imageList.observe(viewLifecycleOwner,
             Observer {
                 adapter.submitList(it)

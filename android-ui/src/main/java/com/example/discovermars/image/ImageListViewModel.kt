@@ -27,7 +27,9 @@ class ImageListViewModel @Inject constructor(
     val cameras: LiveData<List<String>> get() = cameraLiveData
 
     private val changeImageState = MutableLiveData<String>()
-    val editImage: LiveData<String> get() = changeImageState
+
+    private val loadingState = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> get() = loadingState
 
     var currentCamera: String? = null
     var earthDate: String = ""
@@ -95,9 +97,10 @@ class ImageListViewModel @Inject constructor(
 
     private fun refreshAndUpdate() {
         viewModelScope.launch {
-            //val loading = true
+
+            loadingState.value = true
             refreshImagesUseCase.refresh(earthDate)
-            //loading = false
+            loadingState.value = false
         }
     }
 
