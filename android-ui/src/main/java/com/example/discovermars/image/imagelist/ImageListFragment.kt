@@ -131,7 +131,7 @@ class ImageListFragment : DaggerFragment() {
     }
 
     private fun observeViewModel() {
-        var progressBar = requireView().findViewById<ProgressBar>(R.id.imgProgressBar)
+        val progressBar = requireView().findViewById<ProgressBar>(R.id.imgProgressBar)
 
         viewModel.loading.observe(viewLifecycleOwner,
             Observer { t ->
