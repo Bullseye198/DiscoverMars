@@ -40,6 +40,7 @@ RxJava,
 To do:
 - [ ] Add Image Swiping in Image Detail Fragment
 - [ ] Abstract more by putting fragment switching logic into viewmodel
+- [ ] Split up UI by creating Mars-Ui Module
 
 
 In Progress:
