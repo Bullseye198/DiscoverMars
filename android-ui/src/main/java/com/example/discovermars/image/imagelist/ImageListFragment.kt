@@ -14,7 +14,10 @@ import com.example.discovermars.R
 import com.example.discovermars.dependencyInjection.ViewModelFactory
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_image_list.*
+import java.text.DateFormat
 import java.time.LocalDate
+import java.time.Month
+import java.time.Year
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -88,26 +91,23 @@ class ImageListFragment : DaggerFragment() {
             val cmonth = calendar.get(Calendar.MONTH)
             val cday = calendar.get(Calendar.DAY_OF_MONTH)
 
+
             val datePickerDialog = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-              viewModel.onDateSelected("$year-$monthOfYear-$dayOfMonth")
+                val month : Int = monthOfYear + 1
+                var formattedMonth: String = "" + month
+                var formattedDayOfMonth = "" + dayOfMonth
+
+                if (month < 10) {
+                    formattedMonth = "0" + month
+                }
+                if (dayOfMonth < 10) {
+                    formattedDayOfMonth = "0" + dayOfMonth
+                }
+
+              viewModel.onDateSelected("$year-$formattedMonth-$formattedDayOfMonth")
             }, cyear, cmonth, cday)
             datePickerDialog.show()
         }
-
-        fun provideDayMonthFormatter(): DateTimeFormatter{
-            return DateTimeFormatter.ofPattern("yyyy-MM-dd")
-                .withLocale(Locale.getDefault())
-                .withZone(ZoneId.systemDefault())
-        }
-
-      /*  txtDate.setOnEditorActionListener { view, i, keyEvent ->
-            if (i == EditorInfo.IME_ACTION_DONE) {
-                viewModel.onDateSelected(earthDate = txtDate.text.toString())
-                return@setOnEditorActionListener true
-            }
-            return@setOnEditorActionListener false
-        }
-*/
     }
 
     override fun onDestroyView() {
