@@ -91,23 +91,32 @@ class ImageListFragment : DaggerFragment() {
             val cmonth = calendar.get(Calendar.MONTH)
             val cday = calendar.get(Calendar.DAY_OF_MONTH)
 
-
-            val datePickerDialog = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                val month : Int = monthOfYear + 1
-                var formattedMonth: String = "" + month
-                var formattedDayOfMonth = "" + dayOfMonth
-
-                if (month < 10) {
-                    formattedMonth = "0" + month
-                }
-                if (dayOfMonth < 10) {
-                    formattedDayOfMonth = "0" + dayOfMonth
-                }
-
-              viewModel.onDateSelected("$year-$formattedMonth-$formattedDayOfMonth")
-            }, cyear, cmonth, cday)
+            val datePickerDialog = DatePickerDialog(
+                requireContext(),
+                DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                    onDateFormatted(year, monthOfYear, dayOfMonth)
+                },
+                cyear,
+                cmonth,
+                cday
+            )
             datePickerDialog.show()
         }
+    }
+
+    private fun onDateFormatted(year: Int, monthOfYear: Int, dayOfMonth: Int) {
+        val month: Int = monthOfYear + 1
+        var formattedMonth: String = "" + month
+        var formattedDayOfMonth = "" + dayOfMonth
+
+        if (month < 10) {
+            formattedMonth = "0" + month
+        }
+        if (dayOfMonth < 10) {
+            formattedDayOfMonth = "0" + dayOfMonth
+        }
+
+        viewModel.onDateSelected("$year-$formattedMonth-$formattedDayOfMonth")
     }
 
     override fun onDestroyView() {
@@ -137,7 +146,7 @@ class ImageListFragment : DaggerFragment() {
             Observer {
                 adapter.submitList(it)
             })
-        
+
         viewModel.cameras.observe(viewLifecycleOwner,
             Observer {
                 setNewCameras(it)
