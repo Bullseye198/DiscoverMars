@@ -65,3 +65,4 @@ Done:
 - [x] Add function to change date when the picture was taken
 - [x] Always show latest images from Mars Rover on app start
 - [x] Filter out cameras which are not used on a selected date
+- [x] Added Date Picker
