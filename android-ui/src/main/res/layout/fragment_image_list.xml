@@ -5,6 +5,9 @@
     android:id="@+id/frag_image_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:accessibilityHeading="false"
+    android:background="@android:color/darker_gray"
+    android:isScrollContainer="false"
     tools:context=".image.imagelist.ImageListFragment">
 
 
@@ -35,10 +38,10 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:text=""
-        android:inputType="text"
-        android:textSize="16dp"
         android:imeOptions="actionDone"
+        android:inputType="text"
+        android:text=""
+        android:textSize="16dp"
         app:layout_constraintEnd_toStartOf="@+id/spinner1"
         app:layout_constraintTop_toTopOf="parent" />
 
