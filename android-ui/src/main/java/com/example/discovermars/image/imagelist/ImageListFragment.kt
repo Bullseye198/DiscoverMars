@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
@@ -86,6 +87,12 @@ class ImageListFragment : DaggerFragment() {
 
     private fun setupDropdownMenu() {
         floatingActionButton6.setOnClickListener {
+
+            var isOpen: Boolean = false
+
+            var mFabOpenAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_open)
+            var mFabCloseAnim = AnimationUtils.loadAnimation(requireContext(),R.anim.fab_close)
+
            dropdownCardView.isVisible = true
             dropdownCardView2.isVisible = true
             dropdownCardView3.isVisible = true
