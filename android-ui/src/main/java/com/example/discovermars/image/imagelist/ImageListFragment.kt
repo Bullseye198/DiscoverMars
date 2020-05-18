@@ -45,12 +45,17 @@ class ImageListFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (imv_mars_background.drawable as AnimationDrawable).startWithFade()
-
+        onStart()
         setUpImageListAdapter()
         setupSpinnerAdapter()
         observeViewModel()
         onDateSelected()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        (imv_mars_background.drawable as AnimationDrawable).startWithFade()
+
     }
 
     private fun setupSpinnerAdapter() {

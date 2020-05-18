@@ -1,19 +1,19 @@
 package com.example.discovermars.image.imagedetail
 
-import androidx.lifecycle.ViewModelProvider
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import coil.api.load
-import com.example.discovermars.image.ImageDetailViewModel
 import com.example.discovermars.R
+import com.example.discovermars.common.startWithFade
 import com.example.discovermars.dependencyInjection.ViewModelFactory
+import com.example.discovermars.image.ImageDetailViewModel
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_image_detail.*
-import kotlinx.android.synthetic.main.fragment_image_list.*
 import javax.inject.Inject
 
 class ImageDetailFragment : DaggerFragment() {
@@ -44,6 +44,8 @@ class ImageDetailFragment : DaggerFragment() {
         super.onStart()
 
         observeViewModel()
+
+        (frag_image_detail.background as AnimationDrawable).startWithFade()
     }
 
     private fun observeViewModel() {
