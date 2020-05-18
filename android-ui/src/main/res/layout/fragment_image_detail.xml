@@ -2,20 +2,11 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frag_image_detail"
+    android:background="@drawable/space_loop"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".image.imagedetail.ImageDetailFragment">
-
-    <ImageView
-        android:id="@+id/imv_mars_background"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:adjustViewBounds="false"
-        android:contentDescription="TODO"
-        android:scaleType="centerCrop"
-        android:src="@drawable/space_bg_three">
-
-    </ImageView>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
