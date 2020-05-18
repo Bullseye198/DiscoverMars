@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:accessibilityHeading="false"
-    android:background="@android:color/darker_gray"
+    android:background="@color/purple200"
     android:isScrollContainer="false"
     tools:context=".image.imagelist.ImageListFragment">
 
