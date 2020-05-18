@@ -1,6 +1,8 @@
 package com.example.discovermars.image.imagelist
 
 import android.app.DatePickerDialog
+import android.graphics.drawable.AnimatedImageDrawable
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +16,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.discovermars.R
+import com.example.discovermars.common.startWithFade
 import com.example.discovermars.dependencyInjection.ViewModelFactory
 import com.example.discovermars.image.DateFormatterModule
 import com.example.discovermars.image.ImageListViewModel
@@ -42,6 +45,8 @@ class ImageListFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (imv_mars_background.drawable as AnimationDrawable).startWithFade()
+
         setUpImageListAdapter()
         setupSpinnerAdapter()
         observeViewModel()

@@ -63,7 +63,7 @@
         android:adjustViewBounds="false"
         android:contentDescription="TODO"
         android:scaleType="centerCrop"
-        android:src="@drawable/space_bg_three"
+        android:src="@drawable/space_loop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
