@@ -1,16 +1,12 @@
 package com.example.discovermars.image.imagelist
 
 import android.app.DatePickerDialog
-import android.graphics.drawable.AnimatedImageDrawable
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ProgressBar
-import android.widget.Spinner
+import android.widget.*
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -50,6 +46,7 @@ class ImageListFragment : DaggerFragment() {
         setupSpinnerAdapter()
         observeViewModel()
         onDateSelected()
+        setupDropdownMenu()
     }
 
     override fun onStart() {
@@ -59,7 +56,7 @@ class ImageListFragment : DaggerFragment() {
     }
 
     private fun setupSpinnerAdapter() {
-        val cameras = resources.getStringArray(R.array.cameras).toList()
+        val cameras = resources.getStringArray(R.array.rovers).toList()
 
         val spinner = requireView().findViewById<Spinner>(R.id.spinner1)
         if (spinner != null) {
@@ -84,6 +81,14 @@ class ImageListFragment : DaggerFragment() {
                 override fun onNothingSelected(adapterView: AdapterView<*>?) {
                 }
             }
+        }
+    }
+
+    private fun setupDropdownMenu() {
+        floatingActionButton6.setOnClickListener {
+           dropdownCardView.isVisible = true
+            dropdownCardView2.isVisible = true
+            dropdownCardView3.isVisible = true
         }
     }
 
