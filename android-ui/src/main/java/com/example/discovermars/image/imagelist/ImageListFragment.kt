@@ -89,6 +89,24 @@ class ImageListFragment : DaggerFragment() {
            dropdownCardView.isVisible = true
             dropdownCardView2.isVisible = true
             dropdownCardView3.isVisible = true
+
+            dropdownCardView.setOnClickListener {
+                dropdownCardView.isVisible = false
+                dropdownCardView2.isVisible = false
+                dropdownCardView3.isVisible = false
+            }
+
+            dropdownCardView2.setOnClickListener {
+                dropdownCardView.isVisible = false
+                dropdownCardView2.isVisible = false
+                dropdownCardView3.isVisible = false
+            }
+
+            dropdownCardView3.setOnClickListener {
+                dropdownCardView.isVisible = false
+                dropdownCardView2.isVisible = false
+                dropdownCardView3.isVisible = false
+            }
         }
     }
 
