@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:accessibilityHeading="false"
-    android:background="@android:color/darker_gray"
+    android:background="@color/purple800"
     android:isScrollContainer="false"
     tools:context=".image.imagelist.ImageListFragment">
 
@@ -15,45 +15,38 @@
         android:id="@+id/lbl_toolbar_title"
         android:layout_width="wrap_content"
         android:layout_height="56dp"
-        android:text="Mars"
+        android:textColor="@color/colorTransparentWhite"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="38dp"
-        android:layout_height="23dp"
-        android:layout_marginTop="16dp"
-        android:text="Date"
-        app:layout_constraintEnd_toStartOf="@+id/BtnPickerDate"
-        app:layout_constraintHorizontal_bias="0.79"
-        app:layout_constraintStart_toEndOf="@+id/lbl_toolbar_title"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/BtnPickerDate"
         android:layout_width="132dp"
         android:layout_height="40dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
         android:ems="10"
         android:imeOptions="actionDone"
         android:inputType="text"
         android:text=""
         android:textSize="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/spinner1"
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spinner1"
-        android:layout_width="145dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="130dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -95,5 +88,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imv_mars_background" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="116dp"
+        android:layout_height="41dp"
+        android:src="@drawable/marsmissiontransparent"
+        app:layout_constraintBottom_toTopOf="@+id/imv_mars_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/lbl_toolbar_title"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

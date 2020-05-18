@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple200">#BB86FC</color>
+    <color name="purple200">#806F66</color>
     <color name="purple500">#484848</color>
+    <color name="purple600">#484848</color>
     <color name="purple700">#212121</color>
+    <color name="purple800">#1A1A1A</color>
+    <color name="purple900">#020202</color>
     <color name="teal200">#BD7E3B</color>
+    <color name="teal400">#BD7E3B</color>
 
     <!-- 52 = 32%, hex to alpha -->
     <color name="colorTransparentBlack">#52000000</color>
