@@ -10,10 +10,10 @@ class RefreshImagesUseCase @Inject constructor(
     private val iImageRepository: IImageRepository,
     val appDispatchers: AppCoroutineDispatchers
 ) {
-    suspend fun refresh(earthDate: String) {
+    suspend fun refresh(earthDate: String, rover: String) {
         withContext(appDispatchers.io) {
             try {
-                val serverImages = iImageRepository.fetchImages(earthDate = earthDate, camera = "")
+                val serverImages = iImageRepository.fetchImages(earthDate = earthDate, camera = "", rover = rover)
                 iImageRepository.storeImages(serverImages)
             } catch (e: Exception) {
             }
