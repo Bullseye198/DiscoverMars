@@ -1,16 +1,15 @@
 package com.example.discovermars.image.imagelist
 
 import android.app.DatePickerDialog
-import android.graphics.drawable.AnimatedImageDrawable
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ProgressBar
-import android.widget.Spinner
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.*
+import androidx.constraintlayout.widget.Group
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -22,6 +21,7 @@ import com.example.discovermars.image.DateFormatterModule
 import com.example.discovermars.image.ImageListViewModel
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_image_list.*
+import kotlinx.android.synthetic.main.fragment_image_list.view.*
 import java.time.LocalDate
 import java.util.*
 import javax.inject.Inject
@@ -50,6 +50,7 @@ class ImageListFragment : DaggerFragment() {
         setupSpinnerAdapter()
         observeViewModel()
         onDateSelected()
+        setupDropdownMenu()
     }
 
     override fun onStart() {
@@ -59,7 +60,7 @@ class ImageListFragment : DaggerFragment() {
     }
 
     private fun setupSpinnerAdapter() {
-        val cameras = resources.getStringArray(R.array.cameras).toList()
+        val cameras = resources.getStringArray(R.array.rovers).toList()
 
         val spinner = requireView().findViewById<Spinner>(R.id.spinner1)
         if (spinner != null) {
@@ -87,7 +88,54 @@ class ImageListFragment : DaggerFragment() {
         }
     }
 
-    private fun setNewCameras(cameras: List<String>) {
+    private fun setupDropdownMenu() {
+       isclicked(false)
+
+        floatingActionButton6.setOnClickListener {
+        isclicked(true)
+            openDropdownAnimation()
+
+            dropdownCard1.setOnClickListener {
+                isclicked(false)
+                closeDropdownAnimation()
+            }
+
+            dropdownCard2.setOnClickListener {
+                isclicked(false)
+                closeDropdownAnimation()
+            }
+
+            dropdownCard3.setOnClickListener {
+                isclicked(false)
+                closeDropdownAnimation()
+            }
+        }
+    }
+
+    private fun isclicked(isClicked: Boolean) {
+
+        dropdownCard1.isVisible = isClicked
+        dropdownCard2.isVisible = isClicked
+        dropdownCard3.isVisible = isClicked
+    }
+
+    private fun openDropdownAnimation() {
+        val mFabOpenAnim = AnimationUtils.loadAnimation(requireContext(),R.anim.fab_open)
+        dropdownCard1.animation = mFabOpenAnim
+        dropdownCard2.animation = mFabOpenAnim
+        dropdownCard3.animation = mFabOpenAnim
+
+    }
+
+    private fun closeDropdownAnimation() {
+        val mFabCloseAnim = AnimationUtils.loadAnimation(requireContext(),R.anim.fab_close)
+        dropdownCard1.animation = mFabCloseAnim
+        dropdownCard2.animation = mFabCloseAnim
+        dropdownCard3.animation = mFabCloseAnim
+    }
+
+
+        private fun setNewCameras(cameras: List<String>) {
         spinnerAdapter.clear()
         spinnerAdapter.addAll(cameras)
     }

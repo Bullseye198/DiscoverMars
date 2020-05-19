@@ -11,4 +11,10 @@
         <item>MARDI</item>
         <item>NAVCAM</item>
     </string-array>
+
+    <string-array name="rovers">
+        <item>Curiosity</item>
+        <item>Opportunity</item>
+        <item>Spirit</item>
+    </string-array>
 </resources>
