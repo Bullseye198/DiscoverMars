@@ -53,6 +53,10 @@ class ObserveImagesUseCase @Inject constructor(
         selectedCameraStream.onNext(newCamera)
     }
 
+    fun onSelectedRoverChanged(newRover: String) {
+        selectedRoverStream.onNext(newRover)
+    }
+
     fun dispose() {
         disposable.dispose()
     }

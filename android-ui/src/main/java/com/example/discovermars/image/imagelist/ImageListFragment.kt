@@ -98,16 +98,19 @@ class ImageListFragment : DaggerFragment() {
             dropdownCard1.setOnClickListener {
                 isclicked(false)
                 closeDropdownAnimation()
+                viewModel.onRoverSelected("Spirit")
             }
 
             dropdownCard2.setOnClickListener {
                 isclicked(false)
                 closeDropdownAnimation()
+                viewModel.onRoverSelected("Opportunity")
             }
 
             dropdownCard3.setOnClickListener {
                 isclicked(false)
                 closeDropdownAnimation()
+                viewModel.onRoverSelected("Curiosity")
             }
         }
     }

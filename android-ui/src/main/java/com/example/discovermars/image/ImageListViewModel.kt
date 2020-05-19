@@ -33,6 +33,7 @@ class ImageListViewModel @Inject constructor(
 
     var currentCamera: String? = null
     var earthDate: String = ""
+    var rover: String? = null
 
     init {
         getCurrentCameras()
@@ -57,6 +58,11 @@ class ImageListViewModel @Inject constructor(
         observeImagesUseCase.onDateChanged(earthDate)
         observeCurrentCamerasUseCase.onDateChanged(earthDate)
         refreshAndUpdate()
+    }
+
+    fun onRoverSelected(newRover: String) {
+        rover = newRover
+        observeImagesUseCase.onSelectedRoverChanged(newRover)
     }
 
     fun onLatestImages() {
