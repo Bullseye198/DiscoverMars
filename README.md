@@ -46,7 +46,7 @@ To do:
 
 
 In Progress:
-- [ ] Work on the UI
+- [ ] Add 2 more Rovers
 - [ ] RxJava implementation
 
 
@@ -70,3 +70,5 @@ Done:
 - [x] Filter out cameras which are not used on a selected date
 - [x] Added Date Picker
 - [x] Add progress bar
+- [x] Work on the UI
+- [x] Added some Color Palette
