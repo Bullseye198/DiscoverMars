@@ -10,11 +10,16 @@ class PhotoRemoteImpl @Inject constructor(
     private val photoService: PhotoService
 ) : PhotoRemote {
 
-    override suspend fun fetchImages(earthDate: String, camera: String): List<Image> {
+    override suspend fun fetchImages(
+        earthDate: String,
+        camera: String,
+        rover: String
+    ): List<Image> {
         return photoService.getCurrentPhoto(
-            if (earthDate.isNotEmpty()) {
-                earthDate
-            } else null, "aiYJqOieQM1jp0oSvmuj1cEF6N8a4rY8tqtwy0HC", if (camera.isNotEmpty()) {
+            rover = "Opportunity",
+            earthDate = earthDate,
+            key = "aiYJqOieQM1jp0oSvmuj1cEF6N8a4rY8tqtwy0HC",
+            camera = if (camera.isNotEmpty()) {
                 camera
             } else null
         ).photos

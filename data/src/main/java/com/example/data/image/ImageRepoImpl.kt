@@ -13,16 +13,24 @@ class ImageRepoImpl @Inject constructor(
 ) : IImageRepository {
 
     override suspend fun getImageById(ImageId: Int): Image {
-        return requestImages(null, null)
+        return requestImages(null, null, null)
             .first { it.id == ImageId }
     }
 
-    override suspend fun requestImages(earthDate: String?, camera: String?): List<Image> {
-        return photoCache.requestImages(earthDate, camera)
+    override suspend fun requestImages(
+        earthDate: String?,
+        camera: String?,
+        rover: String?
+    ): List<Image> {
+        return photoCache.requestImages(earthDate, camera, rover)
     }
 
-    override suspend fun fetchImages(earthDate: String, camera: String): List<Image> {
-        return photoRemote.fetchImages(earthDate, camera)
+    override suspend fun fetchImages(
+        earthDate: String,
+        camera: String,
+        rover: String
+    ): List<Image> {
+        return photoRemote.fetchImages(earthDate, camera, rover)
     }
 
     override suspend fun storeImages(images: List<Image>) {
@@ -33,4 +41,6 @@ class ImageRepoImpl @Inject constructor(
     override fun observeImages(): Flowable<List<Image>> {
         return photoCache.observeImages()
     }
+
+
 }
