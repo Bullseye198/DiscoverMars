@@ -118,12 +118,12 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/dropdownCardView"
+        android:id="@+id/dropdownCard1"
         android:layout_width="196dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:cardBackgroundColor="@color/purple500"
         app:layout_constraintBottom_toTopOf="@+id/floatingActionButton6"
         app:layout_constraintEnd_toEndOf="parent">
@@ -166,14 +166,14 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/dropdownCardView2"
+        android:id="@+id/dropdownCard2"
         android:layout_width="196dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:cardBackgroundColor="@color/purple500"
-        app:layout_constraintBottom_toTopOf="@+id/dropdownCardView"
+        app:layout_constraintBottom_toTopOf="@+id/dropdownCard1"
         app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -214,14 +214,14 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/dropdownCardView3"
+        android:id="@+id/dropdownCard3"
         android:layout_width="196dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:cardBackgroundColor="@color/purple500"
-        app:layout_constraintBottom_toTopOf="@+id/dropdownCardView2"
+        app:layout_constraintBottom_toTopOf="@+id/dropdownCard2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imv_mars_background"
         app:layout_constraintVertical_bias="1.0">
