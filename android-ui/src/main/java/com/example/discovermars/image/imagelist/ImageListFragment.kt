@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.*
+import androidx.constraintlayout.widget.Group
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +21,7 @@ import com.example.discovermars.image.DateFormatterModule
 import com.example.discovermars.image.ImageListViewModel
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_image_list.*
+import kotlinx.android.synthetic.main.fragment_image_list.view.*
 import java.time.LocalDate
 import java.util.*
 import javax.inject.Inject
@@ -86,35 +89,54 @@ class ImageListFragment : DaggerFragment() {
     }
 
     private fun setupDropdownMenu() {
+
+        val mFabOpenAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_open)
+        val mFabCloseAnim = AnimationUtils.loadAnimation(requireContext(),R.anim.fab_close)
+
         floatingActionButton6.setOnClickListener {
 
-            var isOpen: Boolean = false
 
-            var mFabOpenAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_open)
-            var mFabCloseAnim = AnimationUtils.loadAnimation(requireContext(),R.anim.fab_close)
-
-           dropdownCardView.isVisible = true
+       dropdownCardView.isVisible = true
+            dropdownCardView.animation = mFabOpenAnim
             dropdownCardView2.isVisible = true
+            dropdownCardView2.animation = mFabOpenAnim
             dropdownCardView3.isVisible = true
+            dropdownCardView3.animation = mFabOpenAnim
 
             dropdownCardView.setOnClickListener {
                 dropdownCardView.isVisible = false
+                dropdownCardView.animation = mFabCloseAnim
                 dropdownCardView2.isVisible = false
+                dropdownCardView2.animation = mFabCloseAnim
                 dropdownCardView3.isVisible = false
+                dropdownCardView3.animation = mFabCloseAnim
             }
 
             dropdownCardView2.setOnClickListener {
                 dropdownCardView.isVisible = false
+                dropdownCardView.animation = mFabCloseAnim
                 dropdownCardView2.isVisible = false
+                dropdownCardView2.animation = mFabCloseAnim
                 dropdownCardView3.isVisible = false
+                dropdownCardView3.animation = mFabCloseAnim
             }
 
             dropdownCardView3.setOnClickListener {
                 dropdownCardView.isVisible = false
+                dropdownCardView.animation = mFabCloseAnim
                 dropdownCardView2.isVisible = false
+                dropdownCardView2.animation = mFabCloseAnim
                 dropdownCardView3.isVisible = false
+                dropdownCardView3.animation = mFabCloseAnim
             }
         }
+    }
+
+    private fun setupDropdownAnim() {
+        var mFabOpenAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_open)
+        var mFabCloseAnim = AnimationUtils.loadAnimation(requireContext(),R.anim.fab_close)
+
+
     }
 
     private fun setNewCameras(cameras: List<String>) {
