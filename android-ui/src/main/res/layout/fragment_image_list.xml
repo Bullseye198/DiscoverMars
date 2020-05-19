@@ -151,8 +151,8 @@
 
             <ImageView
                 android:id="@+id/imv_list_item_icon2"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:background="@drawable/spiritroversmall"
                 android:contentDescription="TODO"
                 android:scaleType="fitXY"
@@ -199,8 +199,8 @@
 
             <ImageView
                 android:id="@+id/imv_list_item_icon3"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:background="@drawable/opportunityroversmall"
                 android:contentDescription="TODO"
                 android:scaleType="fitXY"
