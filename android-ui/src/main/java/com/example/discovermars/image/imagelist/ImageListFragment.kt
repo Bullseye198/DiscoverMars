@@ -36,6 +36,7 @@ class ImageListFragment : DaggerFragment() {
     private var cyear = calendar.get(Calendar.YEAR)
     private var cmonth = calendar.get(Calendar.MONTH)
     private var cday = calendar.get(Calendar.DAY_OF_MONTH)
+    private var isOpen = false
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -97,8 +98,15 @@ class ImageListFragment : DaggerFragment() {
         isclicked(false)
 
         floatingActionButton6.setOnClickListener {
-            isclicked(true)
-            openDropdownAnimation()
+            isOpen = if (isOpen) {
+                isclicked(false)
+                closeDropdownAnimation()
+                false
+            } else{
+                isclicked(true)
+                openDropdownAnimation()
+                true
+            }
 
             dropdownCard1.setOnClickListener {
                 isclicked(false)
@@ -120,11 +128,12 @@ class ImageListFragment : DaggerFragment() {
         }
     }
 
-    private fun isclicked(isClicked: Boolean) {
+   private fun isclicked(isClicked: Boolean) {
 
         dropdownCard1.isVisible = isClicked
         dropdownCard2.isVisible = isClicked
         dropdownCard3.isVisible = isClicked
+
     }
 
     private fun openDropdownAnimation() {
