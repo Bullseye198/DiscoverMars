@@ -45,6 +45,7 @@ To do:
 - [ ] Split up UI by creating Mars-Ui Module
 - [ ] Add string "No available pictures from this date"
 - [ ] Add option to go to first available pictures if there is none on selected date
+- [ ] Bug: When switched from image detail to image list, camera resets
 
 
 In Progress:
