@@ -43,9 +43,12 @@ To do:
 - [ ] Add Image Swiping in Image Detail Fragment
 - [ ] Abstract more by putting fragment switching logic into viewmodel
 - [ ] Split up UI by creating Mars-Ui Module
+- [ ] Add string "No available pictures from this date"
+- [ ] Add option to go to first available pictures if there is none on selected date
 
 
 In Progress:
+- [ ] Datepicker always shows the last picked date
 
 Done:
 
