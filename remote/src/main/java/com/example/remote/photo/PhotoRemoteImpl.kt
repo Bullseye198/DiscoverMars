@@ -16,7 +16,7 @@ class PhotoRemoteImpl @Inject constructor(
         rover: String
     ): List<Image> {
         return photoService.getCurrentPhoto(
-            rover = "Opportunity",
+            rover = rover,
             earthDate = earthDate,
             key = "aiYJqOieQM1jp0oSvmuj1cEF6N8a4rY8tqtwy0HC",
             camera = if (camera.isNotEmpty()) {
