@@ -16,24 +16,27 @@ class ObserveCurrentCamerasUseCase @Inject constructor(
 
     private val disposable = CompositeDisposable()
     private val selectedDateStream: BehaviorSubject<String> = BehaviorSubject.create()
-
-    init {
-        selectedDateStream.onNext("")
-    }
+    private val selectedRoverStream: BehaviorSubject<String> = BehaviorSubject.create()
 
     fun requestImages(
         nina: DisposableSubscriber<List<String>>
     ) {
         val newSubscription = iImageRepository.observeImages()
             .combineLatest(selectedDateStream.toFlowable(BackpressureStrategy.LATEST))
+            .combineLatest(selectedRoverStream.toFlowable(BackpressureStrategy.LATEST))
             .map { imagesAndSelectedDate ->
-                val images = imagesAndSelectedDate.first
-                val selectedDate = imagesAndSelectedDate.second
-                val cameras = images
-                    .filter { it.creationDate == selectedDate }
+                val images = imagesAndSelectedDate.first.first
+                val selectedDate = imagesAndSelectedDate.first.second
+                val rover = imagesAndSelectedDate.second
+                val imagesWithFilteredDateAndRover = images
+                    .filter {
+                        it.creationDate == selectedDate &&
+                                it.contents == rover
+                    }
+                val uniqueCamerasForRoverAndDate = imagesWithFilteredDateAndRover
                     .map { it.camera }
                     .distinct()
-                cameras
+                uniqueCamerasForRoverAndDate
             }
             .subscribeOn(rxSchedulers.io)
             .observeOn(rxSchedulers.main)
@@ -43,6 +46,10 @@ class ObserveCurrentCamerasUseCase @Inject constructor(
 
     fun onDateChanged(newDate: String) {
         selectedDateStream.onNext(newDate)
+    }
+
+    fun onRoverChanged(newRover: String) {
+        selectedRoverStream.onNext(newRover)
     }
 
     fun dispose() {

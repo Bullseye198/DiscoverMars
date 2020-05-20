@@ -33,11 +33,12 @@ class ObserveImagesUseCase @Inject constructor(
                 val camera = imagesAndSelectedDate.first.second
                 val rover = imagesAndSelectedDate.second
 
-                images.filter {
+                val imagesForRoverDateAndCamera = images.filter {
                     it.creationDate == selectedDate &&
                             it.camera == camera &&
                             it.contents == rover
                 }
+                imagesForRoverDateAndCamera
             }
             .subscribeOn(rxSchedulers.io)
             .observeOn(rxSchedulers.main)

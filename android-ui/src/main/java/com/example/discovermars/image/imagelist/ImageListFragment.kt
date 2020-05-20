@@ -60,7 +60,7 @@ class ImageListFragment : DaggerFragment() {
     }
 
     private fun setupSpinnerAdapter() {
-        val cameras = resources.getStringArray(R.array.rovers).toList()
+        val cameras = mutableListOf<String>()
 
         val spinner = requireView().findViewById<Spinner>(R.id.spinner1)
         if (spinner != null) {

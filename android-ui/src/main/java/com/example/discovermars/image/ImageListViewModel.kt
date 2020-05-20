@@ -38,7 +38,7 @@ class ImageListViewModel @Inject constructor(
     init {
         getCurrentCameras()
         getImages()
-        onLatestImages()
+        setupDefaultRoverAndDate()
     }
 
     fun handleEvent(event: ImageListEvent) {
@@ -63,12 +63,15 @@ class ImageListViewModel @Inject constructor(
     fun onRoverSelected(newRover: String) {
         rover = newRover
         observeImagesUseCase.onSelectedRoverChanged(newRover)
+        observeCurrentCamerasUseCase.onRoverChanged(newRover)
         refreshAndUpdate()
     }
 
-    fun onLatestImages() {
+    fun setupDefaultRoverAndDate() {
         val lastDate = LocalDate.now().minusDays(2)
         onDateSelected(lastDate.toString())
+        onRoverSelected("Curiosity")
+        onNewCameraSelected("FHAZ")
     }
 
     private fun getCurrentCameras() {

@@ -17,4 +17,7 @@
         <item>Opportunity</item>
         <item>Spirit</item>
     </string-array>
+
+    <string-array name="init_array">
+    </string-array>
 </resources>
