@@ -32,6 +32,11 @@ class ImageListFragment : DaggerFragment() {
     private lateinit var adapter: ImageListAdapter
     private lateinit var spinnerAdapter: ArrayAdapter<String>
 
+    private val calendar: Calendar = Calendar.getInstance()
+    private var cyear = calendar.get(Calendar.YEAR)
+    private var cmonth = calendar.get(Calendar.MONTH)
+    private var cday = calendar.get(Calendar.DAY_OF_MONTH)
+
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
@@ -89,10 +94,10 @@ class ImageListFragment : DaggerFragment() {
     }
 
     private fun setupDropdownMenu() {
-       isclicked(false)
+        isclicked(false)
 
         floatingActionButton6.setOnClickListener {
-        isclicked(true)
+            isclicked(true)
             openDropdownAnimation()
 
             dropdownCard1.setOnClickListener {
@@ -123,7 +128,7 @@ class ImageListFragment : DaggerFragment() {
     }
 
     private fun openDropdownAnimation() {
-        val mFabOpenAnim = AnimationUtils.loadAnimation(requireContext(),R.anim.fab_open)
+        val mFabOpenAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_open)
         dropdownCard1.animation = mFabOpenAnim
         dropdownCard2.animation = mFabOpenAnim
         dropdownCard3.animation = mFabOpenAnim
@@ -131,14 +136,14 @@ class ImageListFragment : DaggerFragment() {
     }
 
     private fun closeDropdownAnimation() {
-        val mFabCloseAnim = AnimationUtils.loadAnimation(requireContext(),R.anim.fab_close)
+        val mFabCloseAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_close)
         dropdownCard1.animation = mFabCloseAnim
         dropdownCard2.animation = mFabCloseAnim
         dropdownCard3.animation = mFabCloseAnim
     }
 
 
-        private fun setNewCameras(cameras: List<String>) {
+    private fun setNewCameras(cameras: List<String>) {
         spinnerAdapter.clear()
         spinnerAdapter.addAll(cameras)
     }
@@ -146,14 +151,14 @@ class ImageListFragment : DaggerFragment() {
     private fun onDateSelected() {
         BtnPickerDate.text = LocalDate.now().toString()
         BtnPickerDate.setOnClickListener {
-            val calendar = Calendar.getInstance()
-            val cyear = calendar.get(Calendar.YEAR)
-            val cmonth = calendar.get(Calendar.MONTH)
-            val cday = calendar.get(Calendar.DAY_OF_MONTH)
 
             val datePickerDialog = DatePickerDialog(
                 requireContext(),
                 DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                    cyear = year
+                    cmonth = monthOfYear
+                    cday = dayOfMonth
+
                     DateFormatterModule.onDateFormatted(year, monthOfYear, dayOfMonth)
                     val formattedDate =
                         DateFormatterModule.onDateFormatted(year, monthOfYear, dayOfMonth)
