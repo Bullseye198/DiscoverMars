@@ -60,7 +60,7 @@ class ImageListFragment : DaggerFragment() {
     }
 
     private fun setupSpinnerAdapter() {
-        val cameras = resources.getStringArray(R.array.rovers).toList()
+        val cameras = mutableListOf<String>()
 
         val spinner = requireView().findViewById<Spinner>(R.id.spinner1)
         if (spinner != null) {
@@ -98,16 +98,19 @@ class ImageListFragment : DaggerFragment() {
             dropdownCard1.setOnClickListener {
                 isclicked(false)
                 closeDropdownAnimation()
+                viewModel.onRoverSelected("Spirit")
             }
 
             dropdownCard2.setOnClickListener {
                 isclicked(false)
                 closeDropdownAnimation()
+                viewModel.onRoverSelected("Opportunity")
             }
 
             dropdownCard3.setOnClickListener {
                 isclicked(false)
                 closeDropdownAnimation()
+                viewModel.onRoverSelected("Curiosity")
             }
         }
     }

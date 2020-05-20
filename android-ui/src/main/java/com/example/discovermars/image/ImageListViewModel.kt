@@ -8,14 +8,14 @@ import com.example.discovermars.image.imagelist.ImageListEvent
 import com.example.domain.image.model.Image
 import com.example.domain.usecases.ObserveCurrentCamerasUseCase
 import com.example.domain.usecases.RefreshImagesUseCase
-import com.example.domain.usecases.RequestImagesUseCase
+import com.example.domain.usecases.ObserveImagesUseCase
 import io.reactivex.subscribers.DisposableSubscriber
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import javax.inject.Inject
 
 class ImageListViewModel @Inject constructor(
-    private val requestImagesUseCase: RequestImagesUseCase,
+    private val observeImagesUseCase: ObserveImagesUseCase,
     private val observeCurrentCamerasUseCase: ObserveCurrentCamerasUseCase,
     private val refreshImagesUseCase: RefreshImagesUseCase
 ) : ViewModel() {
@@ -33,11 +33,12 @@ class ImageListViewModel @Inject constructor(
 
     var currentCamera: String? = null
     var earthDate: String = ""
+    var rover: String = ""
 
     init {
         getCurrentCameras()
         getImages()
-        onLatestImages()
+        setupDefaultRoverAndDate()
     }
 
     fun handleEvent(event: ImageListEvent) {
@@ -49,19 +50,28 @@ class ImageListViewModel @Inject constructor(
 
     fun onNewCameraSelected(newCamera: String) {
         currentCamera = newCamera
-        requestImagesUseCase.onSelectedCameraChanged(newCamera)
+        observeImagesUseCase.onSelectedCameraChanged(newCamera)
     }
 
     fun onDateSelected(earthDate: String) {
         this.earthDate = earthDate
-        requestImagesUseCase.onDateChanged(earthDate)
+        observeImagesUseCase.onDateChanged(earthDate)
         observeCurrentCamerasUseCase.onDateChanged(earthDate)
         refreshAndUpdate()
     }
 
-    fun onLatestImages() {
+    fun onRoverSelected(newRover: String) {
+        rover = newRover
+        observeImagesUseCase.onSelectedRoverChanged(newRover)
+        observeCurrentCamerasUseCase.onRoverChanged(newRover)
+        refreshAndUpdate()
+    }
+
+    fun setupDefaultRoverAndDate() {
         val lastDate = LocalDate.now().minusDays(2)
         onDateSelected(lastDate.toString())
+        onRoverSelected("Curiosity")
+        onNewCameraSelected("FHAZ")
     }
 
     private fun getCurrentCameras() {
@@ -81,7 +91,7 @@ class ImageListViewModel @Inject constructor(
     }
 
     private fun getImages() {
-        requestImagesUseCase.requestImages(object : DisposableSubscriber<List<Image>>() {
+        observeImagesUseCase.requestImages(object : DisposableSubscriber<List<Image>>() {
             override fun onComplete() {
             }
 
@@ -99,7 +109,7 @@ class ImageListViewModel @Inject constructor(
         viewModelScope.launch {
 
             loadingState.value = true
-            refreshImagesUseCase.refresh(earthDate)
+            refreshImagesUseCase.refresh(earthDate, rover)
             loadingState.value = false
         }
     }
@@ -110,6 +120,6 @@ class ImageListViewModel @Inject constructor(
 
     override fun onCleared() {
         super.onCleared()
-        requestImagesUseCase.dispose()
+        observeImagesUseCase.dispose()
     }
 }
