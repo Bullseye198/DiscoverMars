@@ -45,14 +45,11 @@ To do:
 - [ ] Split up UI by creating Mars-Ui Module
 - [ ] Add string "No available pictures from this date"
 - [ ] Add option to go to first available pictures if there is none on selected date
-- [ ] Bug: When switched from image detail to image list, camera resets
-
 
 In Progress:
-- [ ] Datepicker always shows the last picked date
+- [ ] Bug: When switched from image detail to image list, camera resets
 
 Done:
-
 - [x] Set up android-ui, cache, data, domain and remote modules with dependencies
 - [x] Dagger2 implementation
 - [x] Set up 2 fragments (with listAdapter and description)
@@ -75,3 +72,4 @@ Done:
 - [x] Added some Color Palette
 - [x] RxJava implementation
 - [x] Add 2 more Rovers
+- [x] Datepicker always shows the last picked date
