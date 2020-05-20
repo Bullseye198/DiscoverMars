@@ -46,9 +46,6 @@ To do:
 
 
 In Progress:
-- [ ] Add 2 more Rovers
-- [ ] RxJava implementation
-
 
 Done:
 
@@ -72,3 +69,5 @@ Done:
 - [x] Add progress bar
 - [x] Work on the UI
 - [x] Added some Color Palette
+- [x] RxJava implementation
+- [x] Add 2 more Rovers
