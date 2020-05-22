@@ -20,16 +20,11 @@ class ImageListViewModel @Inject constructor(
     private val refreshImagesUseCase: RefreshImagesUseCase
 ) : ViewModel() {
 
-    private val imageListState = MutableLiveData<List<Image>>()
-    val imageList: LiveData<List<Image>> get() = imageListState
-
-    private val cameraLiveData = MutableLiveData<List<String>>()
-    val cameras: LiveData<List<String>> get() = cameraLiveData
-
     private val changeImageState = MutableLiveData<String>()
 
-    private val loadingState = MutableLiveData<Boolean>()
-    val loading: LiveData<Boolean> get() = loadingState
+    private val imageState = MutableLiveData(ImageState())
+
+    fun getState(): LiveData<ImageState> = imageState
 
     var currentCamera: String? = null
     var earthDate: String = ""
@@ -80,7 +75,7 @@ class ImageListViewModel @Inject constructor(
             }
 
             override fun onNext(t: List<String>?) {
-                cameraLiveData.value = t
+                imageState.value = imageState.value!!.copy(cameras = t)
             }
 
             override fun onError(t: Throwable?) {
@@ -96,7 +91,7 @@ class ImageListViewModel @Inject constructor(
             }
 
             override fun onNext(t: List<Image>?) {
-                imageListState.value = t
+                imageState.value = imageState.value!!.copy(feed = t)
             }
 
             override fun onError(t: Throwable?) {
@@ -108,14 +103,18 @@ class ImageListViewModel @Inject constructor(
     private fun refreshAndUpdate() {
         viewModelScope.launch {
 
-            loadingState.value = true
+            imageState.value = imageState.value!!.copy(loading = true)
             refreshImagesUseCase.refresh(earthDate, rover)
-            loadingState.value = false
+            imageState.value = imageState.value!!.copy(loading = false)
         }
     }
 
     private fun getImageDetail(position: Int) {
-        changeImageState.value = imageList.value!![position].creationDate
+        changeImageState.value = imageState.value!!.feed!![position].creationDate
+    }
+
+    fun refresh(userTriggered: Boolean = true) {
+
     }
 
     override fun onCleared() {

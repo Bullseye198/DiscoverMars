@@ -19,6 +19,7 @@ import com.example.discovermars.common.startWithFade
 import com.example.discovermars.dependencyInjection.ViewModelFactory
 import com.example.discovermars.image.DateFormatterModule
 import com.example.discovermars.image.ImageListViewModel
+import com.example.discovermars.image.ImageState
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_image_list.*
 import kotlinx.android.synthetic.main.fragment_image_list.view.*
@@ -202,27 +203,18 @@ class ImageListFragment : DaggerFragment() {
                 }
             }
         )
-
     }
 
     private fun observeViewModel() {
         val progressBar = requireView().findViewById<ProgressBar>(R.id.imgProgressBar)
 
-        viewModel.loading.observe(viewLifecycleOwner,
-            Observer { t ->
-                if (t != null) {
-                    progressBar.isVisible = t
-                }
-            })
-
-        viewModel.imageList.observe(viewLifecycleOwner,
-            Observer {
-                adapter.submitList(it)
-            })
-
-        viewModel.cameras.observe(viewLifecycleOwner,
-            Observer {
-                setNewCameras(it)
-            })
+        viewModel.getState().observe(viewLifecycleOwner,
+        Observer { t ->
+            if (t != null) {
+               progressBar.isVisible = t.loading
+                adapter.submitList(t.feed)
+                t.cameras?.let { setNewCameras(it) }
+            }
+        })
     }
 }
