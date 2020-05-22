@@ -211,7 +211,7 @@ class ImageListFragment : DaggerFragment() {
         viewModel.getState().observe(viewLifecycleOwner,
         Observer { t ->
             if (t != null) {
-               progressBar.isVisible = t.loading
+               progressBar.isVisible = t.loading && t.feed.isNullOrEmpty()
                 adapter.submitList(t.feed)
                 t.cameras?.let { setNewCameras(it) }
             }
