@@ -4,6 +4,8 @@ App that will connect to the NASA API and show photos from Mars that was taken b
 So we got our first pictures of Mars :)
 Our App starts by showing the most recent Images taken by Mars Rover Curiosity.
 
+![](https://media.giphy.com/media/Yo8BuSvDnU13JRbxQP/giphy.gif)
+
 ![Image description](https://image.futurezone.at/images/cfs_landscape_616w_347h/3876098/pia23378.jpg)
 
 How to open project:
