@@ -49,10 +49,12 @@ class ImageDetailFragment : DaggerFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.image.observe(
+        viewModel.getState().observe(
             viewLifecycleOwner,
-            Observer { image ->
-                imageDetailView.load(image.imageUrl.replace("http:", "https:"))
+            Observer { t ->
+                if (t != null) {
+                    imageDetailView.load(t.image?.imageUrl?.replace("http:", "https:"))
+                }
             }
         )
     }

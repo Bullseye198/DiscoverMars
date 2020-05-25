@@ -6,5 +6,6 @@ data class ImageState (
 
     val feed: List<Image>? = null,
     var loading: Boolean = false,
-    var cameras: List<String>? = null
+    var cameras: List<String>? = null,
+    var image: Image? = null
 )

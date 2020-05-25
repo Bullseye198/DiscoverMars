@@ -13,8 +13,10 @@ class ImageDetailViewModel @Inject constructor(
     private val onGetImageByIdUseCase: OnGetImageByIdUseCase
 ) : ViewModel() {
 
-    private val imageState = MutableLiveData<Image>()
-    val image: LiveData<Image> get() = imageState
+    private val imageState = MutableLiveData(ImageState())
+    val image: LiveData<ImageState> = imageState
+
+    fun getState(): LiveData<ImageState> = imageState
 
     fun handleEvent(event: ImageDetailEvent) {
         when (event) {
@@ -28,7 +30,7 @@ class ImageDetailViewModel @Inject constructor(
             }
 
             override fun onNext(t: Image?) {
-                imageState.value = t
+                imageState.value = imageState.value!!.copy(image = t)
             }
 
             override fun onError(t: Throwable?) {
