@@ -14,7 +14,6 @@ class ImageDetailViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val imageState = MutableLiveData(ImageState())
-    val image: LiveData<ImageState> = imageState
 
     fun getState(): LiveData<ImageState> = imageState
 

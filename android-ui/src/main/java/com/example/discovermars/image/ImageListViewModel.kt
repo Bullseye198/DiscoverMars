@@ -20,8 +20,6 @@ class ImageListViewModel @Inject constructor(
     private val refreshImagesUseCase: RefreshImagesUseCase
 ) : ViewModel() {
 
-    private val changeImageState = MutableLiveData<String>()
-
     private val imageState = MutableLiveData(ImageState())
 
     fun getState(): LiveData<ImageState> = imageState
@@ -36,12 +34,6 @@ class ImageListViewModel @Inject constructor(
         setupDefaultRoverAndDate()
     }
 
-    fun handleEvent(event: ImageListEvent) {
-        when (event) {
-            is ImageListEvent.OnImageItemClick -> getImageDetail(event.position)
-            is ImageListEvent.OnStart -> getImages()
-        }
-    }
 
     fun onNewCameraSelected(newCamera: String) {
         currentCamera = newCamera
@@ -107,14 +99,6 @@ class ImageListViewModel @Inject constructor(
             refreshImagesUseCase.refresh(earthDate, rover)
             imageState.value = imageState.value!!.copy(loading = false)
         }
-    }
-
-    private fun getImageDetail(position: Int) {
-        changeImageState.value = imageState.value!!.feed!![position].creationDate
-    }
-
-    fun refresh(userTriggered: Boolean = true) {
-
     }
 
     override fun onCleared() {
