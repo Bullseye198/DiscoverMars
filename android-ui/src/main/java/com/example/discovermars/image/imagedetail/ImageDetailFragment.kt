@@ -45,7 +45,7 @@ class ImageDetailFragment : DaggerFragment() {
 
         observeViewModel()
 
-        (frag_image_detail.background as AnimationDrawable).startWithFade()
+        (imv_mars_background2.drawable as AnimationDrawable).startWithFade()
     }
 
     private fun observeViewModel() {

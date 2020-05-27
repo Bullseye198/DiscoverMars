@@ -3,10 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frag_image_detail"
-    android:background="@drawable/space_loop"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:accessibilityHeading="false"
+    android:background="@color/purple800"
+    android:isScrollContainer="false"
     tools:context=".image.imagedetail.ImageDetailFragment">
+
+    <ImageView
+        android:id="@+id/imv_mars_background2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="false"
+        android:contentDescription="TODO"
+        android:scaleType="centerCrop"
+        android:src="@drawable/space_loop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_toolbar_title">
+
+    </ImageView>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
