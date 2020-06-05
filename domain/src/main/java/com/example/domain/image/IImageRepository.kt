@@ -21,4 +21,6 @@ interface IImageRepository {
     ): List<Image>
 
     suspend fun storeImages(images: List<Image>)
+
+    fun observeImage(id: Int): Flowable<Image>
 }
