@@ -10,5 +10,10 @@ object DaoModule {
     @Provides
     fun provideImageDao(roomImageDatabase: RoomImageDatabase) = roomImageDatabase.roomImageDao()
 
+    @Provides
+    fun provideCamerasDao(roomImageDatabase: RoomImageDatabase) = roomImageDatabase.roomCamerasDao()
+
+    @Provides
+    fun provideRoverDao(roomImageDatabase: RoomImageDatabase) = roomImageDatabase.roomRoverDao()
 
 }

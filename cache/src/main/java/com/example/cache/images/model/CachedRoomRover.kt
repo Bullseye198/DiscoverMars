@@ -6,10 +6,10 @@ import com.example.domain.image.model.CameraX
 import com.example.domain.image.model.Rover
 
 @Entity(
-    tableName = "rover"
+    tableName = "rover",
+    primaryKeys = ["id", "roverImageId"]
 )
 data class RoomRover(
-    @PrimaryKey
     val id: Int,
     val roverImageId: Int,
     val landingDate: String,
@@ -35,7 +35,7 @@ fun RoomRover.mapToDomainRover(cameras: List<RoomCameras>): Rover {
     )
 }
 
-fun Rover.mapToRoomModel(roverImageId: Int): RoomRover {
+fun Rover.mapToRoomRoverModel(roverImageId: Int): RoomRover {
     return RoomRover(
         id = id,
         landingDate = landingDate,
