@@ -9,7 +9,7 @@ data class ImageAndRover(
     @Embedded
     var roomImage: RoomImage,
     @Relation(parentColumn = "id", entityColumn = "roverImageId", entity = RoomRover::class)
-    var roomRover: RoverAndCameras? = null
+    var roomRover: RoverAndCameras?
 )
 
 fun ImageAndRover.mapToDomainModel(): Image {

@@ -106,6 +106,9 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.6.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.6.0")
 
+    //DB Inspector
+    debugImplementation 'im.dino:dbinspector:4.0.0'
+
     debugImplementation "com.github.ChuckerTeam.Chucker:library:3.2.0"
     releaseImplementation "com.github.ChuckerTeam.Chucker:library-no-op:3.2.0"
 }
