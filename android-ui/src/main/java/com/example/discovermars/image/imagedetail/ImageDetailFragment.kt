@@ -55,6 +55,8 @@ class ImageDetailFragment : DaggerFragment() {
             Observer { t ->
                 if (t != null) {
                     binding.imageDetailView.load(t.image?.imageUrl?.replace("http:", "https:"))
+                    binding.lblDetailRover.text = t.image?.contents
+                    binding.lblDetailMessageDate.text = t.image?.creationDate
                 }
             }
         )
