@@ -35,7 +35,7 @@ fun RoomRover.mapToDomainRover(cameras: List<RoomCameras>): Rover {
     )
 }
 
-fun Rover.mapToRoomModel(roverImageId: Int): RoomRover {
+fun Rover.mapToRoomRoverModel(roverImageId: Int): RoomRover {
     return RoomRover(
         id = id,
         landingDate = landingDate,
