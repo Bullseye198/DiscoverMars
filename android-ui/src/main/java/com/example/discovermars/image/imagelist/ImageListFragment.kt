@@ -6,23 +6,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.*
-import androidx.constraintlayout.widget.Group
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.ProgressBar
+import android.widget.Spinner
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.discovermars.R
 import com.example.discovermars.common.startWithFade
+import com.example.discovermars.databinding.FragmentImageListBinding
 import com.example.discovermars.dependencyInjection.ViewModelFactory
 import com.example.discovermars.image.DateFormatterModule
 import com.example.discovermars.image.ImageListViewModel
-import com.example.discovermars.image.ImageState
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_image_list.*
-import kotlinx.android.synthetic.main.fragment_image_list.view.*
 import java.time.LocalDate
 import java.util.*
 import javax.inject.Inject
@@ -32,6 +31,7 @@ class ImageListFragment : DaggerFragment() {
     private lateinit var viewModel: ImageListViewModel
     private lateinit var adapter: ImageListAdapter
     private lateinit var spinnerAdapter: ArrayAdapter<String>
+    private lateinit var binding: FragmentImageListBinding
 
     private val calendar: Calendar = Calendar.getInstance()
     private var cyear = calendar.get(Calendar.YEAR)
@@ -46,8 +46,9 @@ class ImageListFragment : DaggerFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding = FragmentImageListBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ImageListViewModel::class.java)
-        return inflater.inflate(R.layout.fragment_image_list, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,8 +63,7 @@ class ImageListFragment : DaggerFragment() {
 
     override fun onStart() {
         super.onStart()
-        (imv_mars_background.drawable as AnimationDrawable).startWithFade()
-
+        (binding.imvMarsBackground.drawable as AnimationDrawable).startWithFade()
     }
 
     private fun setupSpinnerAdapter() {
@@ -98,30 +98,30 @@ class ImageListFragment : DaggerFragment() {
     private fun setupDropdownMenu() {
         isclicked(false)
 
-        floatingActionButton6.setOnClickListener {
+        binding.floatingActionButton6.setOnClickListener {
             isOpen = if (isOpen) {
                 isclicked(false)
                 closeDropdownAnimation()
                 false
-            } else{
+            } else {
                 isclicked(true)
                 openDropdownAnimation()
                 true
             }
 
-            dropdownCard1.setOnClickListener {
+            binding.dropdownCard1.setOnClickListener {
                 isclicked(false)
                 closeDropdownAnimation()
                 viewModel.onRoverSelected("Spirit")
             }
 
-            dropdownCard2.setOnClickListener {
+            binding.dropdownCard2.setOnClickListener {
                 isclicked(false)
                 closeDropdownAnimation()
                 viewModel.onRoverSelected("Opportunity")
             }
 
-            dropdownCard3.setOnClickListener {
+            binding.dropdownCard3.setOnClickListener {
                 isclicked(false)
                 closeDropdownAnimation()
                 viewModel.onRoverSelected("Curiosity")
@@ -129,27 +129,27 @@ class ImageListFragment : DaggerFragment() {
         }
     }
 
-   private fun isclicked(isClicked: Boolean) {
+    private fun isclicked(isClicked: Boolean) {
 
-        dropdownCard1.isVisible = isClicked
-        dropdownCard2.isVisible = isClicked
-        dropdownCard3.isVisible = isClicked
+        binding.dropdownCard1.isVisible = isClicked
+        binding.dropdownCard2.isVisible = isClicked
+        binding.dropdownCard3.isVisible = isClicked
 
     }
 
     private fun openDropdownAnimation() {
         val mFabOpenAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_open)
-        dropdownCard1.animation = mFabOpenAnim
-        dropdownCard2.animation = mFabOpenAnim
-        dropdownCard3.animation = mFabOpenAnim
+        binding.dropdownCard1.animation = mFabOpenAnim
+        binding.dropdownCard2.animation = mFabOpenAnim
+        binding.dropdownCard3.animation = mFabOpenAnim
 
     }
 
     private fun closeDropdownAnimation() {
         val mFabCloseAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_close)
-        dropdownCard1.animation = mFabCloseAnim
-        dropdownCard2.animation = mFabCloseAnim
-        dropdownCard3.animation = mFabCloseAnim
+        binding.dropdownCard1.animation = mFabCloseAnim
+        binding.dropdownCard2.animation = mFabCloseAnim
+        binding.dropdownCard3.animation = mFabCloseAnim
     }
 
 
@@ -159,8 +159,8 @@ class ImageListFragment : DaggerFragment() {
     }
 
     private fun onDateSelected() {
-        BtnPickerDate.text = LocalDate.now().toString()
-        BtnPickerDate.setOnClickListener {
+        binding.BtnPickerDate.text = LocalDate.now().toString()
+        binding.BtnPickerDate.setOnClickListener {
 
             val datePickerDialog = DatePickerDialog(
                 requireContext(),
@@ -174,7 +174,7 @@ class ImageListFragment : DaggerFragment() {
                         DateFormatterModule.onDateFormatted(year, monthOfYear, dayOfMonth)
                     viewModel.onDateSelected(formattedDate)
 
-                    BtnPickerDate.text = formattedDate
+                    binding.BtnPickerDate.text = formattedDate
                 },
                 cyear,
                 cmonth,
@@ -186,13 +186,13 @@ class ImageListFragment : DaggerFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        rec_list_fragment.adapter = null
-        spinner1.adapter = null
+        binding.recListFragment.adapter = null
+        binding.spinner1.adapter = null
     }
 
     private fun setUpImageListAdapter() {
         adapter = ImageListAdapter()
-        rec_list_fragment.adapter = adapter
+        binding.recListFragment.adapter = adapter
         adapter.event.observe(
             viewLifecycleOwner,
             Observer {
@@ -209,12 +209,12 @@ class ImageListFragment : DaggerFragment() {
         val progressBar = requireView().findViewById<ProgressBar>(R.id.imgProgressBar)
 
         viewModel.getState().observe(viewLifecycleOwner,
-        Observer { t ->
-            if (t != null) {
-               progressBar.isVisible = t.loading && t.feed.isNullOrEmpty()
-                adapter.submitList(t.feed)
-                t.cameras?.let { setNewCameras(it) }
-            }
-        })
+            Observer { t ->
+                if (t != null) {
+                    progressBar.isVisible = t.loading && t.feed.isNullOrEmpty()
+                    adapter.submitList(t.feed)
+                    t.cameras?.let { setNewCameras(it) }
+                }
+            })
     }
 }

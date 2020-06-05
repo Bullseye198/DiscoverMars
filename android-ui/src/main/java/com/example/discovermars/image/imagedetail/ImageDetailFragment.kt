@@ -8,17 +8,17 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import coil.api.load
-import com.example.discovermars.R
 import com.example.discovermars.common.startWithFade
+import com.example.discovermars.databinding.FragmentImageDetailBinding
 import com.example.discovermars.dependencyInjection.ViewModelFactory
 import com.example.discovermars.image.ImageDetailViewModel
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_image_detail.*
 import javax.inject.Inject
 
 class ImageDetailFragment : DaggerFragment() {
 
     private lateinit var viewModel: ImageDetailViewModel
+    private lateinit var binding: FragmentImageDetailBinding
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -35,9 +35,10 @@ class ImageDetailFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        binding = FragmentImageDetailBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ImageDetailViewModel::class.java)
         viewModel.handleEvent(ImageDetailEvent.OnStart(imageId))
-        return inflater.inflate(R.layout.fragment_image_detail, container, false)
+        return binding.root
     }
 
     override fun onStart() {
@@ -45,7 +46,7 @@ class ImageDetailFragment : DaggerFragment() {
 
         observeViewModel()
 
-        (imv_mars_background2.drawable as AnimationDrawable).startWithFade()
+        (binding.imvMarsBackground2.drawable as AnimationDrawable).startWithFade()
     }
 
     private fun observeViewModel() {
@@ -53,7 +54,7 @@ class ImageDetailFragment : DaggerFragment() {
             viewLifecycleOwner,
             Observer { t ->
                 if (t != null) {
-                    imageDetailView.load(t.image?.imageUrl?.replace("http:", "https:"))
+                    binding.imageDetailView.load(t.image?.imageUrl?.replace("http:", "https:"))
                 }
             }
         )

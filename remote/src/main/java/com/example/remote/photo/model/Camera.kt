@@ -5,7 +5,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class Camera(
     @Json(name = "full_name")
-    val fullName: String,
+    val fullName: String, // Front Hazard Avoidance Camera
     @Json(name = "id")
     val id: Int, // 20
     @Json(name = "name")
