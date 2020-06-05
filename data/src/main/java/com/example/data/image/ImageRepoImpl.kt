@@ -37,6 +37,9 @@ class ImageRepoImpl @Inject constructor(
         photoCache.storeImages(images)
     }
 
+    override fun observeImage(id: Int): Flowable<Image> {
+        return photoCache.observeImage(id)
+    }
 
     override fun observeImages(): Flowable<List<Image>> {
         return photoCache.observeImages()

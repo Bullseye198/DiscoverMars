@@ -12,8 +12,7 @@ class OnGetImageByIdUseCase @Inject constructor(
     private val rxSchedulers: AppRxSchedulers
 ) {
     fun getImage(josh: DisposableSubscriber<Image>, ImageId: Int) {
-        iImageRepository.observeImages()
-            .map { images -> images.first { it.id == ImageId } }
+        iImageRepository.observeImage(ImageId)
             .subscribeOn(rxSchedulers.io)
             .observeOn(rxSchedulers.main)
             .subscribeWith(josh)

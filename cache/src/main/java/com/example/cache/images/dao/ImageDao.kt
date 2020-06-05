@@ -23,7 +23,6 @@ interface ImageDao {
         rover: String
     ): List<RoomImage>
 
-
     @Query("SELECT * FROM mars WHERE camera=:camera AND contents=:rover")
     suspend fun getImagesForCamera(camera: String, rover: String): List<RoomImage>
 
@@ -32,7 +31,7 @@ interface ImageDao {
     fun observeImages(): Flowable<List<RoomImage>>
 
     @Query("SELECT * FROM mars WHERE id=:id")
-    fun observeImage(id: String): Flowable<ImageAndRover>
+    fun observeImage(id: Int): Flowable<ImageAndRover>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE) // or OnConflictStrategy.IGNORE
     suspend fun insertAllSuspend(entities: List<RoomImage>)

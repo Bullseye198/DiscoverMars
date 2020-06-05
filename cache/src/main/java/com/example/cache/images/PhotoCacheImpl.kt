@@ -48,7 +48,7 @@ class PhotoCacheImpl @Inject constructor(
         })
     }
 
-    override fun observeImage(id: String): Flowable<Image> {
+    override fun observeImage(id: Int): Flowable<Image> {
     return imageDao.observeImage(id)
         .map { it.mapToDomainModel() }
     }
