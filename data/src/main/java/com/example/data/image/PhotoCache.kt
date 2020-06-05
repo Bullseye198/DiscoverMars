@@ -9,5 +9,7 @@ interface PhotoCache {
 
     fun observeImages(): Flowable<List<Image>>
 
+    fun observeImage(id: String): Flowable<Image>
+
     suspend fun storeImages(images: List<Image>)
 }

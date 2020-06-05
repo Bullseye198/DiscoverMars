@@ -2,7 +2,7 @@ package com.example.remote.photo
 
 import com.example.remote.photo.model.Camera
 import com.example.remote.photo.model.Images
-import com.example.remote.photo.model.Photo
+import com.example.remote.photo.model.RoverRaw
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

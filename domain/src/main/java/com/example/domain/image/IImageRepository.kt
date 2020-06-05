@@ -1,6 +1,7 @@
 package com.example.domain.image
 
 import com.example.domain.image.model.Image
+import com.example.domain.image.model.Rover
 import io.reactivex.Flowable
 
 
