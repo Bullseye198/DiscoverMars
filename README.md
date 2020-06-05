@@ -50,6 +50,7 @@ To do:
 
 In Progress:
 - [ ] Bug: When switched from image detail to image list, camera resets
+- [ ] Work on Image Detail
 
 Done:
 - [x] Set up android-ui, cache, data, domain and remote modules with dependencies
@@ -75,3 +76,4 @@ Done:
 - [x] RxJava implementation
 - [x] Add 2 more Rovers
 - [x] Datepicker always shows the last picked date
+- [x] Migrated to Data Binding
