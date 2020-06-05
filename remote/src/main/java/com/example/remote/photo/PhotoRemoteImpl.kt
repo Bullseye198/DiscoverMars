@@ -2,6 +2,8 @@ package com.example.remote.photo
 
 import com.example.data.image.PhotoRemote
 import com.example.domain.image.model.Image
+import com.example.domain.image.model.Rover
+import com.example.remote.photo.model.mapToDomain
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -24,7 +26,7 @@ class PhotoRemoteImpl @Inject constructor(
             } else null
         ).photos
             .map {
-                Image(it.earthDate, it.rover.name, it.imgSrc, it.id, it.camera.name)
+                Image(it.earthDate, it.rover.name, it.imgSrc, it.id, it.camera.name, it.rover.mapToDomain(), it.sol)
             }
     }
 }

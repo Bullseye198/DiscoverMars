@@ -1,6 +1,9 @@
 package com.example.cache.images
 
 import com.example.cache.images.dao.ImageDao
+import com.example.cache.images.model.mapToDomainModel
+import com.example.cache.images.model.mapToDomainModelList
+import com.example.cache.images.model.mapToRoomModel
 import com.example.data.image.PhotoCache
 import com.example.domain.image.model.Image
 import io.reactivex.Flowable
@@ -28,14 +31,14 @@ class PhotoCacheImpl @Inject constructor(
         }
 
         return roomImages.map { databaseImage ->
-            databaseImage.mapToDomainModel()
+            databaseImage.mapToDomainModelList(null)
         }
     }
 
     override fun observeImages(): Flowable<List<Image>> {
         return imageDao.observeImages()
             .map { roomImages ->
-                roomImages.map { it.mapToDomainModel() }
+                roomImages.map { it.mapToDomainModelList(null) }
             }
     }
 
@@ -43,5 +46,10 @@ class PhotoCacheImpl @Inject constructor(
         imageDao.insertAllSuspend(images.map { domainImage ->
             domainImage.mapToRoomModel()
         })
+    }
+
+    override fun observeImage(id: String): Flowable<Image> {
+    return imageDao.observeImage(id)
+        .map { it.mapToDomainModel() }
     }
 }

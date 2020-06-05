@@ -1,16 +1,17 @@
 package com.example.cache.images
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.cache.images.dao.ImageDao
+import com.example.cache.images.model.RoomCameras
+import com.example.cache.images.model.RoomImage
+import com.example.cache.images.model.RoomRover
 
 private const val DATABASE = "mars"
 
 @Database(
-    entities = [RoomImage::class],
-    version = 2,
+    entities = [RoomImage::class, RoomRover::class, RoomCameras::class],
+    version = 4,
     exportSchema = false
 )
 

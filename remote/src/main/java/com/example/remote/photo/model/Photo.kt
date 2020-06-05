@@ -13,7 +13,7 @@ data class Photo(
     @Json(name = "img_src")
     val imgSrc: String,
     @Json(name = "rover")
-    val rover: Rover,
+    val rover: RoverRaw,
     @Json(name = "sol")
     val sol: Int // 1004
 )
