@@ -12,7 +12,6 @@ import coil.api.load
 import com.example.discovermars.common.startWithFade
 import com.example.discovermars.databinding.FragmentImageDetailBinding
 import com.example.discovermars.dependencyInjection.ViewModelFactory
-import com.example.discovermars.image.ImageDetailViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 

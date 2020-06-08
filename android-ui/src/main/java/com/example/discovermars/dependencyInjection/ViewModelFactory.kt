@@ -2,9 +2,8 @@ package com.example.discovermars.dependencyInjection
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.discovermars.features.main.MainActivity
-import com.example.discovermars.image.ImageDetailViewModel
-import com.example.discovermars.image.ImageListViewModel
+import com.example.discovermars.image.imagedetail.ImageDetailViewModel
+import com.example.discovermars.image.imagelist.ImageListViewModel
 import com.example.discovermars.userInterface.MainActivityViewModel
 import dagger.Binds
 import dagger.MapKey

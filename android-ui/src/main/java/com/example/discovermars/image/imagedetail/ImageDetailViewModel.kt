@@ -1,9 +1,9 @@
-package com.example.discovermars.image
+package com.example.discovermars.image.imagedetail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.discovermars.image.imagedetail.ImageDetailEvent
+import com.example.discovermars.image.ImageState
 import com.example.domain.image.model.Image
 import com.example.domain.usecases.OnGetImageByIdUseCase
 import io.reactivex.subscribers.DisposableSubscriber

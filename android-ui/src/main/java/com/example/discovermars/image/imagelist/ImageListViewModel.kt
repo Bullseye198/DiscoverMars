@@ -1,10 +1,10 @@
-package com.example.discovermars.image
+package com.example.discovermars.image.imagelist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.discovermars.image.imagelist.ImageListEvent
+import com.example.discovermars.image.ImageState
 import com.example.domain.image.model.Image
 import com.example.domain.usecases.ObserveCurrentCamerasUseCase
 import com.example.domain.usecases.RefreshImagesUseCase

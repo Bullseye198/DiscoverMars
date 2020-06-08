@@ -20,7 +20,6 @@ import com.example.discovermars.common.startWithFade
 import com.example.discovermars.databinding.FragmentImageListBinding
 import com.example.discovermars.dependencyInjection.ViewModelFactory
 import com.example.discovermars.image.DateFormatterModule
-import com.example.discovermars.image.ImageListViewModel
 import dagger.android.support.DaggerFragment
 import java.time.LocalDate
 import java.util.*
