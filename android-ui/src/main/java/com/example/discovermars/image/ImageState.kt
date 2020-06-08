@@ -1,5 +1,6 @@
 package com.example.discovermars.image
 
+import com.example.domain.image.model.Camera
 import com.example.domain.image.model.Image
 
 data class ImageState (
@@ -8,4 +9,5 @@ data class ImageState (
     var loading: Boolean = false,
     var cameras: List<String>? = null,
     var image: Image? = null
+    //var fullCameraName: Camera? = null
 )

@@ -71,37 +71,48 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageDetailView" />
 
             <TextView
-                android:id="@+id/lbl_detail_full_camera_name"
+                android:id="@+id/lbl_detail_sol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="64dp"
-                android:text="TextView"
+                android:text="Sol: "
                 android:textColor="@color/teal200"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageDetailView" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/lbl_detail_camera_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="TextView"
+                android:text="Camera"
                 android:textColor="@color/teal200"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lbl_detail_full_camera_name" />
+                app:layout_constraintTop_toBottomOf="@+id/lbl_detail_sol" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/lbl_detail_rover_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="TextView"
+                android:text="Rover Status"
                 android:textColor="@color/teal200"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                app:layout_constraintTop_toBottomOf="@+id/lbl_detail_camera_name" />
+
+            <TextView
+                android:id="@+id/lbl_detail_full_camera_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Full Camera Name"
+                android:textColor="@color/teal200"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lbl_detail_rover_status" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

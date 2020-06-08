@@ -1,5 +1,6 @@
 package com.example.discovermars.image.imagedetail
 
+import android.annotation.SuppressLint
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -49,6 +50,7 @@ class ImageDetailFragment : DaggerFragment() {
         (binding.imvMarsBackground2.drawable as AnimationDrawable).startWithFade()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun observeViewModel() {
         viewModel.getState().observe(
             viewLifecycleOwner,
@@ -57,6 +59,9 @@ class ImageDetailFragment : DaggerFragment() {
                     binding.imageDetailView.load(t.image?.imageUrl?.replace("http:", "https:"))
                     binding.lblDetailRover.text = t.image?.contents
                     binding.lblDetailMessageDate.text = t.image?.creationDate
+                    binding.lblDetailSol.text = "Sol: " + t.image?.sol.toString()
+                    binding.lblDetailCameraName.text = "Camera: " + t.image?.camera
+                    binding.lblDetailRoverStatus.text = "Rover Status: " + t.image?.rover?.status
                 }
             }
         )
