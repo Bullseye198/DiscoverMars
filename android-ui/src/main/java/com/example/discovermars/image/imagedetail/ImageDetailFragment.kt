@@ -60,8 +60,9 @@ class ImageDetailFragment : DaggerFragment() {
                     binding.lblDetailRover.text = t.image?.contents
                     binding.lblDetailMessageDate.text = t.image?.creationDate
                     binding.lblDetailSol.text = "Sol: " + t.image?.sol.toString()
-                    binding.lblDetailCameraName.text = "Camera: " + t.image?.camera
+                    binding.lblDetailCameraName.text = "Camera: " + t.image?.camera?.name
                     binding.lblDetailRoverStatus.text = "Rover Status: " + t.image?.rover?.status
+                    binding.lblDetailFullCameraName.text = "Full Camera Name: " + t.image?.camera?.fullName
                 }
             }
         )

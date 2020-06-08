@@ -20,7 +20,7 @@ class PhotoCacheImpl @Inject constructor(
     override fun observeImages(): Flowable<List<Image>> {
         return imageDao.observeImages()
             .map { roomImages ->
-                roomImages.map { it.mapToDomainModelList(null, null) }
+                roomImages.map { it.mapToDomainModel() }
             }
     }
 
@@ -51,12 +51,11 @@ class PhotoCacheImpl @Inject constructor(
             } //list of list of roomCameras
             .reduce { acc, list -> acc + list } // list of roomCameras
 
-        roverDao.insertRover(allRovers)
-        camerasDao.insertCameras(allCamerasForRover)
-
         val allCamerasForImage =
             images.mapNotNull { domainImages -> domainImages.camera?.mapToRoomModel(domainImages.id) }
 
+        roverDao.insertRover(allRovers)
+        camerasDao.insertCameras(allCamerasForRover)
         camerasDao.insertCameras(allCamerasForImage)
     }
 
