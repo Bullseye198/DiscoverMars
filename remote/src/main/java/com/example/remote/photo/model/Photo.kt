@@ -5,7 +5,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class Photo(
     @Json(name = "camera")
-    val camera: Camera,
+    val camera: CameraRaw,
     @Json(name = "earth_date")
     val earthDate: String, // 2015-06-03
     @Json(name = "id")

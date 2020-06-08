@@ -9,7 +9,7 @@ data class ImageAndRover(
     var roomImage: RoomImage,
     @Relation(parentColumn = "id", entityColumn = "roverImageId", entity = RoomRover::class)
     var roomRover: RoverAndCameras?,
-    @Relation(parentColumn = "id", entityColumn = "cameraImageId")
+    @Relation(parentColumn = "id", entityColumn = "cameraRoverId")
     var roomCamera: RoomCamera?
 )
 

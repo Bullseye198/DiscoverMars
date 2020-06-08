@@ -1,9 +1,11 @@
 package com.example.remote.photo.model
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import com.example.domain.image.model.Camera
+
 
 @JsonClass(generateAdapter = true)
-data class Camera(
+data class CameraRaw(
     @Json(name = "full_name")
     val fullName: String, // Front Hazard Avoidance Camera
     @Json(name = "id")
@@ -12,4 +14,10 @@ data class Camera(
     val name: String, // FHAZ
     @Json(name = "rover_id")
     val roverId: Int // 5
+)
+
+fun CameraRaw.mapToDomain() = Camera(
+    fullName = fullName,
+    name = name,
+    roverId = roverId
 )

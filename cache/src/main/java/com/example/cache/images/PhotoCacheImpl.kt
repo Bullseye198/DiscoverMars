@@ -44,7 +44,7 @@ class PhotoCacheImpl @Inject constructor(
                     RoomCamera(
                         fullName = it.fullName,
                         cameraRoverId = domainRover.id,
-                        cameraImageId = null,
+                        cameraImageId = -1,
                         name = it.name
                     )
                 }

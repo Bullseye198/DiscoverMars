@@ -26,7 +26,7 @@ class PhotoRemoteImpl @Inject constructor(
         ).photos
 
             .map {
-                Image(it.earthDate, it.rover.name, it.imgSrc, it.id, it.camera, it.rover.mapToDomain(), it.sol)
+                Image(it.earthDate, it.rover.name, it.imgSrc, it.id, it.camera.mapToDomain(), it.rover.mapToDomain(), it.sol)
             }
     }
 }

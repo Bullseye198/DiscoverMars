@@ -1,6 +1,5 @@
 package com.example.cache.images.model
 
-import androidx.annotation.NonNull
 import androidx.room.Entity
 import com.example.domain.image.model.Camera
 
@@ -9,10 +8,9 @@ import com.example.domain.image.model.Camera
     primaryKeys = ["fullName", "cameraImageId", "cameraRoverId"]
 )
 data class RoomCamera(
-    @NonNull
     val fullName: String,
-    val cameraImageId: Int?,
-    val cameraRoverId: Int?,
+    val cameraImageId: Int,
+    val cameraRoverId: Int,
     val name: String
 )
 
@@ -27,8 +25,8 @@ fun RoomCamera.mapToDomainModel(): Camera {
 fun Camera.mapToRoomModel(cameraImageId: Int?): RoomCamera {
     return RoomCamera(
         fullName = fullName,
-        cameraImageId = cameraImageId,
+        cameraImageId = cameraImageId ?: -1,
         name = name,
-        cameraRoverId = roverId
+        cameraRoverId = roverId ?: -1
     )
 }

@@ -13,7 +13,7 @@ private const val DATABASE = "mars"
 
 @Database(
     entities = [RoomImage::class, RoomRover::class, RoomCamera::class],
-    version = 5,
+    version = 6,
     exportSchema = false
 )
 

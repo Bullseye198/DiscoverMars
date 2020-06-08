@@ -7,7 +7,7 @@ import com.example.domain.image.model.Rover
 data class RoverAndCameras(
     @Embedded
     var roomRover: RoomRover,
-    @Relation(parentColumn = "id", entityColumn = "roverImageId")
+    @Relation(parentColumn = "id", entityColumn = "cameraRoverId")
     var roomCameras: List<RoomCamera>
 )
 
