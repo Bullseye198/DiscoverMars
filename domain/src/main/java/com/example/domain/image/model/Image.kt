@@ -5,7 +5,7 @@ data class Image(
     val contents: String,
     val imageUrl: String,
     val id: Int,
-    val camera: String,
+    val camera: Camera?,
     val rover: Rover?,
     val sol: Int // 1004
 )

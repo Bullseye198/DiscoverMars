@@ -5,14 +5,14 @@ import androidx.room.RoomDatabase
 import com.example.cache.images.dao.CamerasDao
 import com.example.cache.images.dao.ImageDao
 import com.example.cache.images.dao.RoverDao
-import com.example.cache.images.model.RoomCameras
+import com.example.cache.images.model.RoomCamera
 import com.example.cache.images.model.RoomImage
 import com.example.cache.images.model.RoomRover
 
 private const val DATABASE = "mars"
 
 @Database(
-    entities = [RoomImage::class, RoomRover::class, RoomCameras::class],
+    entities = [RoomImage::class, RoomRover::class, RoomCamera::class],
     version = 5,
     exportSchema = false
 )

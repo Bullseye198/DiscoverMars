@@ -6,12 +6,8 @@ import io.reactivex.Flowable
 
 
 interface IImageRepository {
-    suspend fun getImageById(ImageId: Int): Image
 
     fun observeImages(): Flowable<List<Image>>
-
-    //One Time Request from local Database
-    suspend fun requestImages(earthDate: String?, camera: String?, rover: String?): List<Image>
 
     //from Server - Remote
     suspend fun fetchImages(

@@ -34,7 +34,7 @@ class ObserveCurrentCamerasUseCase @Inject constructor(
                                 it.contents == rover
                     }
                 val uniqueCamerasForRoverAndDate = imagesWithFilteredDateAndRover
-                    .map { it.camera }
+                    .mapNotNull { it.camera?.name }
                     .distinct()
                 uniqueCamerasForRoverAndDate
             }

@@ -35,7 +35,7 @@ class ObserveImagesUseCase @Inject constructor(
 
                 val imagesForRoverDateAndCamera = images.filter {
                     it.creationDate == selectedDate &&
-                            it.camera == camera &&
+                            it.camera?.name == camera &&
                             it.contents == rover
                 }
                 imagesForRoverDateAndCamera

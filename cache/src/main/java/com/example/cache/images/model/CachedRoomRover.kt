@@ -1,7 +1,6 @@
 package com.example.cache.images.model
 
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.example.domain.image.model.CameraX
 import com.example.domain.image.model.Rover
 
@@ -21,7 +20,7 @@ data class RoomRover(
     val totalPhotos: Int
 )
 
-fun RoomRover.mapToDomainRover(cameras: List<RoomCameras>): Rover {
+fun RoomRover.mapToDomainRover(cameras: List<RoomCamera>): Rover {
     return Rover(
         id = id,
         landingDate = landingDate,

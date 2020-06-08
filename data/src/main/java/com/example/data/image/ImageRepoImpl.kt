@@ -12,19 +12,6 @@ class ImageRepoImpl @Inject constructor(
     private val photoCache: PhotoCache
 ) : IImageRepository {
 
-    override suspend fun getImageById(ImageId: Int): Image {
-        return requestImages(null, null, null)
-            .first { it.id == ImageId }
-    }
-
-    override suspend fun requestImages(
-        earthDate: String?,
-        camera: String?,
-        rover: String?
-    ): List<Image> {
-        return photoCache.requestImages(earthDate, camera, rover)
-    }
-
     override suspend fun fetchImages(
         earthDate: String,
         camera: String,
@@ -44,6 +31,4 @@ class ImageRepoImpl @Inject constructor(
     override fun observeImages(): Flowable<List<Image>> {
         return photoCache.observeImages()
     }
-
-
 }

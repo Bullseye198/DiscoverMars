@@ -17,30 +17,10 @@ class PhotoCacheImpl @Inject constructor(
     private val camerasDao: CamerasDao
 ) : PhotoCache {
 
-    override suspend fun requestImages(
-        earthDate: String?,
-        camera: String?,
-        rover: String?
-    ): List<Image> {
-        val roomImages = if (earthDate == null && camera == null) {
-            imageDao.getImages()
-        } else if (camera == null && earthDate != null && rover != null) {
-            imageDao.getImagesForDate(earthDate, rover)
-        } else if (earthDate != null && camera != null && rover != null) {
-            imageDao.getImagesForCameraAndDate(earthDate, camera, rover)
-        } else {
-            imageDao.getImagesForCamera(camera!!, rover!!)
-        }
-
-        return roomImages.map { databaseImage ->
-            databaseImage.mapToDomainModelList(null)
-        }
-    }
-
     override fun observeImages(): Flowable<List<Image>> {
         return imageDao.observeImages()
             .map { roomImages ->
-                roomImages.map { it.mapToDomainModelList(null) }
+                roomImages.map { it.mapToDomainModelList(null, null) }
             }
     }
 
@@ -57,21 +37,27 @@ class PhotoCacheImpl @Inject constructor(
             .mapNotNull { domainImage -> domainImage.rover?.mapToRoomRoverModel(domainImage.id) }
 
         //after map we have List<List<Camera>> what we want is List<Camera>
-        val allCameras = images   // list of domain image
+        val allCamerasForRover = images   // list of domain image
             .mapNotNull { it.rover } // list of domain rover
             .map { domainRover ->
                 domainRover.cameras.map {
-                    RoomCameras(
-                        it.fullName,
-                        domainRover.id,
-                        it.name
+                    RoomCamera(
+                        fullName = it.fullName,
+                        cameraRoverId = domainRover.id,
+                        cameraImageId = null,
+                        name = it.name
                     )
                 }
             } //list of list of roomCameras
             .reduce { acc, list -> acc + list } // list of roomCameras
 
         roverDao.insertRover(allRovers)
-        camerasDao.insertCameras(allCameras)
+        camerasDao.insertCameras(allCamerasForRover)
+
+        val allCamerasForImage =
+            images.mapNotNull { domainImages -> domainImages.camera?.mapToRoomModel(domainImages.id) }
+
+        camerasDao.insertCameras(allCamerasForImage)
     }
 
     override fun observeImage(id: Int): Flowable<Image> {
