@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.example.discovermars.image.ImageState
 import com.example.domain.image.model.Image
 import com.example.domain.usecases.ObserveImageByIdUseCase
-import com.example.domain.usecases.OnGetImageByIdUseCase
 import io.reactivex.subscribers.DisposableSubscriber
 import javax.inject.Inject
 
