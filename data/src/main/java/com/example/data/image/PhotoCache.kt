@@ -6,7 +6,7 @@ import io.reactivex.Flowable
 
 interface PhotoCache {
 
-    fun observeImages(): Flowable<List<Image>>
+    fun observeImages(earthDate: String, rover: String): Flowable<List<Image>>
 
     fun observeImage(id: Int): Flowable<Image>
 

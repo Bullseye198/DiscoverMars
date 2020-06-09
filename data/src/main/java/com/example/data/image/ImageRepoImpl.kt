@@ -14,10 +14,9 @@ class ImageRepoImpl @Inject constructor(
 
     override suspend fun fetchImages(
         earthDate: String,
-        camera: String,
         rover: String
     ): List<Image> {
-        return photoRemote.fetchImages(earthDate, camera, rover)
+        return photoRemote.fetchImages(earthDate, rover)
     }
 
     override suspend fun storeImages(images: List<Image>) {
@@ -28,7 +27,7 @@ class ImageRepoImpl @Inject constructor(
         return photoCache.observeImage(id)
     }
 
-    override fun observeImages(): Flowable<List<Image>> {
-        return photoCache.observeImages()
+    override fun observeImages(earthDate: String, rover: String): Flowable<List<Image>> {
+        return photoCache.observeImages(earthDate, rover)
     }
 }

@@ -5,12 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.discovermars.image.ImageState
 import com.example.domain.image.model.Image
+import com.example.domain.usecases.ObserveImageByIdUseCase
 import com.example.domain.usecases.OnGetImageByIdUseCase
 import io.reactivex.subscribers.DisposableSubscriber
 import javax.inject.Inject
 
 class ImageDetailViewModel @Inject constructor(
-    private val onGetImageByIdUseCase: OnGetImageByIdUseCase
+    private val onGetImageByIdUseCase: ObserveImageByIdUseCase
 ) : ViewModel() {
 
     private val imageState = MutableLiveData(ImageState())
@@ -24,7 +25,7 @@ class ImageDetailViewModel @Inject constructor(
     }
 
     private fun getImage(ImageId: Int) {
-        onGetImageByIdUseCase.getImage(object : DisposableSubscriber<Image>() {
+        onGetImageByIdUseCase.invokeUseCase(object : DisposableSubscriber<Image>() {
             override fun onComplete() {
             }
 

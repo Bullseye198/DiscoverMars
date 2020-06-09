@@ -16,27 +16,21 @@ class ObserveImagesUseCase @Inject constructor(
 ) {
 
     private val disposable = CompositeDisposable()
-    private val selectedDateStream: BehaviorSubject<String> = BehaviorSubject.create()
     private val selectedCameraStream: BehaviorSubject<String> = BehaviorSubject.create()
-    private val selectedRoverStream: BehaviorSubject<String> = BehaviorSubject.create()
 
     fun requestImages(
-        nina: DisposableSubscriber<List<Image>>
+        nina: DisposableSubscriber<List<Image>>,
+        selectedDate: String, rover: String
     ) {
-        val newSubscription = iImageRepository.observeImages()
-            .combineLatest(selectedDateStream.toFlowable(BackpressureStrategy.LATEST))
+        disposable.clear()
+        val newSubscription = iImageRepository.observeImages(selectedDate, rover)
             .combineLatest(selectedCameraStream.toFlowable(BackpressureStrategy.LATEST))
-            .combineLatest(selectedRoverStream.toFlowable(BackpressureStrategy.LATEST))
             .map { imagesAndSelectedDate ->
-                val images = imagesAndSelectedDate.first.first.first
-                val selectedDate = imagesAndSelectedDate.first.first.second
-                val camera = imagesAndSelectedDate.first.second
-                val rover = imagesAndSelectedDate.second
+                val images = imagesAndSelectedDate.first
+                val selectedCamera = imagesAndSelectedDate.second
 
                 val imagesForRoverDateAndCamera = images.filter {
-                    it.creationDate == selectedDate &&
-                            it.camera?.name == camera &&
-                            it.contents == rover
+                    it.camera?.name == selectedCamera
                 }
                 imagesForRoverDateAndCamera
             }
@@ -46,17 +40,10 @@ class ObserveImagesUseCase @Inject constructor(
         disposable.add(newSubscription)
     }
 
-    fun onDateChanged(newDate: String) {
-        selectedDateStream.onNext(newDate)
-    }
-
     fun onSelectedCameraChanged(newCamera: String) {
         selectedCameraStream.onNext(newCamera)
     }
 
-    fun onSelectedRoverChanged(newRover: String) {
-        selectedRoverStream.onNext(newRover)
-    }
 
     fun dispose() {
         disposable.dispose()

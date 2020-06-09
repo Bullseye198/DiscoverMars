@@ -17,8 +17,8 @@ class PhotoCacheImpl @Inject constructor(
     private val camerasDao: CamerasDao
 ) : PhotoCache {
 
-    override fun observeImages(): Flowable<List<Image>> {
-        return imageDao.observeImages()
+    override fun observeImages(earthDate: String, rover: String): Flowable<List<Image>> {
+        return imageDao.observeImages(earthDate, rover)
             .map { roomImages ->
                 roomImages.map { it.mapToDomainModel() }
             }

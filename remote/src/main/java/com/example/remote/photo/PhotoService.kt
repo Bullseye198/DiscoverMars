@@ -17,8 +17,6 @@ interface PhotoService {
     suspend fun getCurrentPhoto(
         @Path("rover") rover: String,
         @Query("earth_date") earthDate: String,
-        @Query("api_key") key: String,
-        @Query("camera") camera: String?
+        @Query("api_key") key: String
     ): Images
-
 }

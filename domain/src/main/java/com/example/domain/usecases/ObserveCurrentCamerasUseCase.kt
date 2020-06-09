@@ -15,19 +15,14 @@ class ObserveCurrentCamerasUseCase @Inject constructor(
 ) {
 
     private val disposable = CompositeDisposable()
-    private val selectedDateStream: BehaviorSubject<String> = BehaviorSubject.create()
-    private val selectedRoverStream: BehaviorSubject<String> = BehaviorSubject.create()
 
     fun requestImages(
-        nina: DisposableSubscriber<List<String>>
+        nina: DisposableSubscriber<List<String>>,
+        selectedDate: String, rover: String
     ) {
-        val newSubscription = iImageRepository.observeImages()
-            .combineLatest(selectedDateStream.toFlowable(BackpressureStrategy.LATEST))
-            .combineLatest(selectedRoverStream.toFlowable(BackpressureStrategy.LATEST))
-            .map { imagesAndSelectedDate ->
-                val images = imagesAndSelectedDate.first.first
-                val selectedDate = imagesAndSelectedDate.first.second
-                val rover = imagesAndSelectedDate.second
+        disposable.clear()
+        val newSubscription = iImageRepository.observeImages(selectedDate, rover)
+            .map { images ->
                 val imagesWithFilteredDateAndRover = images
                     .filter {
                         it.creationDate == selectedDate &&
@@ -42,14 +37,6 @@ class ObserveCurrentCamerasUseCase @Inject constructor(
             .observeOn(rxSchedulers.main)
             .subscribeWith(nina)
         disposable.add(newSubscription)
-    }
-
-    fun onDateChanged(newDate: String) {
-        selectedDateStream.onNext(newDate)
-    }
-
-    fun onRoverChanged(newRover: String) {
-        selectedRoverStream.onNext(newRover)
     }
 
     fun dispose() {

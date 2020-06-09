@@ -13,20 +13,23 @@ class PhotoRemoteImpl @Inject constructor(
 
     override suspend fun fetchImages(
         earthDate: String,
-        camera: String,
         rover: String
     ): List<Image> {
         return photoService.getCurrentPhoto(
             rover = rover,
             earthDate = earthDate,
-            key = "aiYJqOieQM1jp0oSvmuj1cEF6N8a4rY8tqtwy0HC",
-           camera = if (camera.isNotEmpty()) {
-                camera
-            } else null
+            key = "aiYJqOieQM1jp0oSvmuj1cEF6N8a4rY8tqtwy0HC"
         ).photos
-
             .map {
-                Image(it.earthDate, it.rover.name, it.imgSrc, it.id, it.camera.mapToDomain(), it.rover.mapToDomain(), it.sol)
+                Image(
+                    it.earthDate,
+                    it.rover.name,
+                    it.imgSrc,
+                    it.id,
+                    it.camera.mapToDomain(),
+                    it.rover.mapToDomain(),
+                    it.sol
+                )
             }
     }
 }

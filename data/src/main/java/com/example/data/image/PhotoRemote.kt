@@ -4,7 +4,6 @@ import com.example.domain.image.model.Image
 
 interface PhotoRemote {
 
-    suspend fun fetchImages( earthDate: String, camera: String, rover: String): List<Image>
-
+    suspend fun fetchImages(earthDate: String, rover: String): List<Image>
 
 }

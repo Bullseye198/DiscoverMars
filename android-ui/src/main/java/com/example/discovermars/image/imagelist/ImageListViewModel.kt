@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cm.base.interactors.base.CoroutineCompletableUseCase
 import com.example.discovermars.image.ImageState
 import com.example.domain.image.model.Image
 import com.example.domain.usecases.ObserveCurrentCamerasUseCase
@@ -24,7 +25,6 @@ class ImageListViewModel @Inject constructor(
 
     fun getState(): LiveData<ImageState> = imageState
 
-    var currentCamera: String? = null
     var earthDate: String = ""
     var rover: String = ""
 
@@ -36,21 +36,20 @@ class ImageListViewModel @Inject constructor(
 
 
     fun onNewCameraSelected(newCamera: String) {
-        currentCamera = newCamera
         observeImagesUseCase.onSelectedCameraChanged(newCamera)
     }
 
     fun onDateSelected(earthDate: String) {
         this.earthDate = earthDate
-        observeImagesUseCase.onDateChanged(earthDate)
-        observeCurrentCamerasUseCase.onDateChanged(earthDate)
+        getCurrentCameras()
+        getImages()
         refreshAndUpdate()
     }
 
     fun onRoverSelected(newRover: String) {
         rover = newRover
-        observeImagesUseCase.onSelectedRoverChanged(newRover)
-        observeCurrentCamerasUseCase.onRoverChanged(newRover)
+        getCurrentCameras()
+        getImages()
         refreshAndUpdate()
     }
 
@@ -74,7 +73,7 @@ class ImageListViewModel @Inject constructor(
                 throw Exception("Subscription failed because ${t?.localizedMessage}.")
             }
 
-        })
+        }, earthDate, rover)
     }
 
     private fun getImages() {
@@ -89,14 +88,14 @@ class ImageListViewModel @Inject constructor(
             override fun onError(t: Throwable?) {
                 throw Exception("Subscription failed because ${t?.localizedMessage}.")
             }
-        })
+        }, earthDate, rover)
     }
 
     private fun refreshAndUpdate() {
         viewModelScope.launch {
 
             imageState.value = imageState.value!!.copy(loading = true)
-            refreshImagesUseCase.refresh(earthDate, rover)
+            refreshImagesUseCase.invokeUseCase(RefreshImagesUseCase.Params(earthDate, rover))
             imageState.value = imageState.value!!.copy(loading = false)
         }
     }

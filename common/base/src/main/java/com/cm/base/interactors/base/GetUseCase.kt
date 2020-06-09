@@ -6,7 +6,7 @@ import io.reactivex.Flowable
 /**Retrieves changes from the data layer.
  */
 abstract class GetUseCase<T, in Params> constructor(
-    rxSchedulers: AppRxSchedulers? = null
+    rxSchedulers: AppRxSchedulers
 ) : FlowableUseCase<T, Params>(rxSchedulers) {
 
     abstract fun buildStream(params: Params?): Flowable<T>
@@ -14,5 +14,4 @@ abstract class GetUseCase<T, in Params> constructor(
     override fun buildUseCaseObservable(params: Params?): Flowable<T> {
         return buildStream(params)
     }
-
 }

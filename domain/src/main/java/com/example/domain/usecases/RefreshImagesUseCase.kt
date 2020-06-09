@@ -1,22 +1,26 @@
 package com.example.domain.usecases
 
 import com.cm.base.executor.AppCoroutineDispatchers
-import com.cm.base.interactors.base.GetUseCase
+import com.cm.base.interactors.base.CoroutineCompletableUseCase
 import com.example.domain.image.IImageRepository
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class RefreshImagesUseCase @Inject constructor(
     private val iImageRepository: IImageRepository,
-    val appDispatchers: AppCoroutineDispatchers
-) {
-    suspend fun refresh(earthDate: String, rover: String) {
-        withContext(appDispatchers.io) {
-            try {
-                val serverImages = iImageRepository.fetchImages(earthDate = earthDate, camera = "", rover = rover)
-                iImageRepository.storeImages(serverImages)
-            } catch (e: Exception) {
-            }
+    private val appDispatchers: AppCoroutineDispatchers
+) : CoroutineCompletableUseCase<RefreshImagesUseCase.Params>(appDispatchers) {
+
+    override suspend fun execute(params: Params?) {
+        try {
+            val serverImages =
+                iImageRepository.fetchImages(params!!.earthDate, params.rover)
+            iImageRepository.storeImages(serverImages)
+        } catch (e: Exception) {
         }
     }
+
+    data class Params(
+        val earthDate: String,
+        val rover: String
+    )
 }

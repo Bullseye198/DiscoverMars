@@ -16,8 +16,8 @@ interface ImageDao {
     @Query("SELECT * FROM mars WHERE creationDate=:earthDate AND contents=:rover")
     suspend fun getImagesForDate(earthDate: String, rover: String): List<RoomImage>
 
-    @Query("SELECT * FROM mars")
-    fun observeImages(): Flowable<List<ImageAndRover>>
+    @Query("SELECT * FROM mars WHERE creationDate=:earthDate AND contents=:rover")
+    fun observeImages(earthDate: String, rover: String): Flowable<List<ImageAndRover>>
 
     @Query("SELECT * FROM mars WHERE id=:id")
     fun observeImage(id: Int): Flowable<ImageAndRover>

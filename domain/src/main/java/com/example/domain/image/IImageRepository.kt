@@ -7,13 +7,12 @@ import io.reactivex.Flowable
 
 interface IImageRepository {
 
-    fun observeImages(): Flowable<List<Image>>
+    fun observeImages(earthDate: String, rover: String): Flowable<List<Image>>
 
     //from Server - Remote
     suspend fun fetchImages(
-        earthDate: String = "",
-        camera: String = "",
-        rover: String = ""
+        earthDate: String,
+        rover: String
     ): List<Image>
 
     suspend fun storeImages(images: List<Image>)
