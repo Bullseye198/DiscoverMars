@@ -61,7 +61,7 @@ class ImageListViewModel @Inject constructor(
     }
 
     private fun getCurrentCameras() {
-        observeCurrentCamerasUseCase.requestImages(object : DisposableSubscriber<List<String>>() {
+        observeCurrentCamerasUseCase.invokeUseCase(object : DisposableSubscriber<List<String>>() {
             override fun onComplete() {
             }
 
@@ -73,7 +73,7 @@ class ImageListViewModel @Inject constructor(
                 throw Exception("Subscription failed because ${t?.localizedMessage}.")
             }
 
-        }, earthDate, rover)
+        }, ObserveCurrentCamerasUseCase.Params(earthDate = earthDate, rover = rover))
     }
 
     private fun getImages() {

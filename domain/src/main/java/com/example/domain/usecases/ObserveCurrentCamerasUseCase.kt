@@ -1,45 +1,33 @@
 package com.example.domain.usecases
 
 import com.cm.base.executor.AppRxSchedulers
+import com.cm.base.interactors.base.FlowableUseCase
 import com.example.domain.image.IImageRepository
-import io.reactivex.BackpressureStrategy
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.combineLatest
-import io.reactivex.subjects.BehaviorSubject
-import io.reactivex.subscribers.DisposableSubscriber
+import io.reactivex.Flowable
 import javax.inject.Inject
 
 class ObserveCurrentCamerasUseCase @Inject constructor(
     private val iImageRepository: IImageRepository,
-    private val rxSchedulers: AppRxSchedulers
-) {
+    rxSchedulers: AppRxSchedulers
+): FlowableUseCase<List<String>, ObserveCurrentCamerasUseCase.Params>(rxSchedulers) {
 
-    private val disposable = CompositeDisposable()
-
-    fun requestImages(
-        nina: DisposableSubscriber<List<String>>,
-        selectedDate: String, rover: String
-    ) {
-        disposable.clear()
-        val newSubscription = iImageRepository.observeImages(selectedDate, rover)
-            .map { images ->
-                val imagesWithFilteredDateAndRover = images
-                    .filter {
-                        it.creationDate == selectedDate &&
-                                it.contents == rover
-                    }
-                val uniqueCamerasForRoverAndDate = imagesWithFilteredDateAndRover
-                    .mapNotNull { it.camera?.name }
-                    .distinct()
-                uniqueCamerasForRoverAndDate
-            }
-            .subscribeOn(rxSchedulers.io)
-            .observeOn(rxSchedulers.main)
-            .subscribeWith(nina)
-        disposable.add(newSubscription)
+    override fun buildUseCaseObservable(params: Params?): Flowable<List<String>> {
+       return iImageRepository.observeImages(params!!.earthDate, params.rover)
+           .map { images ->
+               val imagesWithFilteredDateAndRover = images
+                   .filter {
+                       it.creationDate == params.earthDate &&
+                               it.contents == params.rover
+                   }
+               val uniqueCamerasForRoverAndDate = imagesWithFilteredDateAndRover
+                   .mapNotNull { it.camera?.name }
+                   .distinct()
+               uniqueCamerasForRoverAndDate
+           }
     }
 
-    fun dispose() {
-        disposable.dispose()
-    }
+    data class Params(
+        val earthDate: String,
+        val rover: String
+    )
 }
