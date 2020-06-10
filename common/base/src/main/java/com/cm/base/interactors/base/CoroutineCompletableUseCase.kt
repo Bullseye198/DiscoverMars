@@ -9,7 +9,7 @@ abstract class CoroutineCompletableUseCase<in Params> constructor(
 
     protected abstract suspend fun execute(params: Params?)
 
-    public suspend fun invokeUseCase(params: Params?) {
+    suspend fun invokeUseCase(params: Params?) {
         withContext(dispatchers.io) {
             execute(params)
         }

@@ -2,7 +2,6 @@ package com.example.domain.usecases
 
 import com.cm.base.executor.AppRxSchedulers
 import com.cm.base.interactors.base.FlowableUseCase
-import com.cm.base.interactors.base.GetUseCase
 import com.example.domain.image.IImageRepository
 import com.example.domain.image.model.Image
 import io.reactivex.BackpressureStrategy
@@ -30,7 +29,8 @@ class ObserveImagesUseCase @Inject constructor(
                     it.camera?.name == selectedCamera
                 }
                 imagesForRoverDateAndCamera
-            }    }
+            }
+    }
 
     fun onSelectedCameraChanged(newCamera: String) {
         selectedCameraStream.onNext(newCamera)

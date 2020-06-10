@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class RefreshImagesUseCase @Inject constructor(
     private val iImageRepository: IImageRepository,
-    private val appDispatchers: AppCoroutineDispatchers
+    appDispatchers: AppCoroutineDispatchers
 ) : CoroutineCompletableUseCase<RefreshImagesUseCase.Params>(appDispatchers) {
 
     override suspend fun execute(params: Params?) {
