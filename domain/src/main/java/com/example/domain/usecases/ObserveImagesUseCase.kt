@@ -1,29 +1,26 @@
 package com.example.domain.usecases
 
 import com.cm.base.executor.AppRxSchedulers
+import com.cm.base.interactors.base.FlowableUseCase
+import com.cm.base.interactors.base.GetUseCase
 import com.example.domain.image.IImageRepository
 import com.example.domain.image.model.Image
 import io.reactivex.BackpressureStrategy
-import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.Flowable
 import io.reactivex.rxkotlin.combineLatest
 import io.reactivex.subjects.BehaviorSubject
-import io.reactivex.subscribers.DisposableSubscriber
 import javax.inject.Inject
 
 class ObserveImagesUseCase @Inject constructor(
     private val iImageRepository: IImageRepository,
-    private val rxSchedulers: AppRxSchedulers
-) {
+    rxSchedulers: AppRxSchedulers
+) : FlowableUseCase<List<Image>, ObserveImagesUseCase.Parameters>(rxSchedulers) {
 
-    private val disposable = CompositeDisposable()
     private val selectedCameraStream: BehaviorSubject<String> = BehaviorSubject.create()
 
-    fun requestImages(
-        nina: DisposableSubscriber<List<Image>>,
-        selectedDate: String, rover: String
-    ) {
-        disposable.clear()
-        val newSubscription = iImageRepository.observeImages(selectedDate, rover)
+    override fun buildUseCaseObservable(params: Parameters?): Flowable<List<Image>> {
+
+        return iImageRepository.observeImages(params!!.earthDate, params.rover)
             .combineLatest(selectedCameraStream.toFlowable(BackpressureStrategy.LATEST))
             .map { imagesAndSelectedDate ->
                 val images = imagesAndSelectedDate.first
@@ -33,19 +30,14 @@ class ObserveImagesUseCase @Inject constructor(
                     it.camera?.name == selectedCamera
                 }
                 imagesForRoverDateAndCamera
-            }
-            .subscribeOn(rxSchedulers.io)
-            .observeOn(rxSchedulers.main)
-            .subscribeWith(nina)
-        disposable.add(newSubscription)
-    }
+            }    }
 
     fun onSelectedCameraChanged(newCamera: String) {
         selectedCameraStream.onNext(newCamera)
     }
 
-
-    fun dispose() {
-        disposable.dispose()
-    }
+    data class Parameters(
+        val rover: String,
+        val earthDate: String
+    )
 }

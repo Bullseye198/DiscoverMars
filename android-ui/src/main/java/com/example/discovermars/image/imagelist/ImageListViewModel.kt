@@ -77,7 +77,7 @@ class ImageListViewModel @Inject constructor(
     }
 
     private fun getImages() {
-        observeImagesUseCase.requestImages(object : DisposableSubscriber<List<Image>>() {
+        observeImagesUseCase.invokeUseCase(object : DisposableSubscriber<List<Image>>() {
             override fun onComplete() {
             }
 
@@ -88,7 +88,7 @@ class ImageListViewModel @Inject constructor(
             override fun onError(t: Throwable?) {
                 throw Exception("Subscription failed because ${t?.localizedMessage}.")
             }
-        }, earthDate, rover)
+        }, ObserveImagesUseCase.Parameters(earthDate = earthDate, rover = rover))
     }
 
     private fun refreshAndUpdate() {
