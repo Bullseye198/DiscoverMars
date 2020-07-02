@@ -40,7 +40,7 @@ class PhotoCacheImpl @Inject constructor(
         val allCamerasForRover = images   // list of domain image
             .mapNotNull { it.rover } // list of domain rover
             .map { domainRover ->
-                domainRover.cameras.map {
+                domainRover.cameras?.map {
                     RoomCamera(
                         fullName = it.fullName,
                         cameraRoverId = domainRover.id,
@@ -49,13 +49,15 @@ class PhotoCacheImpl @Inject constructor(
                     )
                 }
             } //list of list of roomCameras
-            .reduce { acc, list -> acc + list } // list of roomCameras
+            .reduce { acc, list -> acc } // list of roomCameras
 
         val allCamerasForImage =
             images.mapNotNull { domainImages -> domainImages.camera?.mapToRoomModel(domainImages.id) }
 
         roverDao.insertRover(allRovers)
-        camerasDao.insertCameras(allCamerasForRover)
+        if (allCamerasForRover != null) {
+            camerasDao.insertCameras(allCamerasForRover)
+        }
         camerasDao.insertCameras(allCamerasForImage)
     }
 

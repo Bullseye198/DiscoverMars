@@ -13,11 +13,11 @@ data class RoomRover(
     val roverImageId: Int,
     val landingDate: String,
     val launchDate: String,
-    val maxDate: String,
-    val maxSol: Int,
+    val maxDate: String?,
+    val maxSol: Int?,
     val name: String,
     val status: String,
-    val totalPhotos: Int
+    val totalPhotos: Int?
 )
 
 fun RoomRover.mapToDomainRover(cameras: List<RoomCamera>): Rover {
