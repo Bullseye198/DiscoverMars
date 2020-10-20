@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.7">
       <module name="base" target="1.7" />
       <module name="DiscoverMars.android-ui" target="1.8" />
       <module name="DiscoverMars.cache" target="1.8" />
-      <module name="DiscoverMars.common.base" target="1.7" />
       <module name="DiscoverMars.common.base-android" target="1.8" />
       <module name="DiscoverMars.common.base-mvviewmodel" target="1.8" />
       <module name="DiscoverMars.data" target="1.8" />
