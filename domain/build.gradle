@@ -33,4 +33,8 @@ dependencies {
     //OkHttp3
     implementation("com.squareup.okhttp3:okhttp:4.6.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.6.0")
+
+    //Coroutine
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9'
 }
