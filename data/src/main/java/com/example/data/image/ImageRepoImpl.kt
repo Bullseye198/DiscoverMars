@@ -2,7 +2,7 @@ package com.example.data.image
 
 import com.example.domain.image.IImageRepository
 import com.example.domain.image.model.Image
-import io.reactivex.Flowable
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -23,11 +23,11 @@ class ImageRepoImpl @Inject constructor(
         photoCache.storeImages(images)
     }
 
-    override fun observeImage(id: Int): Flowable<Image> {
+    override fun observeImage(id: Int): Flow<Image> {
         return photoCache.observeImage(id)
     }
 
-    override fun observeImages(earthDate: String, rover: String): Flowable<List<Image>> {
+    override fun observeImages(earthDate: String, rover: String): Flow<List<Image>> {
         return photoCache.observeImages(earthDate, rover)
     }
 }

@@ -4,17 +4,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cm.base.interactors.base.CoroutineCompletableUseCase
 import com.example.discovermars.image.ImageState
 import com.example.domain.image.model.Image
 import com.example.domain.usecases.ObserveCurrentCamerasUseCase
 import com.example.domain.usecases.RefreshImagesUseCase
 import com.example.domain.usecases.ObserveImagesUseCase
 import io.reactivex.subscribers.DisposableSubscriber
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import javax.inject.Inject
 
+@ExperimentalCoroutinesApi
 class ImageListViewModel @Inject constructor(
     private val observeImagesUseCase: ObserveImagesUseCase,
     private val observeCurrentCamerasUseCase: ObserveCurrentCamerasUseCase,
@@ -35,10 +38,12 @@ class ImageListViewModel @Inject constructor(
     }
 
 
+    @ExperimentalCoroutinesApi
     fun onNewCameraSelected(newCamera: String) {
         observeImagesUseCase.onSelectedCameraChanged(newCamera)
     }
 
+    @ExperimentalCoroutinesApi
     fun onDateSelected(earthDate: String) {
         this.earthDate = earthDate
         getCurrentCameras()
@@ -53,6 +58,7 @@ class ImageListViewModel @Inject constructor(
         refreshAndUpdate()
     }
 
+    @ExperimentalCoroutinesApi
     fun setupDefaultRoverAndDate() {
         val lastDate = LocalDate.now().minusDays(2)
         onDateSelected(lastDate.toString())
@@ -61,34 +67,29 @@ class ImageListViewModel @Inject constructor(
     }
 
     private fun getCurrentCameras() {
-        observeCurrentCamerasUseCase.invokeUseCase(object : DisposableSubscriber<List<String>>() {
-            override fun onComplete() {
-            }
-
-            override fun onNext(t: List<String>?) {
-                imageState.value = imageState.value!!.copy(cameras = t)
-            }
-
-            override fun onError(t: Throwable?) {
-                throw Exception("Subscription failed because ${t?.localizedMessage}.")
-            }
-
-        }, ObserveCurrentCamerasUseCase.Params(earthDate = earthDate, rover = rover))
+        viewModelScope.launch {
+            observeCurrentCamerasUseCase.buildStream(
+                ObserveCurrentCamerasUseCase.Params(
+                    earthDate,
+                    rover
+                )
+            )
+                .catch { }
+                .collect { currentCameras ->
+                    imageState.value = imageState.value!!.copy(cameras = currentCameras)
+                }
+        }
     }
 
+    @ExperimentalCoroutinesApi
     private fun getImages() {
-        observeImagesUseCase.invokeUseCase(object : DisposableSubscriber<List<Image>>() {
-            override fun onComplete() {
-            }
-
-            override fun onNext(t: List<Image>?) {
-                imageState.value = imageState.value!!.copy(feed = t)
-            }
-
-            override fun onError(t: Throwable?) {
-                throw Exception("Subscription failed because ${t?.localizedMessage}.")
-            }
-        }, ObserveImagesUseCase.Parameters(earthDate = earthDate, rover = rover))
+        viewModelScope.launch {
+            observeImagesUseCase.buildStream(ObserveImagesUseCase.Params(rover, earthDate))
+                .catch { }
+                .collect { images ->
+                    imageState.value = imageState.value!!.copy(feed = images)
+                }
+        }
     }
 
     private fun refreshAndUpdate() {
@@ -98,10 +99,5 @@ class ImageListViewModel @Inject constructor(
             refreshImagesUseCase.invokeUseCase(RefreshImagesUseCase.Params(earthDate, rover))
             imageState.value = imageState.value!!.copy(loading = false)
         }
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        observeImagesUseCase.dispose()
     }
 }

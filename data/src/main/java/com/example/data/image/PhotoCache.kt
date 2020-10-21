@@ -1,14 +1,14 @@
 package com.example.data.image
 
 import com.example.domain.image.model.Image
-import io.reactivex.Flowable
+import kotlinx.coroutines.flow.Flow
 
 
 interface PhotoCache {
 
-    fun observeImages(earthDate: String, rover: String): Flowable<List<Image>>
+    fun observeImages(earthDate: String, rover: String): Flow<List<Image>>
 
-    fun observeImage(id: Int): Flowable<Image>
+    fun observeImage(id: Int): Flow<Image>
 
     suspend fun storeImages(images: List<Image>)
 }

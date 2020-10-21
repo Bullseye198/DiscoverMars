@@ -1,42 +1,37 @@
 package com.example.domain.usecases
 
-import com.cm.base.executor.AppRxSchedulers
-import com.cm.base.interactors.base.FlowableUseCase
+import com.cm.base.executor.AppCoroutineDispatchers
+import com.cm.base.interactors.base.FlowUseCase
 import com.example.domain.image.IImageRepository
 import com.example.domain.image.model.Image
-import io.reactivex.BackpressureStrategy
-import io.reactivex.Flowable
-import io.reactivex.rxkotlin.combineLatest
-import io.reactivex.subjects.BehaviorSubject
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.combine
 import javax.inject.Inject
 
+@ExperimentalCoroutinesApi
 class ObserveImagesUseCase @Inject constructor(
     private val iImageRepository: IImageRepository,
-    rxSchedulers: AppRxSchedulers
-) : FlowableUseCase<List<Image>, ObserveImagesUseCase.Parameters>(rxSchedulers) {
+    appCoroutineDispatchers: AppCoroutineDispatchers
+) : FlowUseCase<List<Image>, ObserveImagesUseCase.Params>(appCoroutineDispatchers) {
 
-    private val selectedCameraStream: BehaviorSubject<String> = BehaviorSubject.create()
+    private val selectedCameraStream: MutableStateFlow<String> = MutableStateFlow("")
 
-    override fun buildUseCaseObservable(params: Parameters?): Flowable<List<Image>> {
-
+    override fun buildStream(params: Params?): Flow<List<Image>> {
         return iImageRepository.observeImages(params!!.earthDate, params.rover)
-            .combineLatest(selectedCameraStream.toFlowable(BackpressureStrategy.LATEST))
-            .map { imagesAndSelectedDate ->
-                val images = imagesAndSelectedDate.first
-                val selectedCamera = imagesAndSelectedDate.second
-
-                val imagesForRoverDateAndCamera = images.filter {
+            .combine(selectedCameraStream) { images, selectedCamera ->
+                images.filter {
                     it.camera?.name == selectedCamera
                 }
-                imagesForRoverDateAndCamera
             }
     }
 
     fun onSelectedCameraChanged(newCamera: String) {
-        selectedCameraStream.onNext(newCamera)
+        selectedCameraStream.value = newCamera
     }
 
-    data class Parameters(
+    data class Params(
         val rover: String,
         val earthDate: String
     )

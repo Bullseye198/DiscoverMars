@@ -6,7 +6,8 @@ import com.example.cache.images.dao.RoverDao
 import com.example.cache.images.model.*
 import com.example.data.image.PhotoCache
 import com.example.domain.image.model.Image
-import io.reactivex.Flowable
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -17,7 +18,7 @@ class PhotoCacheImpl @Inject constructor(
     private val camerasDao: CamerasDao
 ) : PhotoCache {
 
-    override fun observeImages(earthDate: String, rover: String): Flowable<List<Image>> {
+    override fun observeImages(earthDate: String, rover: String): Flow<List<Image>> {
         return imageDao.observeImages(earthDate, rover)
             .map { roomImages ->
                 roomImages.map { it.mapToDomainModel() }
@@ -61,7 +62,7 @@ class PhotoCacheImpl @Inject constructor(
         camerasDao.insertCameras(allCamerasForImage)
     }
 
-    override fun observeImage(id: Int): Flowable<Image> {
+    override fun observeImage(id: Int): Flow<Image> {
         return imageDao.observeImage(id)
             .map { it.mapToDomainModel() }
     }

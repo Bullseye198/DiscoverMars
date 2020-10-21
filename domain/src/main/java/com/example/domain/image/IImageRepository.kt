@@ -1,7 +1,7 @@
 package com.example.domain.image
 
 import com.example.domain.image.model.Image
-import io.reactivex.Flowable
+import kotlinx.coroutines.flow.Flow
 
 
 interface IImageRepository {
@@ -9,7 +9,7 @@ interface IImageRepository {
     fun observeImages(
         earthDate: String,
         rover: String
-    ): Flowable<List<Image>>
+    ): Flow<List<Image>>
 
     //from Server - Remote
     suspend fun fetchImages(
@@ -19,5 +19,5 @@ interface IImageRepository {
 
     suspend fun storeImages(images: List<Image>)
 
-    fun observeImage(id: Int): Flowable<Image>
+    fun observeImage(id: Int): Flow<Image>
 }
